@@ -14,6 +14,7 @@ namespace PersonModelProject
         }
         public void RemoveLast()
         {
+            //TODO: сделать через один метод
             int currSize = _personList.Length;
             Array.Resize<Person_class>(ref _personList, currSize - 1);
         }
@@ -37,6 +38,7 @@ namespace PersonModelProject
         {
             return _personList[index];
         }
+        //TODO: indexOf
         public int GetIndexByPerson(Person_class person)
         {
             return Array.IndexOf(_personList, person);
@@ -45,6 +47,8 @@ namespace PersonModelProject
         {
             Array.Resize<Person_class>(ref _personList, 0);
         }
+
+        //TODO: свойство
         public int Length()
         {
             return _personList.Length;

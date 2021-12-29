@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 
 namespace PersonModelProject
 {
+    //TODO: XML
+    //TODO: RSDN
     public class Person_class
     {
         private string _name;
@@ -19,6 +21,8 @@ namespace PersonModelProject
 
             set
             {
+                //TODO: Проверка на null
+                //TODO: Проверка предметной области
                 _name = value;
             }
         }
@@ -28,15 +32,19 @@ namespace PersonModelProject
 
             set
             {
+                //TODO: Проверка на null
+                //TODO: Проверка предметной области
                 _surname = value;
             }
         }
+
         public int Age
         {
             get => _age;
 
             set
             {
+                //TODO: to const
                 if (value < 0 && value > 150)
                 {
                     throw new Exception("Возраст должен быть в диапазоне от 0 до 150");
@@ -44,6 +52,7 @@ namespace PersonModelProject
                 _age = value;
             }
         }
+
         public gender Gender
         {
             get => _gender;
@@ -62,6 +71,7 @@ namespace PersonModelProject
         /// <param name="userGender"></param>
         public Person_class(string name, string surname, int age, gender userGender)
         {
+            //TODO: вызывать свойства
             _name = name;
             _surname = surname;
             _age = age;
@@ -69,6 +79,7 @@ namespace PersonModelProject
         }
         public Person_class() : this("default", "default", 0, gender.Unknown)
         { }
+
         public static Person_class GetRandomPerson(List<string> names, List<string> surnames)
         {
             Random rnd = new Random();
@@ -78,6 +89,8 @@ namespace PersonModelProject
                                                    (gender)rnd.Next(0, 2));
             return person;
         }
+
+        //TODO: naming
         public string Show
         {
             get
@@ -85,6 +98,8 @@ namespace PersonModelProject
                 return $"{Name} {Surname} Age {Age} Gender {Gender}";
             }
         }
+
+        //TODO: Отделить консольный ввод-вывод от логики класса
         public Person_class ReadConsole()
         {
             Console.WriteLine("Input data according to the following sample: Name Surname Age Gender");

@@ -4,19 +4,26 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
+    //TODO: RSDN
     class Start_Lab1
     {
         static void Main()
         {
+            //TODO: переделать в статик
             Start_Lab1 Lab1 = new Start_Lab1();
+
             List<string> names = new List<string>
-            {"Amari", "Ash", "Avery", "Bay", "Blake",
-             "Cameron", "Casey", "Charlie", "Drew", "Emerson",
-             "Jesse", "Morgan", "Remy", "Sam", "Bobbie"};
+            {
+                "Amari", "Ash", "Avery", "Bay", "Blake",
+                "Cameron", "Casey", "Charlie", "Drew", "Emerson",
+                "Jesse", "Morgan", "Remy", "Sam", "Bobbie"
+            };
             List<string> surnames = new List<string>
-            {"Smith", "Johnson", "Williams", "Jones", "Brown",
-             "Miller", "Wilson", "Moore", "Taylor", "Thomas",
-             "Turner", "Mitchell", "Phillips", "Baker", "Adams"};
+            {
+                "Smith", "Johnson", "Williams", "Jones", "Brown",
+                "Miller", "Wilson", "Moore", "Taylor", "Thomas",
+                "Turner", "Mitchell", "Phillips", "Baker", "Adams"
+            };
             PersonList_class List1 = new PersonList_class();
             PersonList_class List2 = new PersonList_class();
 
@@ -27,6 +34,7 @@ namespace Lab1
                 // Person_class person2 = Person_class.GetRandomPerson(names, surnames);
                 List2.Add(Person_class.GetRandomPerson(names, surnames));
             }
+
             Lab1.Show(List1, List2);
             Console.ReadKey();
             Console.WriteLine("");
@@ -61,8 +69,12 @@ namespace Lab1
             Lab1.Show(List1, List2);
             Console.ReadKey();
         }
+
+        //TODO: XML
+        //TODO: RSDN
         public void Show (PersonList_class List1, PersonList_class List2)
         {
+            //TODO: можно передать параметром
             PersonList_class[] Lists = new PersonList_class[]
             {
                 List1, List2
