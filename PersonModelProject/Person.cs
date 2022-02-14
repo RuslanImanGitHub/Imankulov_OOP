@@ -34,7 +34,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        private gender _gender;
+        private Gender _gender;
 
         /// <summary>
         /// Person's name
@@ -112,7 +112,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        public gender Gender
+        public Gender Gender
         {
             get => _gender;
 
@@ -129,7 +129,7 @@ namespace PersonModelProject
         /// <param name="surname">Person's surname</param>
         /// <param name="age">Person's age</param>
         /// <param name="userGender">Person's gender</param>
-        public Person(string name, string surname, int age, gender userGender)
+        public Person(string name, string surname, int age, Gender userGender)
         {
             Name = name;
             Surname = surname;
@@ -140,7 +140,7 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Person() : this("", "", 1, gender.Unknown)
+        public Person() : this("", "", 1, Gender.Unknown)
         { }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace PersonModelProject
             Person person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                                    rnd.Next(1, 100),
-                                                   (gender)rnd.Next(0, 2));
+                                                   (Gender)rnd.Next(0, 2));
             return person;
         }
 
