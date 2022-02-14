@@ -1,7 +1,6 @@
 ﻿namespace PersonModelProject
 {
-    //TODO: XML | Выполненно
-    //TODO: RSDN
+    //TODO: RSDN | Выполненно
     /// <summary>
     /// Enum of person gender
     /// </summary>

@@ -4,13 +4,11 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    //TODO: RSDN
-    public class Start_Lab1
+    //TODO: RSDN | Выполненно
+    public class StartLab1
     {
         public static void Main()
         {
-            //TODO: переделать в статик | Выполненно
-
             List<string> names = new List<string>
             {
                 "Amari", "Ash", "Avery", "Bay", "Blake",
@@ -23,74 +21,76 @@ namespace Lab1
                 "Miller", "Wilson", "Moore", "Taylor", "Thomas",
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
-            PersonList List1 = new PersonList();
-            PersonList List2 = new PersonList();
 
-            PersonList[] Lists = new PersonList[]
+            //TODO: RSDN | Выполненно
+            PersonList list1 = new PersonList();
+            PersonList list2 = new PersonList();
+
+            PersonList[] lists = new PersonList[]
             {
-                List1, List2
+                list1, list2
             };
 
             Console.WriteLine("Creating 2 list of 3 people");
             for (int i = 0; i < 3; i++)
             {
-                List1.Add(Person.GetRandomPerson(names, surnames));
+                list1.Add(Person.GetRandomPerson(names, surnames));
                 // Person_class person2 = Person_class.GetRandomPerson(names, surnames);
-                List2.Add(Person.GetRandomPerson(names, surnames));
+                list2.Add(Person.GetRandomPerson(names, surnames));
             }
 
-            Show(Lists);
+            Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
             Console.WriteLine("Adding new person to list #1");
-            List1.Add(Person.GetRandomPerson(names, surnames));
-            Show(Lists);
+            list1.Add(Person.GetRandomPerson(names, surnames));
+            Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
             Console.WriteLine("Puting 2nd person from List1 as the last element of List2");
-            List2.Add(List1.GetPersonByIndex(1));
-            Show(Lists);
+            list2.Add(list1.GetPersonByIndex(1));
+            Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
             Console.WriteLine("Deleting 2nd person from List1");
-            List1.RemoveIndex(1);
-            Show(Lists);
+            list1.RemoveIndex(1);
+            Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
             Console.WriteLine("Deleting List2");
-            List2.Clear();
-            Show(Lists);
+            list2.Clear();
+            Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
             Console.WriteLine("Adding person from console");
-            List2.Add(ReadPersonFromConsole());
-            Show(Lists);
+            list2.Add(ReadPersonFromConsole());
+            Show(lists);
             Console.ReadKey();
         }
 
-        //TODO: XML | Выполненно
-        //TODO: RSDN
+        //TODO: RSDN | Выполненно
         /// <summary>
         /// Prints all entries in PresonList object
         /// </summary>
-        /// <param name="Lists">List of PersonList objects that need to be printed</param>
-        static void Show (PersonList[] Lists)
+        /// <param name="lists">List of PersonList objects that need to be printed</param>
+        static void Show (PersonList[] lists)
         {
-            for (int i = 0; i < Lists.Length; i++)
+            for (int i = 0; i < lists.Length; i++)
             {
                 Console.WriteLine("");
                 Console.WriteLine($"List{i + 1}");
-                for (int j = 0; j < Lists[i].Length; j++)
+                for (int j = 0; j < lists[i].Length; j++)
                 {
-                    Console.WriteLine(Lists[i].GetPersonByIndex(j).ShowPerson);
+                    Console.WriteLine(lists[i].GetPersonByIndex(j).Info);
                 }
             }
         }
+
         /// <summary>
         /// Input person from console
         /// </summary>
@@ -144,12 +144,12 @@ namespace Lab1
                             }
                             default:
                             {
-                                Console.WriteLine("Error, you must enter 1, 2, 3 or 4");
+                                Console.WriteLine("Error, you must enter 1, 2, 3 or anything else");
                                 break;
                             }
                         }
                     },
-                    "Enter gender of person. 1 - Male, 2 - Female, 3 - Other, 4 - Unknown")
+                    "Enter gender of person. 1 - Male, 2 - Female, 3 - Other, other input - Unknown")
             };
 
             foreach (var actionTuple in actionsTupleList)
@@ -159,6 +159,11 @@ namespace Lab1
             return defaultPerson;
         }
 
+        /// <summary>
+        /// Handles console input actions
+        /// </summary>
+        /// <param name="action">Function that will be performed</param>
+        /// <param name="inputMessage">Message that will be displayed in console</param>
         private static void ActionHandler(Action action, string inputMessage)
         {
             while (true)
