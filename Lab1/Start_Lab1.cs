@@ -5,12 +5,10 @@ using System.Collections.Generic;
 namespace Lab1
 {
     //TODO: RSDN
-    public class Start_Lab1
+    public static class Start_Lab1
     {
         public static void Main()
         {
-            //TODO: переделать в статик | Выполненно
-
             List<string> names = new List<string>
             {
                 "Amari", "Ash", "Avery", "Bay", "Blake",
@@ -23,6 +21,7 @@ namespace Lab1
                 "Miller", "Wilson", "Moore", "Taylor", "Thomas",
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
+            //TODO: RSDN
             PersonList List1 = new PersonList();
             PersonList List2 = new PersonList();
 
@@ -73,7 +72,6 @@ namespace Lab1
             Console.ReadKey();
         }
 
-        //TODO: XML | Выполненно
         //TODO: RSDN
         /// <summary>
         /// Prints all entries in PresonList object
@@ -91,6 +89,7 @@ namespace Lab1
                 }
             }
         }
+
         /// <summary>
         /// Input person from console
         /// </summary>
@@ -159,6 +158,7 @@ namespace Lab1
             return defaultPerson;
         }
 
+        //TODO: XML
         private static void ActionHandler(Action action, string inputMessage)
         {
             while (true)

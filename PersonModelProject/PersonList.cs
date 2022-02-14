@@ -11,10 +11,12 @@ namespace PersonModelProject
         /// New array of person
         /// </summary>
         private Person[] _personList = new Person[0];
+
         /// <summary>
         /// Length of PersonList
         /// </summary>
         public int Length => _personList.Length;
+
         /// <summary>
         /// Add new entry in PersonList
         /// </summary>
@@ -25,6 +27,7 @@ namespace PersonModelProject
             Array.Resize<Person>(ref _personList, currSize + 1);
             _personList[currSize] = person;
         }
+
         /// <summary>
         /// Removes last object from PersonList
         /// </summary>
@@ -33,6 +36,7 @@ namespace PersonModelProject
             int currSize = _personList.Length;
             Array.Resize<Person>(ref _personList, currSize - 1);
         }
+
         /// <summary>
         /// Removes object specified by index
         /// </summary>
@@ -53,6 +57,7 @@ namespace PersonModelProject
                 }
             }
         }
+
         /// <summary>
         /// Returns object specified by index
         /// </summary>
@@ -62,7 +67,7 @@ namespace PersonModelProject
         {
             return _personList[index];
         }
-        //TODO: indexOf | Выполненно (Вроде бы)
+        
         /// <summary>
         /// Returns index of specified object from PersonList
         /// </summary>
@@ -72,6 +77,7 @@ namespace PersonModelProject
         {
             return Array.IndexOf(_personList, person);
         }
+
         /// <summary>
         /// Clears PersonList
         /// </summary>
