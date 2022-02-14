@@ -16,6 +16,7 @@ namespace PersonModelProject
         /// </summary>
         private string _name;
 
+        //TODO: naming
         /// <summary>
         /// Shows if Person's name was writen in cyrilic
         /// </summary>
@@ -45,6 +46,7 @@ namespace PersonModelProject
 
             set
             {
+                //TODO: дубль
                 if (value != string.Empty)
                 {
                     if (LanguageCheck(value))
@@ -70,9 +72,10 @@ namespace PersonModelProject
 
             set
             {
+                //TODO: дубль
                 if (value != string.Empty)
                 {
-                    if (LanguageCheck(value) == true)
+                    if (LanguageCheck(value) == LanguageCheck(_name))
                     {
                         _surname = DoubleNameCheck(value)
                             ? DoubleNameHandler(value)
@@ -80,7 +83,7 @@ namespace PersonModelProject
                     }
                     else
                     {
-                        throw new Exception($"Use only latin or cyrilic to write {value}");
+                        throw new ArgumentException("Не в одной локали!!!111");
                     }
                 }
             }
@@ -95,7 +98,6 @@ namespace PersonModelProject
 
             set
             {
-                //TODO: to const | Выполненно
                 const int minAge = 0;
                 const int maxAge = 150;
                 if (value <= minAge || value > maxAge)
@@ -116,10 +118,7 @@ namespace PersonModelProject
         {
             get => _gender;
 
-            set
-            {
-                _gender = value;
-            }
+            set => _gender = value;
         }
 
         /// <summary>
@@ -154,45 +153,38 @@ namespace PersonModelProject
             Random rnd = new Random();
             Person person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
+                                                   //TODO:
                                                    rnd.Next(1, 100),
                                                    (Gender)rnd.Next(0, 2));
             return person;
         }
-
-        //TODO: naming | Выполненно
-        //TODO: XML | Выполненно
+        
         /// <summary>
         /// Shows info about the object
         /// </summary>
-        public string Info
-        {
-            get
-            {
-                return $"{Name} {Surname} Age {Age} Gender {Gender}";
-            }
-        }
+        public string Info => $"{Name} {Surname} Age {Age} Gender {Gender}";
 
         /// <summary>
         /// Language check to make sure the name and surname is only in cyrilic or latin
         /// </summary>
         /// <param name="input">Name or surname</param>
         /// <returns></returns>
-        private bool LanguageCheck(string input)
+        private string LanguageCheck(string input)
         {
             Regex regRUS = new Regex(@"^(([А-Яа-я]+)(-)?([А-Яа-я]+)?$)");
-            if (regRUS.IsMatch(input) && (this._cyrilic == null || this._cyrilic == "Rus"))
+            //TODO:
+            if (regRUS.IsMatch(input))
             {
-                this._cyrilic = "Rus";
-                return regRUS.IsMatch(input);
+                return "Rus";
             }
 
             Regex regENG = new Regex(@"^(([A-Za-z]+)(-)?([A-Za-z]+)?$)");
-            if (regENG.IsMatch(input) && (this._cyrilic == null || this._cyrilic == "Eng"))
+            //TODO:
+            if (regENG.IsMatch(input))
             {
-                this._cyrilic = "Eng";
-                return regENG.IsMatch(input);
+                return "Eng";
             }
-            return false;
+            throw new ArgumentException($"Use only latin or cyrilic to write {input}");
         }
 
         /// <summary>
