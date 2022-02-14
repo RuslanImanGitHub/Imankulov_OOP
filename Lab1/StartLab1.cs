@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    //TODO: RSDN | Выполненно
     public class StartLab1
     {
         public static void Main()
@@ -21,8 +20,7 @@ namespace Lab1
                 "Miller", "Wilson", "Moore", "Taylor", "Thomas",
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
-
-            //TODO: RSDN | Выполненно
+            
             PersonList list1 = new PersonList();
             PersonList list2 = new PersonList();
 
@@ -72,8 +70,7 @@ namespace Lab1
             Show(lists);
             Console.ReadKey();
         }
-
-        //TODO: RSDN | Выполненно
+        
         /// <summary>
         /// Prints all entries in PresonList object
         /// </summary>
