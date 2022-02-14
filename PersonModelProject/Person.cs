@@ -47,7 +47,7 @@ namespace PersonModelProject
             {
                 if (value != string.Empty)
                 {
-                    if (LanguageCheck(value) == true)
+                    if (LanguageCheck(value))
                     {
                         _name = DoubleNameCheck(value)
                             ? DoubleNameHandler(value)
