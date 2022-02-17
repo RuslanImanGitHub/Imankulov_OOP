@@ -33,7 +33,6 @@ namespace Lab1
             for (int i = 0; i < 3; i++)
             {
                 list1.Add(Person.GetRandomPerson(names, surnames));
-                // Person_class person2 = Person_class.GetRandomPerson(names, surnames);
                 list2.Add(Person.GetRandomPerson(names, surnames));
             }
 
@@ -121,22 +120,22 @@ namespace Lab1
                         {
                             case 1:
                             {
-                                defaultPerson.Gender = gender.Male;
+                                defaultPerson.Gender = Gender.Male;
                                 return;
                             }
                             case 2:
                             {
-                                defaultPerson.Gender = gender.Female;
+                                defaultPerson.Gender = Gender.Female;
                                 return;
                             }
                             case 3:
                             {
-                                defaultPerson.Gender = gender.Other;
+                                defaultPerson.Gender = Gender.Other;
                                 return;
                             }
                             case 4:
                             {
-                                defaultPerson.Gender = gender.Unknown;
+                                defaultPerson.Gender = Gender.Unknown;
                                 return;
                             }
                             default:
