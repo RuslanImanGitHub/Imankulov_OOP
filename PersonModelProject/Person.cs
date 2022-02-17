@@ -16,12 +16,6 @@ namespace PersonModelProject
         /// </summary>
         private string _name;
 
-        //TODO: naming
-        /// <summary>
-        /// Shows if Person's name was writen in cyrilic
-        /// </summary>
-        private string _cyrilic;
-
         /// <summary>
         /// Person's surname
         /// </summary>
@@ -44,23 +38,7 @@ namespace PersonModelProject
         {
             get => _name;
 
-            set
-            {
-                //TODO: дубль
-                if (value != string.Empty)
-                {
-                    if (LanguageCheck(value))
-                    {
-                        _name = DoubleNameCheck(value)
-                            ? DoubleNameHandler(value)
-                            : FirstLetterToUpper(value);
-                    }
-                    else
-                    {
-                        throw new Exception($"Use only latin or cyrilic to write {value}");
-                    }
-                }
-            }
+            set => Naming(value, true, _surname);
         }
 
         /// <summary>
@@ -70,23 +48,7 @@ namespace PersonModelProject
         {
             get => _surname;
 
-            set
-            {
-                //TODO: дубль
-                if (value != string.Empty)
-                {
-                    if (LanguageCheck(value) == LanguageCheck(_name))
-                    {
-                        _surname = DoubleNameCheck(value)
-                            ? DoubleNameHandler(value)
-                            : FirstLetterToUpper(value);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Не в одной локали!!!111");
-                    }
-                }
-            }
+            set => Naming(value, false, _name);
         }
 
         /// <summary>
@@ -98,9 +60,9 @@ namespace PersonModelProject
 
             set
             {
-                const int minAge = 0;
+                const int minAge = 1;
                 const int maxAge = 150;
-                if (value <= minAge || value > maxAge)
+                if (value < minAge || value > maxAge)
                 {
                     throw new Exception($"Age must be in range from {minAge} to {maxAge}");
                 }
@@ -171,6 +133,10 @@ namespace PersonModelProject
         /// <returns></returns>
         private string LanguageCheck(string input)
         {
+            if (input == null)
+            {
+                return "None";
+            }
             Regex regRUS = new Regex(@"^(([А-Яа-я]+)(-)?([А-Яа-я]+)?$)");
             //TODO:
             if (regRUS.IsMatch(input))
@@ -184,7 +150,7 @@ namespace PersonModelProject
             {
                 return "Eng";
             }
-            throw new ArgumentException($"Use only latin or cyrilic to write {input}");
+            throw new Exception($"Use only latin or cyrilic to write {input}");
         }
 
         /// <summary>
@@ -219,6 +185,36 @@ namespace PersonModelProject
         {
             return input.Substring(0, 1).ToUpper() +
                 input.Substring(1, input.Length - 1).ToLower();
+        }
+
+        /// <summary>
+        /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
+        /// </summary>
+        /// <param name="input">Value that is supposed to be inputed</param>
+        /// <param name="isName">Flag of _name property</param>
+        /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
+        /// <exception cref="Exception"></exception>
+        private void Naming(string input, bool isName, string nameOrSurname)
+        {
+            if (input != string.Empty)
+            {
+                if (LanguageCheck(input) == LanguageCheck(nameOrSurname) || LanguageCheck(nameOrSurname) == "None")
+                {
+                    if (isName)
+                    {
+                        _name = DoubleNameCheck(input)
+                            ? DoubleNameHandler(input)
+                            : FirstLetterToUpper(input);
+                    }
+                    _surname = DoubleNameCheck(input)
+                        ? DoubleNameHandler(input)
+                        : FirstLetterToUpper(input);
+                }
+                else
+                {
+                    throw new Exception("Not in the same localization");
+                }
+            }
         }
     }
 }

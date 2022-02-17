@@ -33,7 +33,6 @@ namespace Lab1
             for (int i = 0; i < 3; i++)
             {
                 list1.Add(Person.GetRandomPerson(names, surnames));
-                // Person_class person2 = Person_class.GetRandomPerson(names, surnames);
                 list2.Add(Person.GetRandomPerson(names, surnames));
             }
 
