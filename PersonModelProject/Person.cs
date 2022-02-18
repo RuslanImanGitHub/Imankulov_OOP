@@ -32,6 +32,16 @@ namespace PersonModelProject
         private Gender _gender;
 
         /// <summary>
+        /// Minimal age accepted by programm
+        /// </summary>
+        public const int minAge = 1;
+
+        /// <summary>
+        /// Maximal age accepted by programm
+        /// </summary>
+        public const int maxAge = 150;
+
+        /// <summary>
         /// Person's name
         /// </summary>
         public string Name
@@ -60,8 +70,6 @@ namespace PersonModelProject
 
             set
             {
-                const int minAge = 1;
-                const int maxAge = 150;
                 if (value < minAge || value > maxAge)
                 {
                     throw new Exception($"Age must be in range from {minAge} to {maxAge}");
@@ -97,11 +105,21 @@ namespace PersonModelProject
             Age = age;
             Gender = userGender;
         }
+        /// <summary>
+        /// Partial constructor of Person object
+        /// </summary>
+        /// <param name="name">Person's name</param>
+        /// <param name="surname">Person's surname</param>
+        public Person(string name, string surname)
+        {
+            Name = name;
+            Surname = surname;
+        }
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Person() : this("John", "Smith", 1, Gender.Unknown)
+        public Person() : this(null, null, 1, Gender.Unknown)
         { }
 
         /// <summary>
@@ -115,8 +133,7 @@ namespace PersonModelProject
             var rnd = new Random();
             var person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
-                                                   //TODO:
-                                                   rnd.Next(1, 150),
+                                                   rnd.Next(minAge, maxAge),
                                                    (Gender)rnd.Next(0, 2));
             return person;
         }
@@ -131,7 +148,7 @@ namespace PersonModelProject
         /// </summary>
         /// <param name="input">Name or surname</param>
         /// <returns></returns>
-        private string LanguageCheck(string input)
+        private static string LanguageCheck(string input)
         {
             if (input == null)
             {
@@ -192,7 +209,7 @@ namespace PersonModelProject
         /// <param name="input">Value that is supposed to be inputed</param>
         /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
         /// <exception cref="Exception"></exception>
-        private string CheckNaming(string input, string nameOrSurname)
+        public static string CheckNaming(string input, string nameOrSurname)
         {
             if (input != string.Empty)
             {
@@ -207,7 +224,7 @@ namespace PersonModelProject
             }
             else
             {
-                throw new ArgumentException("Input string should not be empty");
+                throw new Exception("Input string should not be empty");
             }
         }
     }

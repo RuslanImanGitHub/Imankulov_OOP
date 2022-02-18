@@ -2,6 +2,8 @@
 using PersonModelProject;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Lab1
 {
@@ -96,24 +98,23 @@ namespace Lab1
         /// <returns>Instance person</returns>
         static Person ReadPersonFromConsole()
         {
-            var defaultPerson = new Person();
+            string consoleName = "Default";
+            string consoleSurname = "Default";
+            var defaultPerson = new Person(consoleName, consoleSurname);
             var actionsTupleList = new List<(Action Action, string Message)>
             {
                 (
-                    () => { defaultPerson.Name = Console.ReadLine(); },
+                    () => { consoleName = Console.ReadLine(); },
                     "Enter name of person:"
                 ),
                 (
-                    () =>
-                    {
-                        defaultPerson.Surname = Console.ReadLine();
-                    },
+                    () => { consoleSurname = CheckNaming(Console.ReadLine(), consoleName); },
                     "Enter surname of person:"),
                 (
-                    () =>
-                    {
-                        defaultPerson.Age = Convert.ToInt32(Console.ReadLine());
-                    },
+                    () => { defaultPerson = new Person(consoleName, consoleSurname); },
+                    "Writing name and surname to person"),
+                (
+                    () => { defaultPerson.Age = Convert.ToInt32(Console.ReadLine()); },
                     "Enter age of person:"),
                 (
                     () =>
@@ -178,6 +179,91 @@ namespace Lab1
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Try again!");
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Language check to make sure the name and surname is only in cyrilic or latin
+        /// </summary>
+        /// <param name="input">Name or surname</param>
+        /// <returns></returns>
+        private static string LanguageCheck(string input)
+        {
+            if (input == null)
+            {
+                return null;
+            }
+
+            var regexes = new List<(Regex, string)>
+            {
+                (new Regex(@"^(([А-Яа-я]+)(-)?([А-Яа-я]+)?$)"), "Rus"),
+                (new Regex(@"^(([A-Za-z]+)(-)?([A-Za-z]+)?$)"), "Eng")
+            };
+
+            foreach (var regexValue in regexes.Where(regexValue => regexValue.Item1.IsMatch(input)))
+            {
+                return regexValue.Item2;
+            }
+
+            throw new Exception($"Use only latin or cyrilic to write {input}");
+        }
+
+        /// <summary>
+        /// Checks if there is a "-" in the name
+        /// </summary>
+        /// <param name="input">Name or surname</param>
+        /// <returns></returns>
+        private static bool DoubleNameCheck(string input)
+        {
+            Regex regDouble = new Regex(@"-");
+            return regDouble.IsMatch(input);
+        }
+
+        /// <summary>
+        /// Changes double names first letter being in Upper case
+        /// </summary>
+        /// <param name="input">Name or surname</param>
+        /// <returns></returns>
+        private static string DoubleNameHandler(string input)
+        {
+            string[] doubleName = input.Split("-");
+            return FirstLetterToUpper(doubleName[0]) + "-"
+                + FirstLetterToUpper(doubleName[1]);
+        }
+
+        /// <summary>
+        /// Changes string to first letter being in Upper case and the rest in lower case
+        /// </summary>
+        /// <param name="input">Name or Surname</param>
+        /// <returns></returns>
+        private static string FirstLetterToUpper(string input)
+        {
+            return input.Substring(0, 1).ToUpper() +
+                input.Substring(1, input.Length - 1).ToLower();
+        }
+
+        /// <summary>
+        /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
+        /// </summary>
+        /// <param name="input">Value that is supposed to be inputed</param>
+        /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
+        /// <exception cref="Exception"></exception>
+        private static string CheckNaming(string input, string nameOrSurname)
+        {
+            if (input != string.Empty)
+            {
+                if (LanguageCheck(input) == LanguageCheck(nameOrSurname)
+                    || LanguageCheck(nameOrSurname) == null)
+                {
+                    return DoubleNameCheck(input)
+                            ? DoubleNameHandler(input)
+                            : FirstLetterToUpper(input);
+                }
+                throw new Exception("Not in the same localization");
+            }
+            else
+            {
+                throw new Exception("Input string should not be empty");
             }
         }
     }
