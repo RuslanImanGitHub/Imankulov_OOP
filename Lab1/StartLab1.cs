@@ -1,6 +1,7 @@
 ﻿using System;
 using PersonModelProject;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Lab1
 {
@@ -8,7 +9,8 @@ namespace Lab1
     {
         public static void Main()
         {
-            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
             List<string> names = new List<string>
             {
                 "Amari", "Ash", "Avery", "Bay", "Blake",
