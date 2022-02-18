@@ -8,6 +8,7 @@ namespace Lab1
     {
         public static void Main()
         {
+            Console.InputEncoding = System.Text.Encoding.UTF8;
             List<string> names = new List<string>
             {
                 "Amari", "Ash", "Avery", "Bay", "Blake",

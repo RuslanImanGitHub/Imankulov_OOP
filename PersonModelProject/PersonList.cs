@@ -75,8 +75,7 @@ namespace PersonModelProject
         {
             return _personList[index];
         }
-
-        //TODO: indexOf | Выполненно (Вроде бы)
+        
         /// <summary>
         /// Returns index of specified object from PersonList
         /// </summary>

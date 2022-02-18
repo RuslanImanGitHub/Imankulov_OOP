@@ -38,7 +38,7 @@ namespace PersonModelProject
         {
             get => _name;
 
-            set => Naming(value, true, _surname);
+            set => _name = CheckNaming(value, _surname);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace PersonModelProject
         {
             get => _surname;
 
-            set => Naming(value, false, _name);
+            set => _surname = CheckNaming(value, _name);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Person() : this("", "", 1, Gender.Unknown)
+        public Person() : this("John", "Smith", 1, Gender.Unknown)
         { }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace PersonModelProject
         /// <returns></returns>
         public static Person GetRandomPerson(List<string> names, List<string> surnames)
         {
-            Random rnd = new Random();
-            Person person = new Person(names[rnd.Next(0, names.Count() - 1)],
+            var rnd = new Random();
+            var person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                                    //TODO:
                                                    rnd.Next(1, 100),
@@ -135,21 +135,20 @@ namespace PersonModelProject
         {
             if (input == null)
             {
-                return "None";
-            }
-            Regex regRUS = new Regex(@"^(([А-Яа-я]+)(-)?([А-Яа-я]+)?$)");
-            //TODO:
-            if (regRUS.IsMatch(input))
-            {
-                return "Rus";
+                return null;
             }
 
-            Regex regENG = new Regex(@"^(([A-Za-z]+)(-)?([A-Za-z]+)?$)");
-            //TODO:
-            if (regENG.IsMatch(input))
+            var regexes = new List<(Regex, string)>
             {
-                return "Eng";
+                (new Regex(@"^(([А-Яа-я]+)(-)?([А-Яа-я]+)?$)"), "Rus"),
+                (new Regex(@"^(([A-Za-z]+)(-)?([A-Za-z]+)?$)"), "Eng")
+            };
+
+            foreach (var regexValue in regexes.Where(regexValue => regexValue.Item1.IsMatch(input)))
+            {
+                return regexValue.Item2;
             }
+            
             throw new Exception($"Use only latin or cyrilic to write {input}");
         }
 
@@ -191,29 +190,24 @@ namespace PersonModelProject
         /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
         /// </summary>
         /// <param name="input">Value that is supposed to be inputed</param>
-        /// <param name="isName">Flag of _name property</param>
         /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
         /// <exception cref="Exception"></exception>
-        private void Naming(string input, bool isName, string nameOrSurname)
+        private string CheckNaming(string input, string nameOrSurname)
         {
             if (input != string.Empty)
             {
-                if (LanguageCheck(input) == LanguageCheck(nameOrSurname) || LanguageCheck(nameOrSurname) == "None")
+                if (LanguageCheck(input) == LanguageCheck(nameOrSurname) 
+                    || LanguageCheck(nameOrSurname) == null)
                 {
-                    if (isName)
-                    {
-                        _name = DoubleNameCheck(input)
+                    return DoubleNameCheck(input)
                             ? DoubleNameHandler(input)
                             : FirstLetterToUpper(input);
-                    }
-                    _surname = DoubleNameCheck(input)
-                        ? DoubleNameHandler(input)
-                        : FirstLetterToUpper(input);
                 }
-                else
-                {
-                    throw new Exception("Not in the same localization");
-                }
+                throw new Exception("Not in the same localization");
+            }
+            else
+            {
+                throw new ArgumentException("Input string should not be empty");
             }
         }
     }
