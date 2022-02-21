@@ -27,7 +27,7 @@ namespace Lab1
             PersonList list1 = new PersonList();
             PersonList list2 = new PersonList();
 
-            PersonList[] lists = new PersonList[]
+            PersonList[] lists = 
             {
                 list1, list2
             };
