@@ -22,6 +22,11 @@ namespace PersonModelProject
         private string _surname;
 
         /// <summary>
+        /// Locale of Person's name
+        /// </summary>
+        private string _locale;
+
+        /// <summary>
         /// Person's age
         /// </summary>
         private int _age;
@@ -32,13 +37,23 @@ namespace PersonModelProject
         private Gender _gender;
 
         /// <summary>
+        /// Minimal age accepted by programm
+        /// </summary>
+        public const int _minAge = 1;
+
+        /// <summary>
+        /// Maximal age accepted by programm
+        /// </summary>
+        public const int _maxAge = 150;
+
+        /// <summary>
         /// Person's name
         /// </summary>
         public string Name
         {
             get => _name;
 
-            set => _name = CheckNaming(value, _surname);
+            set => _name = CheckNaming(value);
         }
 
         /// <summary>
@@ -48,7 +63,7 @@ namespace PersonModelProject
         {
             get => _surname;
 
-            set => _surname = CheckNaming(value, _name);
+            set => _surname = CheckNaming(value);
         }
 
         /// <summary>
@@ -60,11 +75,9 @@ namespace PersonModelProject
 
             set
             {
-                const int minAge = 1;
-                const int maxAge = 150;
-                if (value < minAge || value > maxAge)
+                if (value < _minAge || value > _maxAge)
                 {
-                    throw new Exception($"Age must be in range from {minAge} to {maxAge}");
+                    throw new Exception($"Age must be in range from {_minAge} to {_maxAge}");
                 }
                 else
                 {
@@ -101,7 +114,7 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Person() : this("John", "Smith", 1, Gender.Unknown)
+        public Person() : this(null, null, 1, Gender.Unknown)
         { }
 
         /// <summary>
@@ -131,11 +144,11 @@ namespace PersonModelProject
         /// </summary>
         /// <param name="input">Name or surname</param>
         /// <returns></returns>
-        private string LanguageCheck(string input)
+        private void LanguageCheck(string input)
         {
             if (input == null)
             {
-                return null;
+                return;
             }
 
             var regexes = new List<(Regex, string)>
@@ -146,9 +159,19 @@ namespace PersonModelProject
 
             foreach (var regexValue in regexes.Where(regexValue => regexValue.Item1.IsMatch(input)))
             {
-                return regexValue.Item2;
+                if (_locale == null)
+                {
+                    _locale = regexValue.Item2;
+                }
+                else
+                {
+                    if (_locale != regexValue.Item2)
+                    {
+                        throw new Exception("Not in the same localization");
+                    }
+                }
+                return;
             }
-            
             throw new Exception($"Use only latin or cyrilic to write {input}");
         }
 
@@ -192,18 +215,18 @@ namespace PersonModelProject
         /// <param name="input">Value that is supposed to be inputed</param>
         /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
         /// <exception cref="Exception"></exception>
-        private string CheckNaming(string input, string nameOrSurname)
+        private string CheckNaming(string input)
         {
             if (input != string.Empty)
             {
-                if (LanguageCheck(input) == LanguageCheck(nameOrSurname) 
-                    || LanguageCheck(nameOrSurname) == null)
+                LanguageCheck(input);
+                if (input != null)
                 {
                     return DoubleNameCheck(input)
                             ? DoubleNameHandler(input)
                             : FirstLetterToUpper(input);
                 }
-                throw new Exception("Not in the same localization");
+                return input;
             }
             else
             {
