@@ -36,11 +36,13 @@ namespace PersonModelProject
         /// </summary>
         private Gender _gender;
 
+        //TODO: rsdn
         /// <summary>
         /// Minimal age accepted by programm
         /// </summary>
         public const int _minAge = 1;
 
+        //TODO: rsdn
         /// <summary>
         /// Maximal age accepted by programm
         /// </summary>
@@ -209,6 +211,7 @@ namespace PersonModelProject
                 input.Substring(1, input.Length - 1).ToLower();
         }
 
+        //TODO: несоответствие XML и сигнатуры метода
         /// <summary>
         /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
         /// </summary>
