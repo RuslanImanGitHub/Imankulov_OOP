@@ -36,17 +36,17 @@ namespace PersonModelProject
         /// </summary>
         private Gender _gender;
 
-        //TODO: rsdn
+        //TODO: rsdn | Ok
         /// <summary>
         /// Minimal age accepted by programm
         /// </summary>
-        public const int _minAge = 1;
+        public const int minAge = 1;
 
-        //TODO: rsdn
+        //TODO: rsdn | Ok
         /// <summary>
         /// Maximal age accepted by programm
         /// </summary>
-        public const int _maxAge = 150;
+        public const int maxAge = 150;
 
         /// <summary>
         /// Person's name
@@ -77,9 +77,9 @@ namespace PersonModelProject
 
             set
             {
-                if (value < _minAge || value > _maxAge)
+                if (value < minAge || value > maxAge)
                 {
-                    throw new Exception($"Age must be in range from {_minAge} to {_maxAge}");
+                    throw new Exception($"Age must be in range from {minAge} to {maxAge}");
                 }
                 else
                 {
@@ -130,8 +130,7 @@ namespace PersonModelProject
             var rnd = new Random();
             var person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
-                                                   //TODO:
-                                                   rnd.Next(1, 100),
+                                                   rnd.Next(_minAge, _maxAge),
                                                    (Gender)rnd.Next(0, 2));
             return person;
         }
@@ -211,12 +210,11 @@ namespace PersonModelProject
                 input.Substring(1, input.Length - 1).ToLower();
         }
 
-        //TODO: несоответствие XML и сигнатуры метода
+        //TODO: несоответствие XML и сигнатуры метода | Ok
         /// <summary>
         /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
         /// </summary>
         /// <param name="input">Value that is supposed to be inputed</param>
-        /// <param name="nameOrSurname">Value of name or surname to keep the same locale</param>
         /// <exception cref="Exception"></exception>
         private string CheckNaming(string input)
         {

@@ -23,10 +23,10 @@ namespace PersonModelProject
         /// <param name="person">Person object</param>
         public void Add(Person person)
         {
-            //TODO: rsdn
-            int currSize = _personList.Length;
-            Array.Resize<Person>(ref _personList, currSize + 1);
-            _personList[currSize] = person;
+            //TODO: rsdn | Ok
+            int currentSize = _personList.Length;
+            Array.Resize<Person>(ref _personList, currentSize + 1);
+            _personList[currentSize] = person;
         }
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace PersonModelProject
         {
             if (_personList.Length > 1)
             {
-                //TODO: rsdn
-                int currSize = _personList.Length;
-                Array.Resize<Person>(ref _personList, currSize - 1);
+                //TODO: rsdn | Ok
+                int currentSize = _personList.Length;
+                Array.Resize<Person>(ref _personList, currentSize - 1);
             }
             else
             {
