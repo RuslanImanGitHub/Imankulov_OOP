@@ -40,13 +40,13 @@ namespace PersonModelProject
         /// <summary>
         /// Minimal age accepted by programm
         /// </summary>
-        public const int minAge = 1;
+        public const int MinAge = 1;
 
         //TODO: rsdn | Ok
         /// <summary>
         /// Maximal age accepted by programm
         /// </summary>
-        public const int maxAge = 150;
+        public const int MaxAge = 150;
 
         /// <summary>
         /// Person's name
@@ -77,9 +77,9 @@ namespace PersonModelProject
 
             set
             {
-                if (value < minAge || value > maxAge)
+                if (value < MinAge || value > MaxAge)
                 {
-                    throw new Exception($"Age must be in range from {minAge} to {maxAge}");
+                    throw new Exception($"Age must be in range from {MinAge} to {MaxAge}");
                 }
                 else
                 {
