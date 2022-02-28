@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab1
 {
-    public class StartLab1
+    public class StartLab2
     {
         public static void Main()
         {

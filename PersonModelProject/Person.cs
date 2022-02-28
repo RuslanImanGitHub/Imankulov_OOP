@@ -9,7 +9,7 @@ namespace PersonModelProject
     /// <summary>
     /// Class person
     /// </summary>
-    public class Person
+    abstract public class Person
     {
         /// <summary>
         /// Person's name
@@ -29,7 +29,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's age
         /// </summary>
-        private int _age;
+        protected int _age;
 
         /// <summary>
         /// Person's gender
@@ -39,12 +39,12 @@ namespace PersonModelProject
         /// <summary>
         /// Minimal age accepted by programm
         /// </summary>
-        public const int MinAge = 1;
-        
+        private const int MinAge = 1;
+
         /// <summary>
         /// Maximal age accepted by programm
         /// </summary>
-        public const int MaxAge = 150;
+        private const int MaxAge = 150;
 
         /// <summary>
         /// Person's name
@@ -69,7 +69,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's age
         /// </summary>
-        public int Age
+        public virtual int Age
         {
             get => _age;
 
@@ -123,7 +123,7 @@ namespace PersonModelProject
         /// <param name="names">List with random names</param>
         /// <param name="surnames">List with random surnames</param>
         /// <returns></returns>
-        public static Person GetRandomPerson(List<string> names, List<string> surnames)
+        /*public static Person GetRandomPerson(List<string> names, List<string> surnames)
         {
             var rnd = new Random();
             var person = new Person(names[rnd.Next(0, names.Count() - 1)],
@@ -131,12 +131,13 @@ namespace PersonModelProject
                                                    rnd.Next(MinAge, MaxAge),
                                                    (Gender)rnd.Next(0, 2));
             return person;
-        }
-        
+        }*/
+
         /// <summary>
         /// Shows info about the object
         /// </summary>
-        public string Info => $"{Name} {Surname} Age {Age} Gender {Gender}";
+        public virtual string Info()
+        { return $"{Name} {Surname} Age {Age} Gender {Gender}"; }
 
         /// <summary>
         /// Language check to make sure the name and surname is only in cyrilic or latin
