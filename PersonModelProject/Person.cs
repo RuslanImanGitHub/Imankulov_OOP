@@ -6,10 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace PersonModelProject
 {
+    //TODO: RSDN
     /// <summary>
     /// Class person
     /// </summary>
-    abstract public class Person
+    public abstract class Person
     {
         /// <summary>
         /// Person's name
@@ -66,6 +67,7 @@ namespace PersonModelProject
             set => _surname = CheckNaming(value);
         }
 
+        //TODO: duplication
         /// <summary>
         /// Person's age
         /// </summary>
@@ -103,7 +105,7 @@ namespace PersonModelProject
         /// <param name="surname">Person's surname</param>
         /// <param name="age">Person's age</param>
         /// <param name="userGender">Person's gender</param>
-        public Person(string name, string surname, int age, Gender userGender)
+        protected Person(string name, string surname, int age, Gender userGender)
         {
             Name = name;
             Surname = surname;
@@ -114,30 +116,21 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Person() : this(null, null, 1, Gender.Unknown)
+        protected Person() : this(null, null, 1, Gender.Unknown)
         { }
-
-        /// <summary>
-        /// Generator of random Person from lists of names and surnames
-        /// </summary>
-        /// <param name="names">List with random names</param>
-        /// <param name="surnames">List with random surnames</param>
-        /// <returns></returns>
-        /*public static Person GetRandomPerson(List<string> names, List<string> surnames)
-        {
-            var rnd = new Random();
-            var person = new Person(names[rnd.Next(0, names.Count() - 1)],
-                                                   surnames[rnd.Next(0, surnames.Count() - 1)],
-                                                   rnd.Next(MinAge, MaxAge),
-                                                   (Gender)rnd.Next(0, 2));
-            return person;
-        }*/
 
         /// <summary>
         /// Shows info about the object
         /// </summary>
-        public virtual string Info()
-        { return $"{Name} {Surname} Age {Age} Gender {Gender}"; }
+        public abstract string Info();
+
+        /// <summary>
+        /// Shows info about the object
+        /// </summary>
+        protected string Info1()
+        {
+            return $"{Name} {Surname} Age {Age} Gender {Gender}";
+        }
 
         /// <summary>
         /// Language check to make sure the name and surname is only in cyrilic or latin

@@ -32,6 +32,7 @@ namespace PersonModelProject
             set => _facility = value;
         }
 
+        //TODO: duplication
         public override int Age
         {
             get => _age;
@@ -86,7 +87,7 @@ namespace PersonModelProject
                                    (Gender)rnd.Next(0, 2));
             return person;
         }
-
+        
         public override string Info()
         {
             string addition = null;
@@ -106,6 +107,7 @@ namespace PersonModelProject
             {
                 addition = $"Mother {Mother}, Father {Father}";
             }
+            //TODO: duplication
             return $"{Name} {Surname}, Age {Age}, Gender {Gender}, School or daycare {Facility}, Parents: " + addition;
         }
 

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace PersonModelProject
 {
+    //TODO: XML
     public class Adult : Person
     {
         private string _passport;
+        //TODO: RSDN
         private bool _marriagestatus;
         private string _marriagepartner;
         private string _workplace;
@@ -53,6 +55,8 @@ namespace PersonModelProject
             set => _workplace = value;
         }
 
+
+        //TODO: duplication
         public override int Age
         {
             get => _age;
@@ -70,6 +74,7 @@ namespace PersonModelProject
             }
         }
 
+        //TODO: RSDN
         public Adult(string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender userGender)
             : base(name, surname, age, userGender)
         {
@@ -78,6 +83,7 @@ namespace PersonModelProject
             MarriageStatus = marriageStatus;
         }
 
+        //TODO: RSDN
         public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender userGender)
             : this(passport, workplace, marriageStatus, name, surname, age, userGender)
         {
@@ -91,7 +97,9 @@ namespace PersonModelProject
             {
                 addition = $"Marriage partner {MarriagePartner}";
             }
-            return $"{Name} {Surname}, Age {Age}, Gender {Gender}, Passport {Passport},Workplace {Workplace}, Marriage status {MarriageStatus} " + addition;
+            //TODO:
+            return $"{base.Info1()}, Passport {Passport}, " +
+                   $"Workplace {Workplace}, Marriage status {MarriageStatus} {addition}";
         }
 
         public static Adult GetRandomPerson(List<string> names, List<string> surnames, List<string> workplaces) //No marriage partner mirroring yet
