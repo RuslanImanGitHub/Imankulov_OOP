@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonModelProject
 {
-    internal class Child : Person
+    public class Child : Person
     {
         private string _mother;
         private string _father;
@@ -59,10 +59,11 @@ namespace PersonModelProject
             Mother = mother;
         }
 
-        public Child(string father, string facility, string name, string surname, int age, Gender userGender) : this(facility, name, surname, age, userGender)
+        /*public Child(string father, string facility, string name, string surname, int age, Gender userGender) : this(facility, name, surname, age, userGender)
         {
             Father = father;
-        } // Одинаковые параметры, спросить
+        } */
+        // Одинаковые параметры, спросить
 
         public Child(string mother, string father, string facility, string name, string surname, int age, Gender userGender) : this(facility, name, surname, age, userGender)
         {

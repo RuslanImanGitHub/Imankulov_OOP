@@ -23,54 +23,42 @@ namespace Lab1
                 "Miller", "Wilson", "Moore", "Taylor", "Thomas",
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
+            List<string> workplaces = new List<string>
+            {
+                "Power industry", "Gas station", "Post office",
+                "Power plant", "Data center", "Car manufacturing",
+                "Design office", "Window manufacturing", "Network company"
+            };
+            List<string> facilities = new List<string>
+            {
+                "Church school", "Childcare center", "Middle school",
+                "High school", "Low school", "Physics Math school",
+                "social studies school", "STEM school #2"
+            };
             
             PersonList list1 = new PersonList();
-            PersonList list2 = new PersonList();
 
             PersonList[] lists = 
             {
-                list1, list2
+                list1
             };
 
-            Console.WriteLine("Creating 2 list of 3 people");
-            for (int i = 0; i < 3; i++)
+            Console.WriteLine("Creating a list of 7 people");
+            var rnd = new Random();
+            int adultsNumber = rnd.Next(1, 6);
+            for (int i = 0; i < adultsNumber; i++)
             {
-                list1.Add(Person.GetRandomPerson(names, surnames));
-                list2.Add(Person.GetRandomPerson(names, surnames));
+                list1.Add(Adult.GetRandomPerson(names, surnames, workplaces));
             }
-
+            for (int i = 0; i < 7 - adultsNumber; i++)
+            {
+                list1.Add(Child.GetRandomPerson(names, surnames,facilities));
+            }
             Show(lists);
             Console.ReadKey();
             Console.WriteLine("");
 
-            Console.WriteLine("Adding new person to list #1");
-            list1.Add(Person.GetRandomPerson(names, surnames));
-            Show(lists);
-            Console.ReadKey();
-            Console.WriteLine("");
-
-            Console.WriteLine("Puting 2nd person from List1 as the last element of List2");
-            list2.Add(list1.GetPersonByIndex(1));
-            Show(lists);
-            Console.ReadKey();
-            Console.WriteLine("");
-
-            Console.WriteLine("Deleting 2nd person from List1");
-            list1.RemoveIndex(1);
-            Show(lists);
-            Console.ReadKey();
-            Console.WriteLine("");
-
-            Console.WriteLine("Deleting List2");
-            list2.Clear();
-            Show(lists);
-            Console.ReadKey();
-            Console.WriteLine("");
-
-            Console.WriteLine("Adding person from console");
-            list2.Add(ReadPersonFromConsole());
-            Show(lists);
-            Console.ReadKey();
+            
         }
         
         /// <summary>
@@ -85,11 +73,11 @@ namespace Lab1
                 Console.WriteLine($"List{i + 1}");
                 for (int j = 0; j < lists[i].Length; j++)
                 {
-                    Console.WriteLine(lists[i].GetPersonByIndex(j).Info);
+                    Console.WriteLine(lists[i].GetPersonByIndex(j).Info());
                 }
             }
         }
-
+        /*
         /// <summary>
         /// Input person from console
         /// </summary>
@@ -179,6 +167,6 @@ namespace Lab1
                     Console.WriteLine("Try again!");
                 }
             }
-        }
+        }*/
     }
 }
