@@ -78,6 +78,7 @@ namespace PersonModelProject
             var person = new Child($"{names[rnd.Next(0, names.Count() - 1)]} {surname}",
                                    $"{names[rnd.Next(0, names.Count() - 1)]} {surname}",
                                    facilities[rnd.Next(0, facilities.Count() - 1)],
+
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
                                    rnd.Next(MinAge, MaxAge),

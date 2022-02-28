@@ -94,10 +94,13 @@ namespace PersonModelProject
             return $"{Name} {Surname}, Age {Age}, Gender {Gender}, Passport {Passport},Workplace {Workplace}, Marriage status {MarriageStatus}" + addition;
         }
 
-        public static Adult GetRandomPerson(List<string> names, List<string> surnames, List<string> workplaces) //No marriage partner yet
+        public static Adult GetRandomPerson(List<string> names, List<string> surnames, List<string> workplaces) //No marriage partner mirroring yet
         {
             var rnd = new Random();
-            var person = new Adult(rnd.Next(1000,9999).ToString(),
+            string surname = surnames[rnd.Next(0, surnames.Count() - 1)];
+
+            var person = new Adult($"{names[rnd.Next(0, names.Count() - 1)]} {surname}",
+                                   rnd.Next(1000,9999).ToString(),
                                    workplaces[rnd.Next(0, workplaces.Count() - 1)],
                                    rnd.Next(2) == 1,
 
