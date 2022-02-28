@@ -58,7 +58,10 @@ namespace Lab1
             Console.ReadKey();
             Console.WriteLine("");
 
-            
+            Console.WriteLine("4th person in the list is of the following object type:");
+            Console.WriteLine($"{list1.GetPersonByIndex(4).GetType()}");
+            Console.WriteLine($"{list1.GetPersonByIndex(4).Info()}");
+
         }
         
         /// <summary>
@@ -74,6 +77,7 @@ namespace Lab1
                 for (int j = 0; j < lists[i].Length; j++)
                 {
                     Console.WriteLine(lists[i].GetPersonByIndex(j).Info());
+                    Console.WriteLine("");
                 }
             }
         }
