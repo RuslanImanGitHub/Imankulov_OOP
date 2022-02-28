@@ -128,7 +128,7 @@ namespace PersonModelProject
             var rnd = new Random();
             var person = new Person(names[rnd.Next(0, names.Count() - 1)],
                                                    surnames[rnd.Next(0, surnames.Count() - 1)],
-                                                   rnd.Next(_minAge, _maxAge),
+                                                   rnd.Next(MinAge, MaxAge),
                                                    (Gender)rnd.Next(0, 2));
             return person;
         }
