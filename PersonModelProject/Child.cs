@@ -50,12 +50,12 @@ namespace PersonModelProject
             }
         }
 
-        public Child(string facility, string name, string surname, int age, Gender userGender) : base(name, surname, age, userGender)
+        public Child(string facility, string name, string surname, int age, Gender1 userGender) : base(name, surname, age, userGender)
         {
             Facility = facility;
         }
 
-        public Child(string mother, string facility, string name, string surname, int age, Gender userGender) : this(facility ,name, surname, age, userGender)
+        public Child(string mother, string facility, string name, string surname, int age, Gender1 userGender) : this(facility ,name, surname, age, userGender)
         {
             Mother = mother;
         }
@@ -66,7 +66,7 @@ namespace PersonModelProject
         } */
         // Одинаковые параметры, спросить
 
-        public Child(string mother, string father, string facility, string name, string surname, int age, Gender userGender) : this(facility, name, surname, age, userGender)
+        public Child(string mother, string father, string facility, string name, string surname, int age, Gender1 userGender) : this(facility, name, surname, age, userGender)
         {
             Mother = mother;
             Father = father;
@@ -84,7 +84,7 @@ namespace PersonModelProject
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
                                    rnd.Next(MinAge, MaxAge),
-                                   (Gender)rnd.Next(0, 2));
+                                   (Gender1)rnd.Next(0, 2));
             return person;
         }
         

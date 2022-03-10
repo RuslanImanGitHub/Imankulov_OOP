@@ -75,7 +75,7 @@ namespace PersonModelProject
         }
 
         //TODO: RSDN
-        public Adult(string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender userGender)
+        public Adult(string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender1 userGender)
             : base(name, surname, age, userGender)
         {
             Passport = passport;
@@ -84,7 +84,7 @@ namespace PersonModelProject
         }
 
         //TODO: RSDN
-        public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender userGender)
+        public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender1 userGender)
             : this(passport, workplace, marriageStatus, name, surname, age, userGender)
         {
             MarriagePartner = marriagePartner;
@@ -115,7 +115,7 @@ namespace PersonModelProject
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                    rnd.Next(MinAge, MaxAge),
-                                   (Gender)rnd.Next(0, 2));
+                                   (Gender1)rnd.Next(0, 2));
             return person;
         }
     }

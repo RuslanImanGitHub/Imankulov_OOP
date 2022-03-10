@@ -35,7 +35,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        private Gender _gender;
+        private Gender1 _gender;
         
         /// <summary>
         /// Minimal age accepted by programm
@@ -91,7 +91,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        public Gender Gender
+        public Gender1 Gender
         {
             get => _gender;
 
@@ -105,7 +105,7 @@ namespace PersonModelProject
         /// <param name="surname">Person's surname</param>
         /// <param name="age">Person's age</param>
         /// <param name="userGender">Person's gender</param>
-        protected Person(string name, string surname, int age, Gender userGender)
+        protected Person(string name, string surname, int age, Gender1 userGender)
         {
             Name = name;
             Surname = surname;
@@ -116,7 +116,7 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        protected Person() : this(null, null, 1, Gender.Unknown)
+        protected Person() : this(null, null, 1, Gender1.Unknown)
         { }
 
         /// <summary>
