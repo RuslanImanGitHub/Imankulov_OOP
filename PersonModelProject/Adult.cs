@@ -6,17 +6,46 @@ using System.Threading.Tasks;
 
 namespace PersonModelProject
 {
-    //TODO: XML
-    public class Adult : Person
+    //TODO: XML | Ok
+    /// <summary>
+    /// Class adult
+    /// </summary>
+    public class Adult : PersonBase
     {
+        /// <summary>
+        /// Passport ID
+        /// </summary>
         private string _passport;
-        //TODO: RSDN
-        private bool _marriagestatus;
-        private string _marriagepartner;
+
+        //TODO: RSDN | OK
+        /// <summary>
+        /// Marriage status of an adult (True - Married, False - Not married)
+        /// </summary>
+        private bool _marriageStatus;
+
+        /// <summary>
+        /// Marriage partner of an adult
+        /// </summary>
+        private string _marriagePartner;
+
+        /// <summary>
+        /// Workplace of an adult
+        /// </summary>
         private string _workplace;
+
+        /// <summary>
+        /// Minimum age for a person to be considered adult
+        /// </summary>
         private const int MinAge = 18;
+
+        /// <summary>
+        /// Maximum age of a person
+        /// </summary>
         private const int MaxAge = 150;
 
+        /// <summary>
+        /// Passport ID
+        /// </summary>
         public string Passport
         {
             get => _passport;
@@ -24,22 +53,28 @@ namespace PersonModelProject
             set => _passport = value;
         }
 
+        /// <summary>
+        /// Marriage status of an adult (True - Married, False - Not married)
+        /// </summary>
         public bool MarriageStatus
         {
-            get => _marriagestatus;
+            get => _marriageStatus;
 
-            set => _marriagestatus = value;
+            set => _marriageStatus = value;
         }
 
+        /// <summary>
+        /// Marriage partner of an adult
+        /// </summary>
         public string MarriagePartner
         {
-            get => _marriagepartner;
+            get => _marriagePartner;
 
             set
             {
-                if (_marriagestatus == true)
+                if (_marriageStatus == true)
                 {
-                    _marriagepartner = value;
+                    _marriagePartner = value;
                 }
                 else
                 {
@@ -48,6 +83,9 @@ namespace PersonModelProject
             }
         }
 
+        /// <summary>
+        /// Workplace of an adult
+        /// </summary>
         public string Workplace
         {
             get => _workplace;
@@ -55,8 +93,10 @@ namespace PersonModelProject
             set => _workplace = value;
         }
 
-
-        //TODO: duplication
+        /// <summary>
+        /// Age of an Adult
+        /// </summary>
+        //TODO: duplication | Unresolvable
         public override int Age
         {
             get => _age;
@@ -74,8 +114,19 @@ namespace PersonModelProject
             }
         }
 
-        //TODO: RSDN
-        public Adult(string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender1 userGender)
+        /// <summary>
+        /// Adult constructor without marriage partner
+        /// </summary>
+        /// <param name="passport">Adult's passport ID</param>
+        /// <param name="workplace">Adult's workplace</param>
+        /// <param name="marriageStatus">Adult's marriage status</param>
+        /// <param name="name">Adult's name</param>
+        /// <param name="surname">Adult's surname</param>
+        /// <param name="age">Adult's age</param>
+        /// <param name="userGender">Adult's gender</param>
+        //TODO: RSDN | Ok
+        public Adult(string passport, string workplace, bool marriageStatus,
+            string name, string surname, int age, Gender userGender)
             : base(name, surname, age, userGender)
         {
             Passport = passport;
@@ -83,13 +134,29 @@ namespace PersonModelProject
             MarriageStatus = marriageStatus;
         }
 
-        //TODO: RSDN
-        public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus, string name, string surname, int age, Gender1 userGender)
+        /// <summary>
+        /// Adult constructor with marriage partner
+        /// </summary>
+        /// <param name="marriagePartner">Adult's marriage partner</param>
+        /// <param name="passport">Adult's passport ID</param>
+        /// <param name="workplace">Adult's workplace</param>
+        /// <param name="marriageStatus">Adult's marriage status</param>
+        /// <param name="name">Adult's name</param>
+        /// <param name="surname">Adult's surname</param>
+        /// <param name="age">Adult's age</param>
+        /// <param name="userGender">Adult's gender</param>
+        //TODO: RSDN | Ok
+        public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus,
+            string name, string surname, int age, Gender userGender)
             : this(passport, workplace, marriageStatus, name, surname, age, userGender)
         {
             MarriagePartner = marriagePartner;
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <returns></returns>
         public override string Info()
         {
             string addition = null;
@@ -97,26 +164,61 @@ namespace PersonModelProject
             {
                 addition = $"Marriage partner {MarriagePartner}";
             }
-            //TODO:
+            //TODO: duplication | Ok
             return $"{base.Info1()}, Passport {Passport}, " +
                    $"Workplace {Workplace}, Marriage status {MarriageStatus} {addition}";
         }
 
-        public static Adult GetRandomPerson(List<string> names, List<string> surnames, List<string> workplaces) //No marriage partner mirroring yet
+        /// <summary>
+        /// Returns random Adult
+        /// </summary>
+        /// <param name="names">List with names</param>
+        /// <param name="surnames">List with surnames</param>
+        /// <param name="workplaces">List with workplaces</param>
+        /// <param name="isMarried">Flag to mark married adults</param>
+        /// <returns></returns>
+        public static Adult GetRandomAdult(List<string> names, List<string> surnames, List<string> workplaces, bool isMarried)
         {
             var rnd = new Random();
-            string surname = surnames[rnd.Next(0, surnames.Count() - 1)];
 
-            var person = new Adult($"{names[rnd.Next(0, names.Count() - 1)]} {surname}",
-                                   rnd.Next(1000,9999).ToString(),
+            var person = new Adult(rnd.Next(1000,9999).ToString(),
                                    workplaces[rnd.Next(0, workplaces.Count() - 1)],
-                                   true,
+                                   isMarried,
 
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                    rnd.Next(MinAge, MaxAge),
-                                   (Gender1)rnd.Next(0, 2));
+                                   (Gender)rnd.Next(0, 2));
             return person;
+        }
+
+        public static List<Adult> GetAPair(List<string> names, List<string> surnames, List<string> workplaces)
+        {
+            var rnd = new Random();
+            List<Adult> pair = new List<Adult>();
+            pair.Add(GetRandomAdult(names, surnames, workplaces, true));
+
+            var person = new Adult($"{pair[0].Name} {pair[0].Surname}",
+                                   rnd.Next(1000, 9999).ToString(),
+                                   workplaces[rnd.Next(0, workplaces.Count() - 1)],
+                                   true,
+
+                                   names[rnd.Next(0, names.Count() - 1)],
+                                   pair[0].Surname,
+                                   pair[0].Age + rnd.Next(0, 8),
+                                   (Gender)rnd.Next(0, 2));
+            pair[0].MarriagePartner = $"{person.Name} {person.Surname}";
+            pair.Add(person);
+            return pair;
+        }
+
+        /// <summary>
+        /// Unique method for Adult class
+        /// </summary>
+        /// <returns></returns>
+        public string GoToWork()
+        {
+            return $"{this.Name} went to work to {this.Workplace}";
         }
     }
 }

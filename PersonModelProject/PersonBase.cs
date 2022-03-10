@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace PersonModelProject
 {
-    //TODO: RSDN
+    //TODO: RSDN | Ok
     /// <summary>
     /// Class person
     /// </summary>
-    public abstract class Person
+    abstract public class PersonBase
     {
         /// <summary>
         /// Person's name
@@ -35,7 +35,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        private Gender1 _gender;
+        private Gender _gender;
         
         /// <summary>
         /// Minimal age accepted by programm
@@ -67,7 +67,7 @@ namespace PersonModelProject
             set => _surname = CheckNaming(value);
         }
 
-        //TODO: duplication
+        //TODO: duplication | Unresolvable
         /// <summary>
         /// Person's age
         /// </summary>
@@ -91,7 +91,7 @@ namespace PersonModelProject
         /// <summary>
         /// Person's gender
         /// </summary>
-        public Gender1 Gender
+        public Gender Gender
         {
             get => _gender;
 
@@ -105,7 +105,7 @@ namespace PersonModelProject
         /// <param name="surname">Person's surname</param>
         /// <param name="age">Person's age</param>
         /// <param name="userGender">Person's gender</param>
-        protected Person(string name, string surname, int age, Gender1 userGender)
+        protected PersonBase(string name, string surname, int age, Gender userGender)
         {
             Name = name;
             Surname = surname;
@@ -116,7 +116,7 @@ namespace PersonModelProject
         /// <summary>
         /// Default constructor
         /// </summary>
-        protected Person() : this(null, null, 1, Gender1.Unknown)
+        protected PersonBase() : this(null, null, 1, Gender.Unknown)
         { }
 
         /// <summary>

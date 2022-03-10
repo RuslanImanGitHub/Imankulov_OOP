@@ -6,33 +6,67 @@ using System.Threading.Tasks;
 
 namespace PersonModelProject
 {
-    public class Child : Person
+    /// <summary>
+    /// Child class
+    /// </summary>
+    public class Child : PersonBase
     {
-        private string _mother;
-        private string _father;
+        /// <summary>
+        /// Child's first parent
+        /// </summary>
+        private string _firstParent;
+
+        /// <summary>
+        /// Child's second parent
+        /// </summary>
+        private string _secondParent;
+
+        /// <summary>
+        /// Facility where child goes everyday
+        /// </summary>
         private string _facility;
+
+        /// <summary>
+        /// Minimum age for a child
+        /// </summary>
         private const int MinAge = 1;
+
+        /// <summary>
+        /// Maximum age for a child
+        /// </summary>
         private const int MaxAge = 18;
 
-        public string Mother
+        /// <summary>
+        /// Child's mother
+        /// </summary>
+        public string FirstParent
         {
-            get => _mother;
-            set => _mother = value;
+            get => _firstParent;
+            set => _firstParent = value;
         }
 
-        public string Father
+        /// <summary>
+        /// Child's father
+        /// </summary>
+        public string SecondParent
         {
-            get => _father;
-            set => _father = value;
+            get => _secondParent;
+            set => _secondParent = value;
         }
 
+        /// <summary>
+        /// Facility where child goes everyday
+        /// </summary>
         public string Facility
         {
             get => _facility;
             set => _facility = value;
         }
 
-        //TODO: duplication
+        /// <summary>
+        /// Age of a child
+        /// </summary>
+        //TODO: duplication | Unresolvable
         public override int Age
         {
             get => _age;
@@ -50,28 +84,59 @@ namespace PersonModelProject
             }
         }
 
-        public Child(string facility, string name, string surname, int age, Gender1 userGender) : base(name, surname, age, userGender)
+        /// <summary>
+        /// Constructor for a child without parents
+        /// </summary>
+        /// <param name="facility">Child's facility</param>
+        /// <param name="name">Child's name</param>
+        /// <param name="surname">Child's surname</param>
+        /// <param name="age">Child's age</param>
+        /// <param name="userGender">Child's gender</param>
+        public Child(string facility, string name, string surname, int age, Gender userGender) 
+            : base(name, surname, age, userGender)
         {
             Facility = facility;
         }
 
-        public Child(string mother, string facility, string name, string surname, int age, Gender1 userGender) : this(facility ,name, surname, age, userGender)
+        /// <summary>
+        /// Constructor for a child with one parent
+        /// </summary>
+        /// <param name="firstParent">Child's first parent</param>
+        /// <param name="facility">Child's facility</param>
+        /// <param name="name">Child's name</param>
+        /// <param name="surname">Child's surname</param>
+        /// <param name="age">Child's age</param>
+        /// <param name="userGender">Child's gender</param>
+        public Child(string firstParent, string facility, string name, string surname, int age, Gender userGender) 
+            : this(facility ,name, surname, age, userGender)
         {
-            Mother = mother;
+            FirstParent = firstParent;
         }
 
-        /*public Child(string father, string facility, string name, string surname, int age, Gender userGender) : this(facility, name, surname, age, userGender)
+        /// <summary>
+        /// constructor for a child with both parents
+        /// </summary>
+        /// <param name="firstParent">Child's first parent</param>
+        /// <param name="secondParent">Child's second parent</param>
+        /// <param name="facility">Child's facility</param>
+        /// <param name="name">Child's name</param>
+        /// <param name="surname">Child's surname</param>
+        /// <param name="age">Child's age</param>
+        /// <param name="userGender">Child's gender</param>
+        public Child(string firstParent, string secondParent, string facility, string name, string surname, int age, Gender userGender) 
+            : this(facility, name, surname, age, userGender)
         {
-            Father = father;
-        } */
-        // Одинаковые параметры, спросить
-
-        public Child(string mother, string father, string facility, string name, string surname, int age, Gender1 userGender) : this(facility, name, surname, age, userGender)
-        {
-            Mother = mother;
-            Father = father;
+            FirstParent = firstParent;
+            SecondParent = secondParent;
         }
 
+        /// <summary>
+        /// Returns random child
+        /// </summary>
+        /// <param name="names"></param>
+        /// <param name="surnames"></param>
+        /// <param name="facilities"></param>
+        /// <returns></returns>
         public static Child GetRandomPerson(List<string> names, List<string> surnames, List<string> facilities) //Только полные родители
         {
             var rnd = new Random();
@@ -84,32 +149,44 @@ namespace PersonModelProject
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
                                    rnd.Next(MinAge, MaxAge),
-                                   (Gender1)rnd.Next(0, 2));
+                                   (Gender)rnd.Next(0, 2));
             return person;
         }
-        
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <returns></returns>
         public override string Info()
         {
             string addition = null;
-            if (Father == null && Mother == null)
+            if (SecondParent == null && FirstParent == null)
             {
                 addition = $"Orphan";
             }
-            else if (Father == null)
+            else if (SecondParent == null)
             {
-                addition = $"Mother {Mother}";
+                addition = $"First parent {FirstParent}";
             }
-            else if (Mother == null)
+            else if (FirstParent == null)
             {
-                addition = $"Father {Father}";
+                addition = $"First parent {SecondParent}";
             }
             else
             {
-                addition = $"Mother {Mother}, Father {Father}";
+                addition = $"First parent {FirstParent}, Second parent {SecondParent}";
             }
-            //TODO: duplication
-            return $"{Name} {Surname}, Age {Age}, Gender {Gender}, School or daycare {Facility}, Parents: " + addition;
+            //TODO: duplication | Ok
+            return $"{base.Info1()}, School or daycare {Facility}, Parents: " + addition;
         }
 
+        /// <summary>
+        /// Unique method for Child class
+        /// </summary>
+        /// <returns></returns>
+        public string Fortnight()
+        {
+            return $"{this.Name} sure likes to play Fortnight";
+        }
     }
 }

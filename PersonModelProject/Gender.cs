@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of person gender
     /// </summary>
-    public enum Gender1
+    public enum Gender
     {
         Male,
         Female,

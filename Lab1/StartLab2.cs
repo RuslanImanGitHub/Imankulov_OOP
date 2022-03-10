@@ -45,10 +45,14 @@ namespace Lab1
 
             Console.WriteLine("Creating a list of 7 people");
             var rnd = new Random();
-            int adultsNumber = rnd.Next(1, 6);
+            int adultsNumber = rnd.Next(1, 3);
             for (int i = 0; i < adultsNumber; i++)
             {
-                list1.Add(Adult.GetRandomPerson(names, surnames, workplaces));
+                var pairList = Adult.GetAPair(names, surnames, workplaces);
+                for (int j = 0; j < pairList.Count; j++)
+                {
+                    list1.Add(pairList[j]);
+                }
             }
             for (int i = 0; i < 7 - adultsNumber; i++)
             {
@@ -58,10 +62,20 @@ namespace Lab1
             Console.ReadKey();
             Console.WriteLine("");
 
+            var fourthPerson = list1.GetPersonByIndex(4);
             Console.WriteLine("4th person in the list is of the following object type:");
-            Console.WriteLine($"{list1.GetPersonByIndex(4).GetType()}");
-            Console.WriteLine($"{list1.GetPersonByIndex(4).Info()}");
+            Console.WriteLine($"{fourthPerson.GetType()}");
+            Console.WriteLine($"{fourthPerson.Info()}");
 
+            switch (fourthPerson)
+            {
+                case Child fourthChild:
+                    Console.WriteLine(fourthChild.Fortnight());
+                    break;
+                case Adult fourthAdult:
+                    Console.WriteLine(fourthAdult.GoToWork());
+                    break;
+            }
         }
         
         /// <summary>
