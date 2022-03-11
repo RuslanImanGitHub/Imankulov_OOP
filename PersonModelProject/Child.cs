@@ -29,12 +29,12 @@ namespace PersonModelProject
         /// <summary>
         /// Minimum age for a child
         /// </summary>
-        private const int MinAge = 1;
+        protected override int MinAge => 1;
 
         /// <summary>
         /// Maximum age for a child
         /// </summary>
-        private const int MaxAge = 18;
+        protected override int MaxAge => 18;
 
         /// <summary>
         /// Child's mother
@@ -62,28 +62,7 @@ namespace PersonModelProject
             get => _facility;
             set => _facility = value;
         }
-
-        /// <summary>
-        /// Age of a child
-        /// </summary>
-        //TODO: duplication | Unresolvable
-        public override int Age
-        {
-            get => _age;
-
-            set
-            {
-                if (value < MinAge || value > MaxAge)
-                {
-                    throw new Exception($"Age must be in range from {MinAge} to {MaxAge}");
-                }
-                else
-                {
-                    _age = value;
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Constructor for a child without parents
         /// </summary>
@@ -137,7 +116,8 @@ namespace PersonModelProject
         /// <param name="surnames"></param>
         /// <param name="facilities"></param>
         /// <returns></returns>
-        public static Child GetRandomPerson(List<string> names, List<string> surnames, List<string> facilities) //Только полные родители
+        public static Child GetRandomPerson(List<string> names, 
+            List<string> surnames, List<string> facilities) 
         {
             var rnd = new Random();
             string surname = surnames[rnd.Next(0, surnames.Count() - 1)];
@@ -148,7 +128,8 @@ namespace PersonModelProject
 
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
-                                   rnd.Next(MinAge, MaxAge),
+                                   //TODO:
+                                   rnd.Next(1, 18),
                                    (Gender)rnd.Next(0, 2));
             return person;
         }
@@ -176,7 +157,7 @@ namespace PersonModelProject
             {
                 addition = $"First parent {FirstParent}, Second parent {SecondParent}";
             }
-            //TODO: duplication | Ok
+            
             return $"{base.Info1()}, School or daycare {Facility}, Parents: " + addition;
         }
 

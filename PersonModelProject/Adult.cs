@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace PersonModelProject
 {
-    //TODO: XML | Ok
     /// <summary>
     /// Class adult
     /// </summary>
@@ -16,8 +15,7 @@ namespace PersonModelProject
         /// Passport ID
         /// </summary>
         private string _passport;
-
-        //TODO: RSDN | OK
+        
         /// <summary>
         /// Marriage status of an adult (True - Married, False - Not married)
         /// </summary>
@@ -34,14 +32,24 @@ namespace PersonModelProject
         private string _workplace;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private const int _minAge = 18;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const int _maxAge = 150;
+
+        /// <summary>
         /// Minimum age for a person to be considered adult
         /// </summary>
-        private const int MinAge = 18;
+        protected override int MinAge => _minAge;
 
         /// <summary>
         /// Maximum age of a person
         /// </summary>
-        private const int MaxAge = 150;
+        protected override int MaxAge => _maxAge;
 
         /// <summary>
         /// Passport ID
@@ -92,28 +100,7 @@ namespace PersonModelProject
 
             set => _workplace = value;
         }
-
-        /// <summary>
-        /// Age of an Adult
-        /// </summary>
-        //TODO: duplication | Unresolvable
-        public override int Age
-        {
-            get => _age;
-
-            set
-            {
-                if (value < MinAge || value > MaxAge)
-                {
-                    throw new Exception($"Age must be in range from {MinAge} to {MaxAge}");
-                }
-                else
-                {
-                    _age = value;
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Adult constructor without marriage partner
         /// </summary>
@@ -124,7 +111,6 @@ namespace PersonModelProject
         /// <param name="surname">Adult's surname</param>
         /// <param name="age">Adult's age</param>
         /// <param name="userGender">Adult's gender</param>
-        //TODO: RSDN | Ok
         public Adult(string passport, string workplace, bool marriageStatus,
             string name, string surname, int age, Gender userGender)
             : base(name, surname, age, userGender)
@@ -145,7 +131,6 @@ namespace PersonModelProject
         /// <param name="surname">Adult's surname</param>
         /// <param name="age">Adult's age</param>
         /// <param name="userGender">Adult's gender</param>
-        //TODO: RSDN | Ok
         public Adult(string marriagePartner, string passport, string workplace, bool marriageStatus,
             string name, string surname, int age, Gender userGender)
             : this(passport, workplace, marriageStatus, name, surname, age, userGender)
@@ -164,7 +149,7 @@ namespace PersonModelProject
             {
                 addition = $"Marriage partner {MarriagePartner}";
             }
-            //TODO: duplication | Ok
+
             return $"{base.Info1()}, Passport {Passport}, " +
                    $"Workplace {Workplace}, Marriage status {MarriageStatus} {addition}";
         }
@@ -187,11 +172,12 @@ namespace PersonModelProject
 
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surnames[rnd.Next(0, surnames.Count() - 1)],
-                                   rnd.Next(MinAge, MaxAge),
+                                   rnd.Next(_minAge, _maxAge),
                                    (Gender)rnd.Next(0, 2));
             return person;
         }
 
+        //TODO: XML
         public static List<Adult> GetAPair(List<string> names, List<string> surnames, List<string> workplaces)
         {
             var rnd = new Random();
