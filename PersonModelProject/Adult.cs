@@ -184,7 +184,6 @@ namespace PersonModelProject
         /// <param name="surnames">List with surnames</param>
         /// <param name="workplaces">List with workplaces</param>
         /// <returns></returns>
-        //TODO: XML | Ok
         public static List<Adult> GetAPair(List<string> names, List<string> surnames, List<string> workplaces)
         {
             var rnd = new Random();

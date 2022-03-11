@@ -138,7 +138,6 @@ namespace PersonModelProject
 
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
-                                   //TODO: | Ok
                                    rnd.Next(_minAge, _maxAge),
                                    (Gender)rnd.Next(0, 2));
             return person;

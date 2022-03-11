@@ -121,8 +121,7 @@ namespace PersonModelProject
         /// Shows info about the object
         /// </summary>
         public abstract string Info();
-
-        //TODO: | Ok
+        
         /// <summary>
         /// Shows info about the object
         /// </summary>
