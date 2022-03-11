@@ -32,12 +32,12 @@ namespace PersonModelProject
         private string _workplace;
 
         /// <summary>
-        /// 
+        /// Minimum age for a person to be considered adult
         /// </summary>
         private const int _minAge = 18;
 
         /// <summary>
-        /// 
+        /// Maximum age of a person
         /// </summary>
         private const int _maxAge = 150;
 
@@ -150,7 +150,7 @@ namespace PersonModelProject
                 addition = $"Marriage partner {MarriagePartner}";
             }
 
-            return $"{base.Info1()}, Passport {Passport}, " +
+            return $"{base.InfoBase()}, Passport {Passport}, " +
                    $"Workplace {Workplace}, Marriage status {MarriageStatus} {addition}";
         }
 
@@ -177,7 +177,14 @@ namespace PersonModelProject
             return person;
         }
 
-        //TODO: XML
+        /// <summary>
+        /// Returns list with 2 random adults who are married
+        /// </summary>
+        /// <param name="names">List with names</param>
+        /// <param name="surnames">List with surnames</param>
+        /// <param name="workplaces">List with workplaces</param>
+        /// <returns></returns>
+        //TODO: XML | Ok
         public static List<Adult> GetAPair(List<string> names, List<string> surnames, List<string> workplaces)
         {
             var rnd = new Random();

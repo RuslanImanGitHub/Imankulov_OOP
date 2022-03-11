@@ -27,14 +27,24 @@ namespace PersonModelProject
         private string _facility;
 
         /// <summary>
-        /// Minimum age for a child
+        /// Minimum age for a person
         /// </summary>
-        protected override int MinAge => 1;
+        private const int _minAge = 1;
 
         /// <summary>
         /// Maximum age for a child
         /// </summary>
-        protected override int MaxAge => 18;
+        private const int _maxAge = 18;
+
+        /// <summary>
+        /// Minimum age for a person
+        /// </summary>
+        protected override int MinAge => _minAge;
+
+        /// <summary>
+        /// Maximum age for a child
+        /// </summary>
+        protected override int MaxAge => _maxAge;
 
         /// <summary>
         /// Child's mother
@@ -128,8 +138,8 @@ namespace PersonModelProject
 
                                    names[rnd.Next(0, names.Count() - 1)],
                                    surname,
-                                   //TODO:
-                                   rnd.Next(1, 18),
+                                   //TODO: | Ok
+                                   rnd.Next(_minAge, _maxAge),
                                    (Gender)rnd.Next(0, 2));
             return person;
         }
@@ -158,7 +168,7 @@ namespace PersonModelProject
                 addition = $"First parent {FirstParent}, Second parent {SecondParent}";
             }
             
-            return $"{base.Info1()}, School or daycare {Facility}, Parents: " + addition;
+            return $"{base.InfoBase()}, School or daycare {Facility}, Parents: " + addition;
         }
 
         /// <summary>

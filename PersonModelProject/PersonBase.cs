@@ -122,11 +122,11 @@ namespace PersonModelProject
         /// </summary>
         public abstract string Info();
 
-        //TODO:
+        //TODO: | Ok
         /// <summary>
         /// Shows info about the object
         /// </summary>
-        protected string Info1()
+        protected string InfoBase()
         {
             return $"{Name} {Surname} Age {Age} Gender {Gender}";
         }
