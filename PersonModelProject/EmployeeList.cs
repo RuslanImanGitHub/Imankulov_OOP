@@ -5,12 +5,12 @@ namespace PersonModelProject
     /// <summary>
     /// Class list of persons
     /// </summary>
-    public class PersonList
+    public class EmployeeList
     {
         /// <summary>
         /// New array of person
         /// </summary>
-        private PersonBase[] _personList = new PersonBase[0];
+        private EmployeeBase[] _personList = new EmployeeBase[0];
 
         /// <summary>
         /// Length of PersonList
@@ -21,10 +21,10 @@ namespace PersonModelProject
         /// Add new entry in PersonList
         /// </summary>
         /// <param name="person">Person object</param>
-        public void Add(PersonBase person)
+        public void Add(EmployeeBase person)
         {
             int currentSize = _personList.Length;
-            Array.Resize<PersonBase>(ref _personList, currentSize + 1);
+            Array.Resize<EmployeeBase>(ref _personList, currentSize + 1);
             _personList[currentSize] = person;
         }
 
@@ -36,7 +36,7 @@ namespace PersonModelProject
             if (_personList.Length > 1)
             {
                 int currentSize = _personList.Length;
-                Array.Resize<PersonBase>(ref _personList, currentSize - 1);
+                Array.Resize<EmployeeBase>(ref _personList, currentSize - 1);
             }
             else
             {
@@ -52,9 +52,9 @@ namespace PersonModelProject
         public void RemoveIndex(int index)
         {
             int currSize = _personList.Length;
-            PersonBase[] tmpPersonlist = _personList;
+            EmployeeBase[] tmpPersonlist = _personList;
             int tmpIndex = 0;
-            _personList = new PersonBase[currSize - 1];
+            _personList = new EmployeeBase[currSize - 1];
 
             for (int i = 0; i < currSize; i++)
             {
@@ -71,7 +71,7 @@ namespace PersonModelProject
         /// </summary>
         /// <param name="index">Index of object to return</param>
         /// <returns></returns>
-        public PersonBase GetPersonByIndex(int index)
+        public EmployeeBase GetPersonByIndex(int index)
         {
             return _personList[index];
         }
@@ -81,7 +81,7 @@ namespace PersonModelProject
         /// </summary>
         /// <param name="person">Object which index is needed</param>
         /// <returns></returns>
-        public int GetIndexOfPerson(PersonBase person)
+        public int GetIndexOfPerson(EmployeeBase person)
         {
             return Array.IndexOf(_personList, person);
         }
@@ -91,7 +91,7 @@ namespace PersonModelProject
         /// </summary>
         public void Clear()
         {
-            Array.Resize<PersonBase>(ref _personList, 0);
+            Array.Resize<EmployeeBase>(ref _personList, 0);
         }
     }
 }

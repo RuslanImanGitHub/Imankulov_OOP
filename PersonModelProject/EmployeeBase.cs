@@ -4,13 +4,23 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 
+
 namespace PersonModelProject
 {
     /// <summary>
     /// Class person
     /// </summary>
-    public abstract class PersonBase
+    public abstract class EmployeeBase : SalaryPaymentProject.IPayable
     {
+        double _account;
+
+        public double Account
+        {
+            get => _account;
+
+            set => _account = value;
+        }
+
         /// <summary>
         /// Person's name
         /// </summary>
@@ -35,16 +45,16 @@ namespace PersonModelProject
         /// Person's gender
         /// </summary>
         private Gender _gender;
-        
+
         /// <summary>
         /// Minimal age accepted by programm
         /// </summary>
-        protected abstract int MinAge { get; }
+        protected const int _minAge = 18;
 
         /// <summary>
         /// Maximal age accepted by programm
         /// </summary>
-        protected abstract int MaxAge { get; }
+        protected const int _maxAge = 150;
 
         /// <summary>
         /// Person's name
@@ -75,9 +85,9 @@ namespace PersonModelProject
 
             set
             {
-                if (value < MinAge || value > MaxAge)
+                if (value < _minAge || value > _maxAge)
                 {
-                    throw new Exception($"Age must be in range from {MinAge} to {MaxAge}");
+                    throw new Exception($"Age must be in range from {_minAge} to {_maxAge}");
                 }
                 else
                 {
@@ -103,18 +113,19 @@ namespace PersonModelProject
         /// <param name="surname">Person's surname</param>
         /// <param name="age">Person's age</param>
         /// <param name="userGender">Person's gender</param>
-        protected PersonBase(string name, string surname, int age, Gender userGender)
+        protected EmployeeBase(string name, string surname, int age, Gender userGender, double startingMoney)
         {
             Name = name;
             Surname = surname;
             Age = age;
             Gender = userGender;
+            Account = startingMoney;
         }
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        protected PersonBase() : this(null, null, 1, Gender.Unknown)
+        protected EmployeeBase() : this(null, null, 1, Gender.Unknown, 0)
         { }
 
         /// <summary>
@@ -122,13 +133,12 @@ namespace PersonModelProject
         /// </summary>
         public abstract string Info();
 
-        //TODO: | Ok
         /// <summary>
         /// Shows info about the object
         /// </summary>
         protected string InfoBase()
         {
-            return $"{Name} {Surname} Age {Age} Gender {Gender}";
+            return $"{Name} {Surname} Age {Age} Gender {Gender} Account {Account}";
         }
 
         /// <summary>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab2", "Lab1\Lab2.csproj", "{4BF4FCE9-8C08-41D8-BE51-9F03F107D834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab3", "Lab1\Lab3.csproj", "{4BF4FCE9-8C08-41D8-BE51-9F03F107D834}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonModelProject", "PersonModelProject\PersonModelProject.csproj", "{F77BF836-7630-4DC4-9AEB-41C37A3E4ED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryPaymentProject", "PersonModelProject\SalaryPaymentProject.csproj", "{F77BF836-7630-4DC4-9AEB-41C37A3E4ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
