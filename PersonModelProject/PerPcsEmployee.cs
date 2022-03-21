@@ -12,10 +12,19 @@ namespace SalaryPaymentProject
     /// </summary>
     public class PerPcsEmployee : EmployeeBase, IPayable
     {
+        /// <summary>
+        /// How much money employee gets per one pcs production
+        /// </summary>
         private double _paymentPerOnePcs;
 
+        /// <summary>
+        /// How much pcs employee produced
+        /// </summary>
         private double _pcsAmount;
 
+        /// <summary>
+        /// How much money employee gets per one pcs production
+        /// </summary>
         public double PaymentPerOnePcs
         {
             get => _paymentPerOnePcs;
@@ -23,6 +32,9 @@ namespace SalaryPaymentProject
             set => _paymentPerOnePcs = value;
         }
 
+        /// <summary>
+        /// How much pcs employee produced
+        /// </summary>
         public double PcsAmount
         {
             get => _pcsAmount;
@@ -46,6 +58,8 @@ namespace SalaryPaymentProject
         /// <param name="age">Employee's age</param>
         /// <param name="userGender">Employee's gender</param>
         /// <param name="startingMoney">Starting money in employee's account</param>
+        /// <param name="paymentPerOnePcs">How much money employee gets per one pcs production</param>
+        /// <param name="pcsAmount">How much pcs employee produced</param>
         public PerPcsEmployee(string name, string surname, int age, Gender userGender, 
                               double startingMoney, double paymentPerOnePcs, double pcsAmount)
             : base(name, surname, age, userGender, startingMoney)

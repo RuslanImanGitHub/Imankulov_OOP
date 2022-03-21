@@ -11,10 +11,19 @@ namespace SalaryPaymentProject
     /// </summary>
     public class PerHourEmployee : EmployeeBase, IPayable
     {
+        /// <summary>
+        /// Employee's hourly payment
+        /// </summary>
         private double _hourlyPayment;
 
+        /// <summary>
+        /// How many hours have employee worked
+        /// </summary>
         private int _hoursWorked;
 
+        /// <summary>
+        /// Employee's hourly payment
+        /// </summary>
         public double HourlyPayment
         {
             get => _hourlyPayment;
@@ -22,6 +31,9 @@ namespace SalaryPaymentProject
             set => _hourlyPayment = value;
         }
 
+        /// <summary>
+        /// How many hours have employee worked
+        /// </summary>
         public int HoursWorked
         {
             get => _hoursWorked;
@@ -32,8 +44,6 @@ namespace SalaryPaymentProject
         /// <summary>
         /// Method for adding salary to an employees account
         /// </summary>
-        /// <param name="HourlyPayment">Employee's hourly payment</param>
-        /// <param name="HoursWorked">How many hours employee has worked</param>
         /// <returns></returns>
         public double ChangeMoney() => Account += HourlyPayment * HoursWorked;
 
@@ -45,6 +55,8 @@ namespace SalaryPaymentProject
         /// <param name="age">Employee's age</param>
         /// <param name="userGender">Employee's gender</param>
         /// <param name="startingMoney">Starting money in employee's account</param>
+        /// <param name="hourlyPayment">Employee's hourly payment</param>
+        /// <param name="hoursWorked">How many hours have employee worked</param>
         public PerHourEmployee(string name, string surname, int age, Gender userGender,
                                double startingMoney, double hourlyPayment, int hoursWorked)
             : base(name, surname, age, userGender, startingMoney)

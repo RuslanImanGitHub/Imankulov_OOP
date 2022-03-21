@@ -11,8 +11,14 @@ namespace SalaryPaymentProject
     /// </summary>
     public class WageEmployee : EmployeeBase, IPayable
     {
+        /// <summary>
+        /// Employee's wage
+        /// </summary>
         private double _wage;
 
+        /// <summary>
+        /// Employee's wage
+        /// </summary>
         public double Wage
         {
             get => _wage;
@@ -35,6 +41,7 @@ namespace SalaryPaymentProject
         /// <param name="age">Employee's age</param>
         /// <param name="userGender">Employee's gender</param>
         /// <param name="startingMoney">Starting money in employee's account</param>
+        /// <param name="wage">Employee's wage</param>
         public WageEmployee(string name, string surname, int age, Gender userGender, double startingMoney, double wage)
           : base(name, surname, age, userGender, startingMoney)
         {

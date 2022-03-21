@@ -6,10 +6,10 @@ using SalaryPaymentProject;
 //TODO:| namespace synced
 namespace Lab3
 {
-    //TODO: RSDN
+    //TODO: RSDN | Ok
     public class StartLab3
     {
-        //TODO: RSDN
+        //TODO: RSDN | Ok
         public static void Main()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -44,7 +44,7 @@ namespace Lab3
             Console.ReadKey();
             Console.WriteLine("");
 
-            //TODO: нет полиморфизма | Check
+            //TODO: нет полиморфизма | Ok
             Console.WriteLine("Adding 100 to all accounts accept Wage Employee account");
             for (int i = 0; i < list1.Count; i++)
             {
