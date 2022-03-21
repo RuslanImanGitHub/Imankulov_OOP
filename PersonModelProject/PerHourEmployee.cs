@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonModelProject
+namespace SalaryPaymentProject
 {
     /// <summary>
     /// Class PerHourEmployee
     /// </summary>
-    public class PerHourEmployee : EmployeeBase, SalaryPaymentProject.IPayable
+    public class PerHourEmployee : EmployeeBase, IPayable<double, int>
     {
         /// <summary>
         /// Method for adding salary to an employees account
@@ -17,7 +17,7 @@ namespace PersonModelProject
         /// <param name="HourlyPayment">Employee's hourly payment</param>
         /// <param name="HoursWorked">How many hours employee has worked</param>
         /// <returns></returns>
-        public double ChangeMoney(double HourlyPayment, double HoursWorked) => Account += (HourlyPayment * HoursWorked);
+        public double ChangeMoney(double HourlyPayment, int HoursWorked) => Account += HourlyPayment * HoursWorked;
 
         /// <summary>
         /// Constructor of Employee object
@@ -48,7 +48,7 @@ namespace PersonModelProject
                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                    rnd.Next(_minAge, _maxAge),
                                    (Gender)rnd.Next(0, 2),
-                                   rnd.Next(100,600));
+                                   rnd.Next(100, 600));
             return person;
         }
 
@@ -58,7 +58,7 @@ namespace PersonModelProject
         /// <returns></returns>
         public override string Info()
         {
-            return $"{base.InfoBase()}, Employee type: {this.GetType()}";
+            return $"{InfoBase()}, Employee type: {GetType()}";
         }
     }
 }

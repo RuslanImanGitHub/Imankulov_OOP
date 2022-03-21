@@ -1,4 +1,4 @@
-﻿namespace PersonModelProject
+﻿namespace SalaryPaymentProject
 {
     /// <summary>
     /// Enum of person gender

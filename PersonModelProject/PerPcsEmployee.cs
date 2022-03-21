@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonModelProject
+namespace SalaryPaymentProject
 {
-    //TODO: RSDN
+    //TODO: RSDN | Ok
     /// <summary>
     /// Class PerPcsEmployee
     /// </summary>
-    public class PerPcsEmployee : EmployeeBase, SalaryPaymentProject.IPayable
+    public class PerPcsEmployee : EmployeeBase, IPayable<double, int>
     {
         /// <summary>
         /// Method for adding salary to an employees account
@@ -18,7 +18,7 @@ namespace PersonModelProject
         /// <param name="PaymentPerOnePcs">Payment for a piece of equipment employee made</param>
         /// <param name="PcsAmount">Amount of equipment employee made</param>
         /// <returns></returns>
-        public double ChangeMoney(double PaymentPerOnePcs, double PcsAmount) => Account += (PaymentPerOnePcs * PcsAmount);
+        public double ChangeMoney(double PaymentPerOnePcs, int PcsAmount) => Account += PaymentPerOnePcs * PcsAmount;
 
         /// <summary>
         /// Constructor of Employee object
@@ -60,7 +60,7 @@ namespace PersonModelProject
         /// <returns></returns>
         public override string Info()
         {
-            return $"{base.InfoBase()}, Employee type: {this.GetType()}";
+            return $"{InfoBase()}, Employee type: {GetType()}";
         }
     }
 }

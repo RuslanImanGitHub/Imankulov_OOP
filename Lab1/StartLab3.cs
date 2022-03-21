@@ -1,10 +1,10 @@
 ﻿using System;
-using PersonModelProject;
 using System.Collections.Generic;
 using System.Text;
+using SalaryPaymentProject;
 
-//TODO:
-namespace Lab1
+//TODO:| namespace synced
+namespace Lab3
 {
     //TODO: RSDN
     public class StartLab3
@@ -27,9 +27,10 @@ namespace Lab1
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
             
-            EmployeeList list1 = new EmployeeList();
+            List<EmployeeBase> list1 = new List<EmployeeBase>();
 
-            EmployeeList[] lists = 
+
+            List<EmployeeBase>[] lists = 
             {
                 list1
             };
@@ -43,30 +44,39 @@ namespace Lab1
             Console.ReadKey();
             Console.WriteLine("");
 
-            //TODO: нет полиморфизма
+            //TODO: нет полиморфизма | Check
             Console.WriteLine("Adding 100 to all accounts");
-            ((PerHourEmployee)list1.GetPersonByIndex(0)).ChangeMoney(25, 4);
-            ((PerPcsEmployee)list1.GetPersonByIndex(1)).ChangeMoney(5, 20);
-            ((WageEmployee)list1.GetPersonByIndex(2)).ChangeMoney(100);
+            for (int i = 0; i < list1.Count; i++)
+                switch (list1[i])
+                {
+                    case PerHourEmployee Employee:
+                        Employee.ChangeMoney(25, 4);
+                        break;
+                    case PerPcsEmployee Employee:
+                        Employee.ChangeMoney(5, 20);
+                        break;
+                    case WageEmployee Employee:
+                        Employee.ChangeMoney(100);
+                        break;
+                }
             Console.WriteLine("");
             Show(lists);
             Console.ReadKey();
-
         }
 
         /// <summary>
         /// Prints all entries in PresonList object
         /// </summary>
         /// <param name="lists">List of PersonList objects that need to be printed</param>
-        static void Show (EmployeeList[] lists)
+        static void Show (List<EmployeeBase>[] lists)
         {
             for (int i = 0; i < lists.Length; i++)
             {
                 Console.WriteLine("");
                 Console.WriteLine($"List{i + 1}");
-                for (int j = 0; j < lists[i].Length; j++)
+                for (int j = 0; j < lists[i].Count; j++)
                 {
-                    Console.WriteLine(lists[i].GetPersonByIndex(j).Info());
+                    Console.WriteLine(lists[i][j].Info());
                     Console.WriteLine("");
                 }
             }

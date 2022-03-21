@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonModelProject
+namespace SalaryPaymentProject
 {
     /// <summary>
     /// Child class
     /// </summary>
-    public class WageEmployee : EmployeeBase, SalaryPaymentProject.IPayable
+    public class WageEmployee : EmployeeBase, IPayable<double, double>
     {
         /// <summary>
         /// Method for adding salary to an employees account
         /// </summary>
         /// <param name="Wage">Employee's wage</param>
         /// <returns></returns>
-        public double ChangeMoney(double Wage) => Account += Wage;
+        public double ChangeMoney(double Wage, double Account2 = 1) => Account += Wage;
 
         /// <summary>
         /// Constructor of Employee object
@@ -57,7 +57,7 @@ namespace PersonModelProject
         /// <returns></returns>
         public override string Info()
         {
-            return $"{base.InfoBase()}, Employee type: {this.GetType()}";
+            return $"{InfoBase()}, Employee type: {GetType()}";
         }
     }
 }

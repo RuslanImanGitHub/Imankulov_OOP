@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-//TODO:
-namespace PersonModelProject
+//TODO: | namespace synced
+namespace SalaryPaymentProject
 {
     /// <summary>
     /// Class person
     /// </summary>
-    public abstract class EmployeeBase : SalaryPaymentProject.IPayable
+    public abstract class EmployeeBase
     {
-        //TODO: RSDN
+        //TODO: RSDN | Ok
         /// <summary>
         /// Employee's account
         /// </summary>
-        double _account;
+        private double _account;
 
         /// <summary>
         /// Employee's account
@@ -217,7 +217,7 @@ namespace PersonModelProject
             return input.Substring(0, 1).ToUpper() +
                 input.Substring(1, input.Length - 1).ToLower();
         }
-        
+
         /// <summary>
         /// Used to performe check on inputs for naming and to keep the same locale for names and surnames
         /// </summary>

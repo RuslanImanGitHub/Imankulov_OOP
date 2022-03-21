@@ -9,21 +9,16 @@ namespace SalaryPaymentProject
     /// <summary>
     /// Interface for salary payment
     /// </summary>
-    public interface IPayable
+    public interface IPayable<T, Y>
     {
-        /// <summary>
-        /// Account property
-        /// </summary>
-        double Account { get; set; }
-
-        //TODO: Убрать реализацию
+        //TODO: Убрать реализацию | Ok
         /// <summary>
         /// Method for adding salary to an employees account
         /// </summary>
         /// <param name="currentBalance">Current balance of an employee</param>
         /// <param name="change">Payment for person</param>
         /// <returns></returns>
-        double ChangeMoney(double currentBalance, double change) => currentBalance + change;
+        double ChangeMoney(T currentBalance, Y change);
 
     }
 }
