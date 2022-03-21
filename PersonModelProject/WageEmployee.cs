@@ -16,7 +16,7 @@ namespace SalaryPaymentProject
         /// </summary>
         /// <param name="Wage">Employee's wage</param>
         /// <returns></returns>
-        public double ChangeMoney(double Wage, double Account2 = 1) => Account += Wage;
+        public double ChangeMoney(double Wage, double Unused = 1) => Account += Wage;
 
         /// <summary>
         /// Constructor of Employee object
