@@ -12,8 +12,14 @@ namespace PersonModelProject
     /// </summary>
     public abstract class EmployeeBase : SalaryPaymentProject.IPayable
     {
+        /// <summary>
+        /// Employee's account
+        /// </summary>
         double _account;
 
+        /// <summary>
+        /// Employee's account
+        /// </summary>
         public double Account
         {
             get => _account;
@@ -22,27 +28,27 @@ namespace PersonModelProject
         }
 
         /// <summary>
-        /// Person's name
+        /// Employee's name
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// Person's surname
+        /// Employee's surname
         /// </summary>
         private string _surname;
 
         /// <summary>
-        /// Locale of Person's name
+        /// Locale of Employee's name
         /// </summary>
         private string _locale;
 
         /// <summary>
-        /// Person's age
+        /// Employee's age
         /// </summary>
         protected int _age;
 
         /// <summary>
-        /// Person's gender
+        /// Employee's gender
         /// </summary>
         private Gender _gender;
 
@@ -57,7 +63,7 @@ namespace PersonModelProject
         protected const int _maxAge = 150;
 
         /// <summary>
-        /// Person's name
+        /// Employee's name
         /// </summary>
         public string Name
         {
@@ -67,7 +73,7 @@ namespace PersonModelProject
         }
 
         /// <summary>
-        /// Person's surname
+        /// Employee's surname
         /// </summary>
         public string Surname
         {
@@ -75,9 +81,9 @@ namespace PersonModelProject
 
             set => _surname = CheckNaming(value);
         }
-        
+
         /// <summary>
-        /// Person's age
+        /// Employee's age
         /// </summary>
         public int Age
         {
@@ -97,7 +103,7 @@ namespace PersonModelProject
         }
 
         /// <summary>
-        /// Person's gender
+        /// Employee's gender
         /// </summary>
         public Gender Gender
         {
@@ -107,12 +113,13 @@ namespace PersonModelProject
         }
 
         /// <summary>
-        /// Constructor of Person object
+        /// Constructor of Employee object
         /// </summary>
-        /// <param name="name">Person's name</param>
-        /// <param name="surname">Person's surname</param>
-        /// <param name="age">Person's age</param>
-        /// <param name="userGender">Person's gender</param>
+        /// <param name="name">Employee's name</param>
+        /// <param name="surname">Employee's surname</param>
+        /// <param name="age">Employee's age</param>
+        /// <param name="userGender">Employee's gender</param>
+        /// <param name="startingMoney">Starting money in employee's account</param>
         protected EmployeeBase(string name, string surname, int age, Gender userGender, double startingMoney)
         {
             Name = name;
