@@ -3,10 +3,13 @@ using PersonModelProject;
 using System.Collections.Generic;
 using System.Text;
 
+//TODO:
 namespace Lab1
 {
+    //TODO: RSDN
     public class StartLab3
     {
+        //TODO: RSDN
         public static void Main()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -40,6 +43,7 @@ namespace Lab1
             Console.ReadKey();
             Console.WriteLine("");
 
+            //TODO: нет полиморфизма
             Console.WriteLine("Adding 100 to all accounts");
             ((PerHourEmployee)list1.GetPersonByIndex(0)).ChangeMoney(25, 4);
             ((PerPcsEmployee)list1.GetPersonByIndex(1)).ChangeMoney(5, 20);

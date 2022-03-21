@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-
-
+//TODO:
 namespace PersonModelProject
 {
     /// <summary>
@@ -12,6 +11,7 @@ namespace PersonModelProject
     /// </summary>
     public abstract class EmployeeBase : SalaryPaymentProject.IPayable
     {
+        //TODO: RSDN
         /// <summary>
         /// Employee's account
         /// </summary>

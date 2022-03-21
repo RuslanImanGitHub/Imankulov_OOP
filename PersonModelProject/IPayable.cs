@@ -16,6 +16,7 @@ namespace SalaryPaymentProject
         /// </summary>
         double Account { get; set; }
 
+        //TODO: Убрать реализацию
         /// <summary>
         /// Method for adding salary to an employees account
         /// </summary>
