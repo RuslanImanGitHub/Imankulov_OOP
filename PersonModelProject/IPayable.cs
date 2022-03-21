@@ -9,7 +9,7 @@ namespace SalaryPaymentProject
     /// <summary>
     /// Interface for salary payment
     /// </summary>
-    public interface IPayable<T, Y>
+    public interface IPayable
     {
         //TODO: Убрать реализацию | Ok
         /// <summary>
@@ -18,7 +18,7 @@ namespace SalaryPaymentProject
         /// <param name="currentBalance">Current balance of an employee</param>
         /// <param name="change">Payment for person</param>
         /// <returns></returns>
-        double ChangeMoney(T currentBalance, Y change);
+        double ChangeMoney();
 
     }
 }

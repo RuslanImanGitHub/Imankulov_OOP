@@ -27,10 +27,10 @@ namespace Lab3
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
             
-            List<EmployeeBase> list1 = new List<EmployeeBase>();
+            List<IPayable> list1 = new List<IPayable>();
 
 
-            List<EmployeeBase>[] lists = 
+            List<IPayable>[] lists = 
             {
                 list1
             };
@@ -45,20 +45,11 @@ namespace Lab3
             Console.WriteLine("");
 
             //TODO: нет полиморфизма | Check
-            Console.WriteLine("Adding 100 to all accounts");
+            Console.WriteLine("Adding 100 to all accounts accept Wage Employee account");
             for (int i = 0; i < list1.Count; i++)
-                switch (list1[i])
-                {
-                    case PerHourEmployee Employee:
-                        Employee.ChangeMoney(25, 4);
-                        break;
-                    case PerPcsEmployee Employee:
-                        Employee.ChangeMoney(5, 20);
-                        break;
-                    case WageEmployee Employee:
-                        Employee.ChangeMoney(100);
-                        break;
-                }
+            {
+                list1[i].ChangeMoney();
+            }
             Console.WriteLine("");
             Show(lists);
             Console.ReadKey();
@@ -68,7 +59,7 @@ namespace Lab3
         /// Prints all entries in PresonList object
         /// </summary>
         /// <param name="lists">List of PersonList objects that need to be printed</param>
-        static void Show (List<EmployeeBase>[] lists)
+        static void Show (List<IPayable>[] lists)
         {
             for (int i = 0; i < lists.Length; i++)
             {
@@ -76,7 +67,7 @@ namespace Lab3
                 Console.WriteLine($"List{i + 1}");
                 for (int j = 0; j < lists[i].Count; j++)
                 {
-                    Console.WriteLine(lists[i][j].Info());
+                    Console.WriteLine(((EmployeeBase)lists[i][j]).Info());
                     Console.WriteLine("");
                 }
             }

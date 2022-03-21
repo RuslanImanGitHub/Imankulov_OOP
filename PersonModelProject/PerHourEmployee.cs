@@ -9,15 +9,33 @@ namespace SalaryPaymentProject
     /// <summary>
     /// Class PerHourEmployee
     /// </summary>
-    public class PerHourEmployee : EmployeeBase, IPayable<double, int>
+    public class PerHourEmployee : EmployeeBase, IPayable
     {
+        private double _hourlyPayment;
+
+        private int _hoursWorked;
+
+        public double HourlyPayment
+        {
+            get => _hourlyPayment;
+
+            set => _hourlyPayment = value;
+        }
+
+        public int HoursWorked
+        {
+            get => _hoursWorked;
+
+            set => _hoursWorked = value;
+        }
+
         /// <summary>
         /// Method for adding salary to an employees account
         /// </summary>
         /// <param name="HourlyPayment">Employee's hourly payment</param>
         /// <param name="HoursWorked">How many hours employee has worked</param>
         /// <returns></returns>
-        public double ChangeMoney(double HourlyPayment, int HoursWorked) => Account += HourlyPayment * HoursWorked;
+        public double ChangeMoney() => Account += HourlyPayment * HoursWorked;
 
         /// <summary>
         /// Constructor of Employee object
@@ -27,10 +45,12 @@ namespace SalaryPaymentProject
         /// <param name="age">Employee's age</param>
         /// <param name="userGender">Employee's gender</param>
         /// <param name="startingMoney">Starting money in employee's account</param>
-        public PerHourEmployee(string name, string surname, int age, Gender userGender, double startingMoney)
+        public PerHourEmployee(string name, string surname, int age, Gender userGender,
+                               double startingMoney, double hourlyPayment, int hoursWorked)
             : base(name, surname, age, userGender, startingMoney)
         {
-
+            HourlyPayment = hourlyPayment;
+            HoursWorked = hoursWorked;
         }
 
         /// <summary>
@@ -48,7 +68,9 @@ namespace SalaryPaymentProject
                                    surnames[rnd.Next(0, surnames.Count() - 1)],
                                    rnd.Next(_minAge, _maxAge),
                                    (Gender)rnd.Next(0, 2),
-                                   rnd.Next(100, 600));
+                                   rnd.Next(100, 600),
+                                   rnd.Next(25, 50),
+                                   rnd.Next(1, 5));
             return person;
         }
 
@@ -58,7 +80,7 @@ namespace SalaryPaymentProject
         /// <returns></returns>
         public override string Info()
         {
-            return $"{InfoBase()}, Employee type: {GetType()}";
+            return $"{InfoBase()}, HourlyPayment: {HourlyPayment}, HoursWorked: {HoursWorked}";
         }
     }
 }
