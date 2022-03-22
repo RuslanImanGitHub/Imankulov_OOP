@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-//TODO: | namespace synced
 namespace SalaryPaymentProject
 {
     /// <summary>
@@ -11,7 +10,6 @@ namespace SalaryPaymentProject
     /// </summary>
     public abstract class EmployeeBase
     {
-        //TODO: RSDN | Ok
         /// <summary>
         /// Employee's account
         /// </summary>
