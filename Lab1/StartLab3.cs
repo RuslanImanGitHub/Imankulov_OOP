@@ -66,7 +66,7 @@ namespace Lab3
                 Console.WriteLine($"List{i + 1}");
                 for (int j = 0; j < lists[i].Count; j++)
                 {
-                    //TODO: BUG
+                    //TODO: BUG | Ok
                     Console.WriteLine((lists[i][j]).Info());
                     Console.WriteLine("");
                 }
