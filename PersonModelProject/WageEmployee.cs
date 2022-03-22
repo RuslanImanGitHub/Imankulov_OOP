@@ -31,7 +31,7 @@ namespace SalaryPaymentProject
         /// </summary>
         /// <param name="Wage">Employee's wage</param>
         /// <returns></returns>
-        public double ChangeMoney() => Account += Wage;
+        public override double ChangeMoney() => Account += Wage;
 
         /// <summary>
         /// Constructor of Employee object

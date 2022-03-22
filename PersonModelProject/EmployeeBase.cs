@@ -8,8 +8,14 @@ namespace SalaryPaymentProject
     /// <summary>
     /// Class person
     /// </summary>
-    public abstract class EmployeeBase
+    public abstract class EmployeeBase : IPayable
     {
+        /// <summary>
+        /// Method for adding salary to an employees account
+        /// </summary>
+        /// <returns></returns>
+        public virtual double ChangeMoney() => Account;
+
         /// <summary>
         /// Employee's account
         /// </summary>

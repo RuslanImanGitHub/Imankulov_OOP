@@ -24,14 +24,14 @@ namespace Lab3
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
             
-            var list1 = new List<IPayable>
+            var list1 = new List<EmployeeBase>
             {
                 PerHourEmployee.GetRandomPerHourEmployee(names, surnames),
                 PerPcsEmployee.GetRandomPerPcsEmployee(names, surnames),
                 WageEmployee.GetRandomWageEmployee(names, surnames)
             };
 
-            List<IPayable>[] lists = 
+            List<EmployeeBase>[] lists = 
             {
                 list1
             };
@@ -58,7 +58,7 @@ namespace Lab3
         /// Prints all entries in PresonList object
         /// </summary>
         /// <param name="lists">List of PersonList objects that need to be printed</param>
-        static void Show (List<IPayable>[] lists)
+        static void Show (List<EmployeeBase>[] lists)
         {
             for (int i = 0; i < lists.Length; i++)
             {
@@ -67,7 +67,7 @@ namespace Lab3
                 for (int j = 0; j < lists[i].Count; j++)
                 {
                     //TODO: BUG
-                    Console.WriteLine(((EmployeeBase)lists[i][j]).Info());
+                    Console.WriteLine((lists[i][j]).Info());
                     Console.WriteLine("");
                 }
             }

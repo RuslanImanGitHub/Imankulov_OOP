@@ -45,7 +45,7 @@ namespace SalaryPaymentProject
         /// Method for adding salary to an employees account
         /// </summary>
         /// <returns></returns>
-        public double ChangeMoney() => Account += HourlyPayment * HoursWorked;
+        public override double ChangeMoney() => Account += HourlyPayment * HoursWorked;
 
         /// <summary>
         /// Constructor of Employee object

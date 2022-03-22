@@ -45,7 +45,7 @@ namespace SalaryPaymentProject
         /// <param name="PaymentPerOnePcs">Payment for a piece of equipment employee made</param>
         /// <param name="PcsAmount">Amount of equipment employee made</param>
         /// <returns></returns>
-        public double ChangeMoney() => Account += PaymentPerOnePcs * PcsAmount;
+        public override double ChangeMoney() => Account += PaymentPerOnePcs * PcsAmount;
 
         /// <summary>
         /// Constructor of Employee object
