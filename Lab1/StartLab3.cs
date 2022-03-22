@@ -52,8 +52,7 @@ namespace Lab3
             Show(lists);
             Console.ReadKey();
         }
-
-        //TODO: RSDN
+        
         /// <summary>
         /// Prints all entries in PresonList object
         /// </summary>
@@ -66,8 +65,7 @@ namespace Lab3
                 Console.WriteLine($"List{i + 1}");
                 for (int j = 0; j < lists[i].Count; j++)
                 {
-                    //TODO: BUG | Ok
-                    Console.WriteLine((lists[i][j]).Info());
+                    Console.WriteLine(lists[i][j].Info());
                     Console.WriteLine("");
                 }
             }
