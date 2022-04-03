@@ -65,6 +65,9 @@ namespace SalaryPaymentProject
             HoursWorked = hoursWorked;
         }
 
+        public PerHourEmployee() : this(null, null, 18, Gender.Unknown, 0, 0, 0)
+        { }
+
         /// <summary>
         /// Method returns random employee
         /// </summary>

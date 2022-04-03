@@ -48,6 +48,9 @@ namespace SalaryPaymentProject
             Wage = wage;
         }
 
+        public WageEmployee() : this(null, null, 18, Gender.Unknown, 0, 0)
+        { }
+
         /// <summary>
         /// Method returns random employee
         /// </summary>

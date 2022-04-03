@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SalaryPaymentProject
 {
     /// <summary>
     /// Class person
     /// </summary>
+    [XmlInclude(typeof(WageEmployee))]
+    [XmlInclude(typeof(PerHourEmployee))]
+    [XmlInclude(typeof(PerPcsEmployee))]
     public abstract class EmployeeBase : IPayable
     {
         /// <summary>
@@ -49,7 +54,7 @@ namespace SalaryPaymentProject
         /// <summary>
         /// Employee's age
         /// </summary>
-        protected int _age;
+        private int _age;
 
         /// <summary>
         /// Employee's gender
@@ -206,7 +211,7 @@ namespace SalaryPaymentProject
         /// <returns></returns>
         private static string DoubleNameHandler(string input)
         {
-            string[] doubleName = input.Split("-");
+            string[] doubleName = input.Split('-');
             return FirstLetterToUpper(doubleName[0]) + "-"
                 + FirstLetterToUpper(doubleName[1]);
         }
