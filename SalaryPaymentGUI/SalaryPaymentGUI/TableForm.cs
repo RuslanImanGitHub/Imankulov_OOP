@@ -14,15 +14,15 @@ using System.Xml.Serialization;
 
 namespace SalaryPaymentGUI
 {
-    public delegate void UpdateEmployeeList(EmployeeBase newEmployee);
-
     public partial class TableForm : Form
     {
+        //TODO:
         public BindingList<EmployeeBase> employees = new BindingList<EmployeeBase>();
         public BindingList<WageEmployee> wageEmployees = new BindingList<WageEmployee>();
         public BindingList<PerHourEmployee> perHourEmployees = new BindingList<PerHourEmployee>();
         public BindingList<PerPcsEmployee> perPcsEmployees = new BindingList<PerPcsEmployee>();
-        public UpdateEmployeeList updateDelegate;
+        //TODO:
+        public EventHandler<EventArgsEmployeeAdded> updateDelegate;
 
         public TableForm()
         {
@@ -38,8 +38,12 @@ namespace SalaryPaymentGUI
 
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
-            AddingEmployeeForm addingEmployeeForm = new AddingEmployeeForm(updateDelegate);
+            var addingEmployeeForm = new AddingEmployeeForm();
             addingEmployeeForm.EmployeeAdded += UpdateDelegateWithNewEmployee;
+            addingEmployeeForm.Closed += (o, args) =>
+            {
+                addingEmployeeForm.EmployeeAdded -= UpdateDelegateWithNewEmployee;
+            };
             addingEmployeeForm.Show();
         }
 
@@ -62,40 +66,45 @@ namespace SalaryPaymentGUI
 
         private void CreateRandomEmployeeButton_Click(object sender, EventArgs e)
         {
-            List<string> names = new List<string>
+            employees.Add(GenerateRandomEmployee());
+            //wageEmployees.Add(newEmployee);
+        }
+
+        private EmployeeBase GenerateRandomEmployee()
+        {
+            var names = new List<string>
             {
                 "Amari", "Ash", "Avery", "Bay", "Blake",
                 "Cameron", "Casey", "Charlie", "Drew", "Emerson",
                 "Jesse", "Morgan", "Remy", "Sam", "Bobbie"
             };
-            List<string> surnames = new List<string>
+            var surnames = new List<string>
             {
                 "Smith", "Johnson", "Williams", "Jones", "Brown",
                 "Miller", "Wilson", "Moore", "Taylor", "Thomas",
                 "Turner", "Mitchell", "Phillips", "Baker", "Adams"
             };
 
-            if (this.comboBox2.Text == "Оклад")
+            switch (this.comboBox2.Text)
             {
-                var newEmployee = WageEmployee.GetRandomWageEmployee(names, surnames);
-                employees.Add(newEmployee);
-                wageEmployees.Add(newEmployee);
-            }
-            if (this.comboBox2.Text == "Почасовя оплата")
-            {
-                var newEmployee = PerHourEmployee.GetRandomPerHourEmployee(names, surnames);
-                employees.Add(newEmployee);
-                perHourEmployees.Add(newEmployee);
-            }
-            if (this.comboBox2.Text == "Сдельная оплата")
-            {
-                var newEmployee = PerPcsEmployee.GetRandomPerPcsEmployee(names, surnames);
-                employees.Add(newEmployee);
-                perPcsEmployees.Add(newEmployee);
+                //TODO: строковые ключи
+                case "Оклад":
+                {
+                    return WageEmployee.GetRandomWageEmployee(names, surnames);
+                }
+                case "Почасовя оплата":
+                {
+                    return PerHourEmployee.GetRandomPerHourEmployee(names, surnames);
+                }
+                case "Сдельная оплата":
+                default:
+                {
+                    return PerPcsEmployee.GetRandomPerPcsEmployee(names, surnames);
+                }
             }
         }
 
-        public void UpdateDelegateWithNewEmployee (object source, EventsForUpdate e)
+        public void UpdateDelegateWithNewEmployee (object source, EventArgsEmployeeAdded e)
         {
             employees.Add(e.GetEmployee());
 
@@ -117,6 +126,7 @@ namespace SalaryPaymentGUI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //TODO: строковые ключи
             if (this.comboBox1.Text == "Оклад")
             {
                 this.dataGridView1.DataSource = this.wageEmployees;
@@ -186,19 +196,19 @@ namespace SalaryPaymentGUI
                 {
                     if (column.Name == currentSelection)
                     {
-                        string currnetType = column.ValueType.Name;
+                        var currnetType = column.ValueType;
 
-                        if (currnetType == "Int32" || currnetType == "Double")
+                        if (currnetType == typeof(Int32) || currnetType == typeof(double))
                         {
                             var numericOperations = new string[] { "=", ">", "<" };
                             this.ActionSortComboBox.DataSource = numericOperations;
                         }
-                        if (currnetType == "String")
+                        if (currnetType == typeof(string))
                         {
                             var textOperations = new string[] { "=" };
                             this.ActionSortComboBox.DataSource = textOperations;
                         }
-                        if (currnetType == "Gender")
+                        if (currnetType == typeof(Gender))
                         {
                             this.ActionSortComboBox.DataSource = Enum.GetNames(typeof(Gender));
                         }
@@ -291,6 +301,7 @@ namespace SalaryPaymentGUI
                 for (int j = 0; j < this.dataGridView1.Columns.Count; j++)
                 {
                     var column = this.dataGridView1.Columns[j];
+                    //TODO:
                     if ((string)ColumnSortComboBox.SelectedItem == "Gender")
                     {
                         if (column.Name == this.ColumnSortComboBox.SelectedItem)

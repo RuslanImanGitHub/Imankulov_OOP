@@ -13,27 +13,33 @@ namespace SalaryPaymentGUI
 {
     public partial class AddingEmployeeForm : Form
     {
-        public event EventHandler<EventsForUpdate> EmployeeAdded;
-
-        public UpdateEmployeeList updator;
+        public event EventHandler<EventArgsEmployeeAdded> EmployeeAdded;
+        
+        //TODO: RSDN
         public string EmployeeType;
+
+        //TODO: RSDN
         List<Control> DataAcquisitionList = new List<Control>();
+
+
+        Dictionary<string, Action> dictionary = new Dictionary<string, Action>()
+        {
+            { "Ставка", () => { } }
+        };
 
         public AddingEmployeeForm()
         {
             InitializeComponent();
-        }
+            var tmpEmployeeTypeKeys = dictionary.Keys.ToList();
+            comboBox1.DataSource = tmpEmployeeTypeKeys;
 
-        public AddingEmployeeForm(UpdateEmployeeList updateDelegate)
-        {
-            InitializeComponent();
-            updator = updateDelegate;
             this.EmployeeCreationConfirmButton.Enabled = false;
         }
 
 
         private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
         {
+            //TODO: duplication
             Label nameLabel = new Label();
             nameLabel.Text = "Имя";
             nameLabel.Location = new Point(12, 64);
@@ -42,6 +48,7 @@ namespace SalaryPaymentGUI
             nameBox.Location = new Point(150, 64);
             nameBox.Size = new Size(121, 21);
 
+            //TODO: duplication
             Label surnameLabel = new Label();
             surnameLabel.Text = "фамилия";
             surnameLabel.Location = new Point(12, 95);
@@ -50,6 +57,7 @@ namespace SalaryPaymentGUI
             surnameBox.Location = new Point(150, 95);
             surnameBox.Size = new Size(121, 21);
 
+            //TODO: duplication
             Label genderLabel = new Label();
             genderLabel.Text = "Пол";
             genderLabel.Location = new Point(12, 126);
@@ -75,9 +83,14 @@ namespace SalaryPaymentGUI
             accountBox.Location = new Point(150, 188);
             accountBox.Size = new Size(121, 21);
 
+            //TODO: RSDN
             List<Control> controlList = new List<Control> { nameBox, surnameBox, ageBox, genderBox, accountBox };
             List<Label> labelList = new List<Label> { nameLabel, surnameLabel, genderLabel, ageLabel, accountLabel };
 
+            
+            dictionary[comboBox1.Text].Invoke();
+
+            //TODO: строковые ключи
             if (this.comboBox1.Text == "Ставка")
             {
                 Label wageLabel = new Label();
@@ -185,9 +198,12 @@ namespace SalaryPaymentGUI
 
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            EventsForUpdate b = new EventsForUpdate(newEmployee);
-            b.Employee = newEmployee;
-            EmployeeAdded(this, b);
+            //TODO: RSDN
+            var b = new EventArgsEmployeeAdded(newEmployee)
+            {
+                Employee = newEmployee
+            };
+            EmployeeAdded?.Invoke(this, b);
         }
     }
 }

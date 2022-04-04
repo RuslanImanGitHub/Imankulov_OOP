@@ -64,7 +64,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventsForUpdate.cs" />
+    <Compile Include="EventArgsEmployeeAdded.cs" />
     <Compile Include="TableForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,8 +7,11 @@ using SalaryPaymentProject;
 
 namespace SalaryPaymentGUI
 {
-    public class EventsForUpdate : EventArgs
+    //TODO: XML
+
+    public class EventArgsEmployeeAdded : EventArgs
     {
+        //TODO:
         private EmployeeBase employee;
 
         public EmployeeBase Employee
@@ -17,10 +20,12 @@ namespace SalaryPaymentGUI
             get => employee;
         }
 
-        public EventsForUpdate(EmployeeBase setEmployee)
+        public EventArgsEmployeeAdded(EmployeeBase setEmployee)
         {
             this.employee = setEmployee;
         }
+
+        //TODO:
         public EmployeeBase GetEmployee()
         {
             return Employee;
