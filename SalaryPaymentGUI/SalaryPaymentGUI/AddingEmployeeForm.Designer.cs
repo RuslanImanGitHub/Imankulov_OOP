@@ -110,6 +110,8 @@ namespace SalaryPaymentGUI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddingEmployeeForm";
             this.Text = "Form2";
             this.ResumeLayout(false);

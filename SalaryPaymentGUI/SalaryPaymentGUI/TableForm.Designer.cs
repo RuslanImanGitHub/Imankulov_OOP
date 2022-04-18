@@ -242,6 +242,8 @@
             this.Controls.Add(this.AddEmployeeButton);
             this.Controls.Add(this.panelDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "TableForm";
             this.Text = "Form1";
             this.panelDataGridView.ResumeLayout(false);
