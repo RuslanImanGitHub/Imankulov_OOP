@@ -17,13 +17,13 @@ namespace SalaryPaymentGUI
     public partial class TableForm : Form
     {
         //TODO: public?
-        public BindingList<EmployeeBase> employees = new BindingList<EmployeeBase>();
+        private BindingList<EmployeeBase> employees = new BindingList<EmployeeBase>();
 
         //TODO: public?
-        public static BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
+        private static BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
 
         //TODO: 
-        public EventHandler<EventArgsEmployeeAdded> _updateDelegate;
+        private EventHandler<EventArgsEmployeeAdded> _updateDelegate;
 
         public TableForm()
         {
@@ -64,15 +64,6 @@ namespace SalaryPaymentGUI
             }
         }
 
-        //TODO:
-        private void CalculateSalaryButton_Click(object sender, EventArgs e)
-        {
-            foreach(EmployeeBase employee in employees)
-            {
-                employee.ChangeMoney();
-                this.dataGridView1.Update();
-            }
-        }
 
         private void CreateRandomEmployeeButton_Click(object sender, EventArgs e)
         {
@@ -83,7 +74,7 @@ namespace SalaryPaymentGUI
             this.dataGridView1.Update();
         }
 
-        //TODO:
+        //TODO: засунуть в random employee
         static List<string> names = new List<string>
         {
             "Amari", "Ash", "Avery", "Bay", "Blake",
@@ -100,7 +91,7 @@ namespace SalaryPaymentGUI
         };
 
         //TODO: RSDN
-        Dictionary<string, Action> RandomEmployeeDictionary = new Dictionary<string, Action>()
+        private Dictionary<string, Action> RandomEmployeeDictionary = new Dictionary<string, Action>()
         {
             { "Оклад", () => { _employeesDict.Add(WageEmployee.GetRandomWageEmployee(names, surnames));
                                 } },
@@ -126,12 +117,18 @@ namespace SalaryPaymentGUI
             openFileDialog.Filter = "XML|*.xml";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //TODO:
-                using (var streamReader = new StreamReader(openFileDialog.FileName))
+                try
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
-                    employees = (BindingList<EmployeeBase>)serializer.Deserialize(streamReader);
-                    this.dataGridView1.DataSource = employees;
+                    using (var streamReader = new StreamReader(openFileDialog.FileName))
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
+                        employees = (BindingList<EmployeeBase>)serializer.Deserialize(streamReader);
+                        this.dataGridView1.DataSource = employees;
+                    }
+                }
+                catch (Exception ex)
+                { 
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
@@ -188,110 +185,69 @@ namespace SalaryPaymentGUI
 
         private void SortButton_Click(object sender, EventArgs e)
         {
-            CurrencyManager currencyManager = (CurrencyManager)BindingContext[dataGridView1.DataSource];
-            currencyManager.SuspendBinding();
-            for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
+            BindingList<EmployeeBase> listDataSource = (BindingList<EmployeeBase>)this.dataGridView1.DataSource;
+            BindingList<EmployeeBase> sortedEmployees = new BindingList<EmployeeBase>();
+            if (Double.TryParse(this.DataSortTextBox.Text, out double numericData))
             {
-                var row = this.dataGridView1.Rows[i];
-                for (int j = 0; j < this.dataGridView1.Columns.Count; j++)
+                switch (this.ActionSortComboBox.SelectedIndex)
                 {
-                    var column = this.dataGridView1.Columns[j];
-
-                    if ((string)ColumnSortComboBox.SelectedItem == "Gender")
-                    {
-                        if (column.Name == this.ColumnSortComboBox.SelectedItem)
+                    case 0:
+                        foreach (EmployeeBase employee in listDataSource)
                         {
-                            //TODO: RSDN
-                            //TODO: duplication 1
-                            if (row.Cells[column.Index].Value.ToString() == this.ActionSortComboBox.SelectedItem.ToString())
+                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) == numericData)
                             {
-                                row.Selected = true;
-                                row.Visible = true;
-                            }
-                            else
-                            {
-                                row.Selected = false;
-                                row.Visible = false;
+                                sortedEmployees.Add(employee);
                             }
                         }
-                    }
-                    else
-                    {
-                        switch(this.ActionSortComboBox.SelectedIndex)
+                        this.dataGridView1.DataSource = sortedEmployees;
+                        break;
+                    case 1:
+                        foreach (EmployeeBase employee in listDataSource)
                         {
-                            case 0:
-                                if (column.Name == this.ColumnSortComboBox.SelectedItem)
-                                {
-                                    if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
-                                    {
-                                        //TODO: duplication 2
-                                        if (CheckItem(Convert.ToDouble(row.Cells[column.Index].Value),
-                                                numericData,
-                                                this.ActionSortComboBox.SelectedIndex))
-                                        {
-                                            row.Selected = true;
-                                            row.Visible = true;
-                                        }
-                                        else
-                                        {
-                                            row.Selected = false;
-                                            row.Visible = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //TODO: duplication 1
-                                        if (row.Cells[column.Index].Value.ToString() == this.DataSortTextBox.Text.ToString())
-                                        {
-                                            row.Selected = true;
-                                            row.Visible = true;
-                                        }
-                                        else
-                                        {
-                                            row.Selected = false;
-                                            row.Visible = false;
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                if (column.Name == this.ColumnSortComboBox.SelectedItem)
-                                {
-                                    if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
-                                    {
-                                        //TODO: duplication 2
-                                        if (Convert.ToDouble(row.Cells[column.Index].Value) > numericData)
-                                        {
-                                            row.Selected = true;
-                                            row.Visible = true;
-                                        }
-                                        else
-                                        {
-                                            row.Selected = false;
-                                            row.Visible = false;
-                                        }
-                                    }
-                                }
-                                break;
-                            case 2:
-                                if (column.Name == this.ColumnSortComboBox.SelectedItem)
-                                {
-                                    if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
-                                    {
-                                        //TODO: duplication 2
-
-                                        var isLessValue = 
-                                            Convert.ToDouble(row.Cells[column.Index].Value) < numericData;
-                                        row.Selected = isLessValue;
-                                        row.Visible = isLessValue;
-                                    }
-                                }
-                                break;
+                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) > numericData)
+                            {
+                                sortedEmployees.Add(employee);
+                            }
                         }
-                    }
+                        this.dataGridView1.DataSource = sortedEmployees;
+                        break;
+                    case 2:
+                        foreach (EmployeeBase employee in listDataSource)
+                        {
+                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) < numericData)
+                            {
+                                sortedEmployees.Add(employee);
+                            }
+                        }
+                        this.dataGridView1.DataSource = sortedEmployees;
+                        break;
                 }
             }
-            currencyManager.ResumeBinding();
+            else
+            {
+                if ((string)ColumnSortComboBox.SelectedItem == "Gender")
+                {
+                    foreach (EmployeeBase employee in listDataSource)
+                    {
+                        if (employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee).ToString() == (string)this.ActionSortComboBox.SelectedItem)
+                        {
+                            sortedEmployees.Add(employee);
+                        }
+                    }
+                    this.dataGridView1.DataSource = sortedEmployees;
+                }
+                else
+                {
+                    foreach (EmployeeBase employee in listDataSource)
+                    {
+                        if ((string)employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee) == this.DataSortTextBox.Text)
+                        {
+                            sortedEmployees.Add(employee);
+                        }
+                    }
+                    this.dataGridView1.DataSource = sortedEmployees;
+                }
+            }
         }
 
         private bool CheckItem(double value1, double value2, int checkingType)
@@ -307,8 +263,8 @@ namespace SalaryPaymentGUI
             }
         }
 
-        //TODO: RSDN
-        private void button1_Click(object sender, EventArgs e)
+        //TODO: RSDN | Done
+        private void CancelFilterButton_Click(object sender, EventArgs e)
         {
             this.dataGridView1.DataSource = null;
             this.dataGridView1.DataSource = employees;

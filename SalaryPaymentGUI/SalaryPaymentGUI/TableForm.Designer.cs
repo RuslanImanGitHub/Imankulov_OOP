@@ -45,7 +45,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ActionSortComboBox = new System.Windows.Forms.ComboBox();
             this.SortButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.CancelFilterButton = new System.Windows.Forms.Button();
             this.panelDataGridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -209,22 +209,22 @@
             this.SortButton.UseVisualStyleBackColor = true;
             this.SortButton.Click += new System.EventHandler(this.SortButton_Click);
             // 
-            // button1
+            // CancelFilterButton
             // 
-            this.button1.Location = new System.Drawing.Point(1105, 354);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Сбросить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.CancelFilterButton.Location = new System.Drawing.Point(1105, 354);
+            this.CancelFilterButton.Name = "CancelFilterButton";
+            this.CancelFilterButton.Size = new System.Drawing.Size(130, 23);
+            this.CancelFilterButton.TabIndex = 20;
+            this.CancelFilterButton.Text = "Сбросить";
+            this.CancelFilterButton.UseVisualStyleBackColor = true;
+            this.CancelFilterButton.Click += new System.EventHandler(this.CancelFilterButton_Click);
             // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 615);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.CancelFilterButton);
             this.Controls.Add(this.SortButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ActionSortComboBox);
@@ -272,7 +272,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox ActionSortComboBox;
         private System.Windows.Forms.Button SortButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button CancelFilterButton;
     }
 }
 

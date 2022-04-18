@@ -11,19 +11,18 @@ namespace SalaryPaymentGUI
 
     public class EventArgsEmployeeAdded : EventArgs
     {
-        private EmployeeBase _employee;
 
-        //TODO: инкапсуляция - private set
-        public EmployeeBase Employee
-        {
-            set => _employee = value;
-            get => _employee;
-        }
+        //TODO: инкапсуляция - private set | Done
+        public EmployeeBase Employee { get; private set; }
+
 
         public EventArgsEmployeeAdded(EmployeeBase setEmployee)
         {
-            //TODO: null?
-            this._employee = setEmployee;
+            //TODO: null? | Done
+            if (setEmployee != null)
+            {
+                this.Employee = setEmployee;
+            }
         }
     }
 }
