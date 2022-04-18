@@ -15,22 +15,49 @@ namespace SalaryPaymentGUI
     {
         public event EventHandler<EventArgsEmployeeAdded> EmployeeAdded;
         
-        //TODO: RSDN
-        public string EmployeeType;
+        //TODO: RSDN | Done
+        static public string _employeeType;
 
-        //TODO: RSDN
-        List<Control> DataAcquisitionList = new List<Control>();
+        //TODO: RSDN | Done
+        static List<Control> _dictAcquisitionList = new List<Control>();
+
+        public List<Control> dataAcquisitionList = new List<Control>();
+
+        static List<Control> _labelList = new List<Control>();
 
 
-        Dictionary<string, Action> dictionary = new Dictionary<string, Action>()
+        Dictionary<string, Action> Instructions = new Dictionary<string, Action>()
         {
-            { "Ставка", () => { } }
+            { "Оклад", () => {          var _fieldNames = new List<string> {"Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
+                                                        "Ставка"};
+                                        var controls = BuildFields(_fieldNames);
+                                        _dictAcquisitionList = controls[0];
+                                        _labelList = controls[1];
+                                        _employeeType = "WageEmployee";
+                                } },
+            { "Почасовая оплата", () => {
+                                        var _fieldNames = new List<string> {"Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
+                                              "Почасовая ставка", "Отработанные часы"};
+
+                                        var controls = BuildFields(_fieldNames);
+                                        _dictAcquisitionList = controls[0];
+                                        _labelList = controls[1];
+                                        _employeeType = "PerHourEmployee";
+                                } },
+            { "Сдельная оплата", () => {
+                                        var _fieldNames = new List<string> {"Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
+                                              "Поштучная ставка", "Выработка"};
+                                        var controls = BuildFields(_fieldNames);
+                                        _dictAcquisitionList = controls[0];
+                                        _labelList = controls[1];
+                                        _employeeType = "PerPcsEmployee";
+                                } }
         };
 
         public AddingEmployeeForm()
         {
             InitializeComponent();
-            var tmpEmployeeTypeKeys = dictionary.Keys.ToList();
+            var tmpEmployeeTypeKeys = Instructions.Keys.ToList();
             comboBox1.DataSource = tmpEmployeeTypeKeys;
 
             this.EmployeeCreationConfirmButton.Enabled = false;
@@ -39,122 +66,13 @@ namespace SalaryPaymentGUI
 
         private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
         {
-            //TODO: duplication
-            Label nameLabel = new Label();
-            nameLabel.Text = "Имя";
-            nameLabel.Location = new Point(12, 64);
-            nameLabel.Size = new Size(200, 21);
-            TextBox nameBox = new TextBox();
-            nameBox.Location = new Point(150, 64);
-            nameBox.Size = new Size(121, 21);
+            Instructions[comboBox1.Text].Invoke();
+            List<Control> controlList = new List<Control>();
+            dataAcquisitionList = _dictAcquisitionList;
+            List<Control> labelList = new List<Control>();
+            labelList = _labelList;
 
-            //TODO: duplication
-            Label surnameLabel = new Label();
-            surnameLabel.Text = "фамилия";
-            surnameLabel.Location = new Point(12, 95);
-            surnameLabel.Size = new Size(200, 21);
-            TextBox surnameBox = new TextBox();
-            surnameBox.Location = new Point(150, 95);
-            surnameBox.Size = new Size(121, 21);
-
-            //TODO: duplication
-            Label genderLabel = new Label();
-            genderLabel.Text = "Пол";
-            genderLabel.Location = new Point(12, 126);
-            genderLabel.Size = new Size(200, 21);
-            ComboBox genderBox = new ComboBox();
-            genderBox.DataSource = Enum.GetValues(typeof(Gender));
-            genderBox.Location = new Point(150, 126);
-            genderBox.Size = new Size(121, 21);
-
-            Label ageLabel = new Label();
-            ageLabel.Text = "Возраст";
-            ageLabel.Location = new Point(12, 157);
-            ageLabel.Size = new Size(200, 21);
-            TextBox ageBox = new TextBox();
-            ageBox.Location = new Point(150, 157);
-            ageBox.Size = new Size(121, 21);
-
-            Label accountLabel = new Label();
-            accountLabel.Text = "Стартовый баланс";
-            accountLabel.Location = new Point(12, 188);
-            accountLabel.Size = new Size(200, 21);
-            TextBox accountBox = new TextBox();
-            accountBox.Location = new Point(150, 188);
-            accountBox.Size = new Size(121, 21);
-
-            //TODO: RSDN
-            List<Control> controlList = new List<Control> { nameBox, surnameBox, ageBox, genderBox, accountBox };
-            List<Label> labelList = new List<Label> { nameLabel, surnameLabel, genderLabel, ageLabel, accountLabel };
-
-            
-            dictionary[comboBox1.Text].Invoke();
-
-            //TODO: строковые ключи
-            if (this.comboBox1.Text == "Ставка")
-            {
-                Label wageLabel = new Label();
-                wageLabel.Text = "Оклад";
-                wageLabel.Location = new Point(12, 219);
-                wageLabel.Size = new Size(200, 21);
-                TextBox wageBox = new TextBox();
-                wageBox.Location = new Point(150, 219);
-                wageBox.Size = new Size(121, 21);
-                EmployeeType = "WageEmployee";
-                controlList.Add(wageBox);
-                labelList.Add(wageLabel);
-            }
-
-            if (this.comboBox1.Text == "Почасовая оплата")
-            {
-                Label hourlyPaymentLabel = new Label();
-                hourlyPaymentLabel.Text = "Почасовая ставка";
-                hourlyPaymentLabel.Location = new Point(12, 219);
-                hourlyPaymentLabel.Size = new Size(200, 21);
-                TextBox hourlyPaymentBox = new TextBox();
-                hourlyPaymentBox.Location = new Point(150, 219);
-                hourlyPaymentBox.Size = new Size(121, 21);
-                controlList.Add(hourlyPaymentBox);
-                labelList.Add(hourlyPaymentLabel);
-
-                Label hoursWorkedLabel = new Label();
-                hoursWorkedLabel.Text = "Отработанные часы";
-                hoursWorkedLabel.Location = new Point(12, 250);
-                hoursWorkedLabel.Size = new Size(200, 21);
-                TextBox hoursWorkedBox = new TextBox();
-                hoursWorkedBox.Location = new Point(150, 250);
-                hoursWorkedBox.Size = new Size(121, 21);
-                controlList.Add(hoursWorkedBox);
-                labelList.Add(hoursWorkedLabel);
-                EmployeeType = "PerHourEmployee";
-                
-            }
-
-            if (this.comboBox1.Text == "Сдельная оплата")
-            {
-                Label paymentPerOnePcsLabel = new Label();
-                paymentPerOnePcsLabel.Text = "Поштучная ставка";
-                paymentPerOnePcsLabel.Location = new Point(12, 219);
-                paymentPerOnePcsLabel.Size = new Size(200, 21);
-                TextBox paymentPerOnePcsBox = new TextBox();
-                paymentPerOnePcsBox.Location = new Point(150, 219);
-                paymentPerOnePcsBox.Size = new Size(121, 21);
-                controlList.Add(paymentPerOnePcsBox);
-                labelList.Add(paymentPerOnePcsLabel);
-
-                Label amountPcsLabel = new Label();
-                amountPcsLabel.Text = "Выработка";
-                amountPcsLabel.Location = new Point(12, 250);
-                amountPcsLabel.Size = new Size(200, 21);
-                TextBox amountPcsBox = new TextBox();
-                amountPcsBox.Location = new Point(150, 250);
-                amountPcsBox.Size = new Size(121, 21);
-                controlList.Add(amountPcsBox);
-                labelList.Add(amountPcsLabel);
-                EmployeeType = "PerPcsEmployee";
-            }
-            DataAcquisitionList = controlList;
-            this.Controls.AddRange(controlList.ToArray());
+            this.Controls.AddRange(dataAcquisitionList.ToArray());
             this.Controls.AddRange(labelList.ToArray());
             this.EmployeeSalaryTypeChoiceButton.Enabled = false;
             this.EmployeeCreationConfirmButton.Enabled = true;
@@ -162,29 +80,29 @@ namespace SalaryPaymentGUI
 
         private void EmployeeCreationConfirmButton_Click(object sender, EventArgs e)
         {
-            switch (EmployeeType)
+            switch (_employeeType)
             {
                 case "WageEmployee":
-                    WageEmployee wageEmployee = new WageEmployee(DataAcquisitionList[0].Text, DataAcquisitionList[1].Text,
-                                        int.Parse(DataAcquisitionList[2].Text),
-                                        (Gender)Enum.Parse(typeof(Gender), DataAcquisitionList[3].Text),
-                                        double.Parse(DataAcquisitionList[4].Text), double.Parse(DataAcquisitionList[5].Text));
+                    WageEmployee wageEmployee = new WageEmployee(dataAcquisitionList[0].Text, dataAcquisitionList[1].Text,
+                                        int.Parse(dataAcquisitionList[2].Text),
+                                        (Gender)Enum.Parse(typeof(Gender), dataAcquisitionList[3].Text),
+                                        double.Parse(dataAcquisitionList[4].Text), double.Parse(dataAcquisitionList[5].Text));
                     UpdateNewEmployee(wageEmployee);
                     break;
                 case "PerHourEmployee":
-                    PerHourEmployee perHourEmployee = new PerHourEmployee(DataAcquisitionList[0].Text, DataAcquisitionList[1].Text,
-                                        int.Parse(DataAcquisitionList[2].Text),
-                                        (Gender)Enum.Parse(typeof(Gender), DataAcquisitionList[3].Text),
-                                        double.Parse(DataAcquisitionList[4].Text), double.Parse(DataAcquisitionList[5].Text),
-                                        int.Parse(DataAcquisitionList[6].Text));
+                    PerHourEmployee perHourEmployee = new PerHourEmployee(dataAcquisitionList[0].Text, dataAcquisitionList[1].Text,
+                                        int.Parse(dataAcquisitionList[2].Text),
+                                        (Gender)Enum.Parse(typeof(Gender), dataAcquisitionList[3].Text),
+                                        double.Parse(dataAcquisitionList[4].Text), double.Parse(dataAcquisitionList[5].Text),
+                                        int.Parse(dataAcquisitionList[6].Text));
                     UpdateNewEmployee(perHourEmployee);
                     break;
                 case "PerPcsEmployee":
-                    PerPcsEmployee perPcsEmployee = new PerPcsEmployee(DataAcquisitionList[0].Text, DataAcquisitionList[1].Text,
-                                        int.Parse(DataAcquisitionList[2].Text),
-                                        (Gender)Enum.Parse(typeof(Gender), DataAcquisitionList[3].Text),
-                                        double.Parse(DataAcquisitionList[4].Text), double.Parse(DataAcquisitionList[5].Text),
-                                        int.Parse(DataAcquisitionList[6].Text));
+                    PerPcsEmployee perPcsEmployee = new PerPcsEmployee(dataAcquisitionList[0].Text, dataAcquisitionList[1].Text,
+                                        int.Parse(dataAcquisitionList[2].Text),
+                                        (Gender)Enum.Parse(typeof(Gender), dataAcquisitionList[3].Text),
+                                        double.Parse(dataAcquisitionList[4].Text), double.Parse(dataAcquisitionList[5].Text),
+                                        int.Parse(dataAcquisitionList[6].Text));
                     UpdateNewEmployee(perPcsEmployee);
                     break;
             }
@@ -198,12 +116,48 @@ namespace SalaryPaymentGUI
 
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN
-            var b = new EventArgsEmployeeAdded(newEmployee)
+            //TODO: RSDN | Done
+            var AddedEmployee = new EventArgsEmployeeAdded(newEmployee)
             {
                 Employee = newEmployee
             };
-            EmployeeAdded?.Invoke(this, b);
+            EmployeeAdded?.Invoke(this, AddedEmployee);
+        }
+
+        static private List<List<Control>> BuildFields(List<string> FieldNames)
+        {
+            List<Control> labels = new List<Control>();
+            List<Control> boxes = new List<Control>();
+            var controls = new List<List<Control>>();
+            int startPosition = 64;
+            for (int i = 0; i < FieldNames.Count; i++)
+            {
+                
+                Label newLabel = new Label();
+                newLabel.Text = FieldNames[i];
+                newLabel.Location = new Point(12, startPosition + i * 31);
+                newLabel.Size = new Size(200, 21);
+                labels.Add(newLabel);
+                
+                if (FieldNames[i] == "Пол")
+                {
+                    ComboBox genderBox = new ComboBox();
+                    genderBox.DataSource = Enum.GetValues(typeof(Gender));
+                    genderBox.Location = new Point(150, 126);
+                    genderBox.Size = new Size(121, 21);
+                    boxes.Add(genderBox);
+                }
+                else
+                {
+                    TextBox newBox = new TextBox();
+                    newBox.Location = new Point(150, startPosition + i * 31);
+                    newBox.Size = new Size(121, 21);
+                    boxes.Add((newBox));
+                }
+            }
+            controls.Add(boxes);
+            controls.Add(labels);
+            return controls;
         }
     }
 }

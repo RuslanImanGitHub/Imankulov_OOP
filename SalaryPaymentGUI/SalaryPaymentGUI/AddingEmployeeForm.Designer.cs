@@ -49,6 +49,7 @@ namespace SalaryPaymentGUI
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Ставка",
@@ -108,6 +109,7 @@ namespace SalaryPaymentGUI
             this.Controls.Add(this.EmployeeSalaryTypeChoiceButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "AddingEmployeeForm";
             this.Text = "Form2";
             this.ResumeLayout(false);

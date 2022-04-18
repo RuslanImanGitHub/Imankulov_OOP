@@ -11,24 +11,18 @@ namespace SalaryPaymentGUI
 
     public class EventArgsEmployeeAdded : EventArgs
     {
-        //TODO:
-        private EmployeeBase employee;
+        //TODO: | Done Убрал метод, все делается через свойства
+        private EmployeeBase _employee;
 
         public EmployeeBase Employee
         {
-            set => employee = value;
-            get => employee;
+            set => _employee = value;
+            get => _employee;
         }
 
         public EventArgsEmployeeAdded(EmployeeBase setEmployee)
         {
-            this.employee = setEmployee;
-        }
-
-        //TODO:
-        public EmployeeBase GetEmployee()
-        {
-            return Employee;
+            this._employee = setEmployee;
         }
     }
 }

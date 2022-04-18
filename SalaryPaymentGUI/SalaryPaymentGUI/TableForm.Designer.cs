@@ -32,9 +32,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.DeleteEmployeeButton = new System.Windows.Forms.Button();
-            this.CalculateSalaryButton = new System.Windows.Forms.Button();
             this.CreateRandomEmployeeButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SaveFileButton = new System.Windows.Forms.Button();
@@ -47,6 +45,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ActionSortComboBox = new System.Windows.Forms.ComboBox();
             this.SortButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelDataGridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -88,16 +87,6 @@
             this.DeleteEmployeeButton.UseVisualStyleBackColor = true;
             this.DeleteEmployeeButton.Click += new System.EventHandler(this.DeleteEmployeeButton_Click);
             // 
-            // CalculateSalaryButton
-            // 
-            this.CalculateSalaryButton.Location = new System.Drawing.Point(962, 107);
-            this.CalculateSalaryButton.Name = "CalculateSalaryButton";
-            this.CalculateSalaryButton.Size = new System.Drawing.Size(129, 23);
-            this.CalculateSalaryButton.TabIndex = 4;
-            this.CalculateSalaryButton.Text = "Начислить зарплату";
-            this.CalculateSalaryButton.UseVisualStyleBackColor = true;
-            this.CalculateSalaryButton.Click += new System.EventHandler(this.CalculateSalaryButton_Click);
-            // 
             // CreateRandomEmployeeButton
             // 
             this.CreateRandomEmployeeButton.Location = new System.Drawing.Point(1092, 549);
@@ -107,20 +96,6 @@
             this.CreateRandomEmployeeButton.Text = "Создать случайного сотрудника";
             this.CreateRandomEmployeeButton.UseVisualStyleBackColor = true;
             this.CreateRandomEmployeeButton.Click += new System.EventHandler(this.CreateRandomEmployeeButton_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Оклад",
-            "Почасовя оплата",
-            "Сдельная оплата",
-            "Все"});
-            this.comboBox1.Location = new System.Drawing.Point(1106, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(129, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -133,10 +108,11 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Оклад",
-            "Почасовя оплата",
+            "Почасовая оплата",
             "Сдельная оплата"});
             this.comboBox2.Location = new System.Drawing.Point(957, 549);
             this.comboBox2.Name = "comboBox2";
@@ -172,6 +148,7 @@
             // 
             // ColumnSortComboBox
             // 
+            this.ColumnSortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ColumnSortComboBox.FormattingEnabled = true;
             this.ColumnSortComboBox.Location = new System.Drawing.Point(961, 241);
             this.ColumnSortComboBox.Name = "ColumnSortComboBox";
@@ -215,6 +192,7 @@
             // 
             // ActionSortComboBox
             // 
+            this.ActionSortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ActionSortComboBox.FormattingEnabled = true;
             this.ActionSortComboBox.Location = new System.Drawing.Point(961, 287);
             this.ActionSortComboBox.Name = "ActionSortComboBox";
@@ -231,11 +209,22 @@
             this.SortButton.UseVisualStyleBackColor = true;
             this.SortButton.Click += new System.EventHandler(this.SortButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1105, 354);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(130, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Сбросить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 615);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SortButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ActionSortComboBox);
@@ -248,12 +237,11 @@
             this.Controls.Add(this.SaveFileButton);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.CreateRandomEmployeeButton);
-            this.Controls.Add(this.CalculateSalaryButton);
             this.Controls.Add(this.DeleteEmployeeButton);
             this.Controls.Add(this.AddEmployeeButton);
             this.Controls.Add(this.panelDataGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "TableForm";
             this.Text = "Form1";
             this.panelDataGridView.ResumeLayout(false);
@@ -269,9 +257,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button AddEmployeeButton;
         private System.Windows.Forms.Button DeleteEmployeeButton;
-        private System.Windows.Forms.Button CalculateSalaryButton;
         private System.Windows.Forms.Button CreateRandomEmployeeButton;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button SaveFileButton;
@@ -284,6 +270,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox ActionSortComboBox;
         private System.Windows.Forms.Button SortButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 
