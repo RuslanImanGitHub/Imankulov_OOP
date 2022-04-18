@@ -185,46 +185,23 @@ namespace SalaryPaymentGUI
 
         private void SortButton_Click(object sender, EventArgs e)
         {
-            BindingList<EmployeeBase> listDataSource = (BindingList<EmployeeBase>)this.dataGridView1.DataSource;
-            BindingList<EmployeeBase> sortedEmployees = new BindingList<EmployeeBase>();
+            var listDataSource = (BindingList<EmployeeBase>)this.dataGridView1.DataSource;
+            var sortedEmployees = new BindingList<EmployeeBase>();
             if (Double.TryParse(this.DataSortTextBox.Text, out double numericData))
             {
-                switch (this.ActionSortComboBox.SelectedIndex)
+                foreach (EmployeeBase employee in listDataSource)
                 {
-                    case 0:
-                        foreach (EmployeeBase employee in listDataSource)
-                        {
-                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) == numericData)
-                            {
-                                sortedEmployees.Add(employee);
-                            }
-                        }
-                        this.dataGridView1.DataSource = sortedEmployees;
-                        break;
-                    case 1:
-                        foreach (EmployeeBase employee in listDataSource)
-                        {
-                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) > numericData)
-                            {
-                                sortedEmployees.Add(employee);
-                            }
-                        }
-                        this.dataGridView1.DataSource = sortedEmployees;
-                        break;
-                    case 2:
-                        foreach (EmployeeBase employee in listDataSource)
-                        {
-                            if (Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee)) < numericData)
-                            {
-                                sortedEmployees.Add(employee);
-                            }
-                        }
-                        this.dataGridView1.DataSource = sortedEmployees;
-                        break;
+                    if (CheckItem(ToDouble(employee), numericData,
+                            this.ActionSortComboBox.SelectedIndex))
+                    {
+                        sortedEmployees.Add(employee);
+                    }
                 }
+                this.dataGridView1.DataSource = sortedEmployees;
             }
             else
             {
+                //TODO: duplication
                 if ((string)ColumnSortComboBox.SelectedItem == "Gender")
                 {
                     foreach (EmployeeBase employee in listDataSource)
@@ -250,20 +227,25 @@ namespace SalaryPaymentGUI
             }
         }
 
+        private double ToDouble(EmployeeBase employee)
+        {
+            //TODO: Передать как аргумент название проперти
+            return Convert.ToDouble(employee.GetType().GetProperty(this.ColumnSortComboBox.Text).GetValue(employee));
+        }
+
         private bool CheckItem(double value1, double value2, int checkingType)
         {
             switch (checkingType)
             {
                 case 0:
-                    return value1 > value2;
-                case 1:
-                    return value1 < value2;
-                default:
                     return value1 == value2;
+                case 1:
+                    return value1 > value2;
+                default:
+                    return value1 < value2;
             }
         }
-
-        //TODO: RSDN | Done
+        
         private void CancelFilterButton_Click(object sender, EventArgs e)
         {
             this.dataGridView1.DataSource = null;
