@@ -15,25 +15,34 @@ namespace SalaryPaymentGUI
     {
         public event EventHandler<EventArgsEmployeeAdded> EmployeeAdded;
         
-        //TODO: RSDN | Done
-        static public string _employeeType;
+        //TODO: инкапсуляция?
+        public static string _employeeType;
 
-        //TODO: RSDN | Done
+        //TODO: RSDN 
         static List<Control> _dictAcquisitionList = new List<Control>();
 
+        //TODO: инкапсуляция?
         public List<Control> dataAcquisitionList = new List<Control>();
 
+        //TODO: RSDN 
         static List<Control> _labelList = new List<Control>();
 
-
+        //TODO: RSDN 
         Dictionary<string, Action> Instructions = new Dictionary<string, Action>()
         {
-            { "Оклад", () => {          var _fieldNames = new List<string> {"Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
-                                                        "Ставка"};
-                                        var controls = BuildFields(_fieldNames);
-                                        _dictAcquisitionList = controls[0];
-                                        _labelList = controls[1];
-                                        _employeeType = "WageEmployee";
+            { 
+                "Оклад", 
+                () => {   
+                    //TODO: RSDN
+                    var _fieldNames = new List<string> 
+                    {
+                        "Имя", "Фамилия", "Пол", 
+                        "Возраст", "Стартовый баланс", "Ставка"
+                    };
+                    var controls = BuildFields(_fieldNames);
+                    _dictAcquisitionList = controls[0];
+                    _labelList = controls[1];
+                    _employeeType = "WageEmployee";
                                 } },
             { "Почасовая оплата", () => {
                                         var _fieldNames = new List<string> {"Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
@@ -67,6 +76,7 @@ namespace SalaryPaymentGUI
         private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
         {
             Instructions[comboBox1.Text].Invoke();
+            //TODO:
             List<Control> controlList = new List<Control>();
             dataAcquisitionList = _dictAcquisitionList;
             List<Control> labelList = new List<Control>();
@@ -82,9 +92,12 @@ namespace SalaryPaymentGUI
         {
             switch (_employeeType)
             {
-                case "WageEmployee":
-                    WageEmployee wageEmployee = new WageEmployee(dataAcquisitionList[0].Text, dataAcquisitionList[1].Text,
-                                        int.Parse(dataAcquisitionList[2].Text),
+
+                case nameof(WageEmployee):
+                    var wageEmployee = new WageEmployee(
+                        dataAcquisitionList[0].Text, 
+                        dataAcquisitionList[1].Text,
+                        int.Parse(dataAcquisitionList[2].Text),
                                         (Gender)Enum.Parse(typeof(Gender), dataAcquisitionList[3].Text),
                                         double.Parse(dataAcquisitionList[4].Text), double.Parse(dataAcquisitionList[5].Text));
                     UpdateNewEmployee(wageEmployee);
@@ -116,7 +129,7 @@ namespace SalaryPaymentGUI
 
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN | Done
+            //TODO: RSDN 
             var AddedEmployee = new EventArgsEmployeeAdded(newEmployee)
             {
                 Employee = newEmployee
@@ -124,7 +137,8 @@ namespace SalaryPaymentGUI
             EmployeeAdded?.Invoke(this, AddedEmployee);
         }
 
-        static private List<List<Control>> BuildFields(List<string> FieldNames)
+        //TODO: RSDN
+        private static List<List<Control>> BuildFields(List<string> FieldNames)
         {
             List<Control> labels = new List<Control>();
             List<Control> boxes = new List<Control>();
@@ -135,6 +149,7 @@ namespace SalaryPaymentGUI
                 
                 Label newLabel = new Label();
                 newLabel.Text = FieldNames[i];
+                //TODO: const
                 newLabel.Location = new Point(12, startPosition + i * 31);
                 newLabel.Size = new Size(200, 21);
                 labels.Add(newLabel);

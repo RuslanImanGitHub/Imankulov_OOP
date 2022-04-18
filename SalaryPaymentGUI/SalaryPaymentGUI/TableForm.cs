@@ -16,12 +16,13 @@ namespace SalaryPaymentGUI
 {
     public partial class TableForm : Form
     {
-        //TODO: | Done
+        //TODO: public?
         public BindingList<EmployeeBase> employees = new BindingList<EmployeeBase>();
 
-        static public BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
+        //TODO: public?
+        public static BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
 
-        //TODO: | Done
+        //TODO: 
         public EventHandler<EventArgsEmployeeAdded> _updateDelegate;
 
         public TableForm()
@@ -63,6 +64,7 @@ namespace SalaryPaymentGUI
             }
         }
 
+        //TODO:
         private void CalculateSalaryButton_Click(object sender, EventArgs e)
         {
             foreach(EmployeeBase employee in employees)
@@ -81,6 +83,7 @@ namespace SalaryPaymentGUI
             this.dataGridView1.Update();
         }
 
+        //TODO:
         static List<string> names = new List<string>
         {
             "Amari", "Ash", "Avery", "Bay", "Blake",
@@ -88,6 +91,7 @@ namespace SalaryPaymentGUI
             "Jesse", "Morgan", "Remy", "Sam", "Bobbie"
         };
 
+        //TODO:
         static List<string> surnames = new List<string>
         {
             "Smith", "Johnson", "Williams", "Jones", "Brown",
@@ -95,6 +99,7 @@ namespace SalaryPaymentGUI
             "Turner", "Mitchell", "Phillips", "Baker", "Adams"
         };
 
+        //TODO: RSDN
         Dictionary<string, Action> RandomEmployeeDictionary = new Dictionary<string, Action>()
         {
             { "Оклад", () => { _employeesDict.Add(WageEmployee.GetRandomWageEmployee(names, surnames));
@@ -121,6 +126,7 @@ namespace SalaryPaymentGUI
             openFileDialog.Filter = "XML|*.xml";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                //TODO:
                 using (var streamReader = new StreamReader(openFileDialog.FileName))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
@@ -152,7 +158,6 @@ namespace SalaryPaymentGUI
 
         private void ColumnSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             var currentSelection = ColumnSortComboBox.SelectedItem;
             if (currentSelection != null)
             {
@@ -167,12 +172,12 @@ namespace SalaryPaymentGUI
                             var numericOperations = new string[] { "=", ">", "<" };
                             this.ActionSortComboBox.DataSource = numericOperations;
                         }
-                        if (currnetType == typeof(string))
+                        else if (currnetType == typeof(string))
                         {
                             var textOperations = new string[] { "=" };
                             this.ActionSortComboBox.DataSource = textOperations;
                         }
-                        if (currnetType == typeof(Gender))
+                        else if (currnetType == typeof(Gender))
                         {
                             this.ActionSortComboBox.DataSource = Enum.GetNames(typeof(Gender));
                         }
@@ -196,6 +201,8 @@ namespace SalaryPaymentGUI
                     {
                         if (column.Name == this.ColumnSortComboBox.SelectedItem)
                         {
+                            //TODO: RSDN
+                            //TODO: duplication 1
                             if (row.Cells[column.Index].Value.ToString() == this.ActionSortComboBox.SelectedItem.ToString())
                             {
                                 row.Selected = true;
@@ -217,7 +224,10 @@ namespace SalaryPaymentGUI
                                 {
                                     if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
                                     {
-                                        if (Convert.ToDouble(row.Cells[column.Index].Value) == numericData)
+                                        //TODO: duplication 2
+                                        if (CheckItem(Convert.ToDouble(row.Cells[column.Index].Value),
+                                                numericData,
+                                                this.ActionSortComboBox.SelectedIndex))
                                         {
                                             row.Selected = true;
                                             row.Visible = true;
@@ -230,6 +240,7 @@ namespace SalaryPaymentGUI
                                     }
                                     else
                                     {
+                                        //TODO: duplication 1
                                         if (row.Cells[column.Index].Value.ToString() == this.DataSortTextBox.Text.ToString())
                                         {
                                             row.Selected = true;
@@ -248,6 +259,7 @@ namespace SalaryPaymentGUI
                                 {
                                     if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
                                     {
+                                        //TODO: duplication 2
                                         if (Convert.ToDouble(row.Cells[column.Index].Value) > numericData)
                                         {
                                             row.Selected = true;
@@ -266,16 +278,12 @@ namespace SalaryPaymentGUI
                                 {
                                     if (double.TryParse(this.DataSortTextBox.Text, out double numericData))
                                     {
-                                        if (Convert.ToDouble(row.Cells[column.Index].Value) < numericData)
-                                        {
-                                            row.Selected = true;
-                                            row.Visible = true;
-                                        }
-                                        else
-                                        {
-                                            row.Selected = false;
-                                            row.Visible = false;
-                                        }
+                                        //TODO: duplication 2
+
+                                        var isLessValue = 
+                                            Convert.ToDouble(row.Cells[column.Index].Value) < numericData;
+                                        row.Selected = isLessValue;
+                                        row.Visible = isLessValue;
                                     }
                                 }
                                 break;
@@ -286,6 +294,20 @@ namespace SalaryPaymentGUI
             currencyManager.ResumeBinding();
         }
 
+        private bool CheckItem(double value1, double value2, int checkingType)
+        {
+            switch (checkingType)
+            {
+                case 0:
+                    return value1 > value2;
+                case 1:
+                    return value1 < value2;
+                default:
+                    return value1 == value2;
+            }
+        }
+
+        //TODO: RSDN
         private void button1_Click(object sender, EventArgs e)
         {
             this.dataGridView1.DataSource = null;

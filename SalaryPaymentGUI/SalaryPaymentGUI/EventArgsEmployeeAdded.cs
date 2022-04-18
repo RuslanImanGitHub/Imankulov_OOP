@@ -11,9 +11,9 @@ namespace SalaryPaymentGUI
 
     public class EventArgsEmployeeAdded : EventArgs
     {
-        //TODO: | Done Убрал метод, все делается через свойства
         private EmployeeBase _employee;
 
+        //TODO: инкапсуляция - private set
         public EmployeeBase Employee
         {
             set => _employee = value;
@@ -22,6 +22,7 @@ namespace SalaryPaymentGUI
 
         public EventArgsEmployeeAdded(EmployeeBase setEmployee)
         {
+            //TODO: null?
             this._employee = setEmployee;
         }
     }
