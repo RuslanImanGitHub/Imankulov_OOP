@@ -12,12 +12,10 @@ namespace SalaryPaymentGUI
     /// </summary>
     public class EventArgsEmployeeAdded : EventArgs
     {
-
-        //TODO: инкапсуляция - private set | Done
         /// <summary>
         /// Property to write (private) or get employee
         /// </summary>
-        public EmployeeBase Employee { get; private set; }
+        public EmployeeBase Employee { get; }
 
         /// <summary>
         /// Event constructor
@@ -25,11 +23,11 @@ namespace SalaryPaymentGUI
         /// <param name="setEmployee">Employee that is being added</param>
         public EventArgsEmployeeAdded(EmployeeBase setEmployee)
         {
-            //TODO: null? | Done
             if (setEmployee != null)
             {
                 this.Employee = setEmployee;
             }
+            //TODO: exception?
         }
     }
 }

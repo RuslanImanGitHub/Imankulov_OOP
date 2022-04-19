@@ -18,31 +18,26 @@ namespace SalaryPaymentGUI
         /// </summary>
         public event EventHandler<EventArgsEmployeeAdded> EmployeeAdded;
         
-        //TODO: инкапсуляция? | Done
         /// <summary>
         /// Indicates what type employee is being created
         /// </summary>
         private static string _employeeType;
-
-        //TODO: RSDN | Done
+        
         /// <summary>
         /// List of controls that is used to get them from action in _instructions
         /// </summary>
         private static List<Control> _dictAcquisitionList = new List<Control>();
-
-        //TODO: инкапсуляция? | Done
+        
         /// <summary>
         /// list of interactable controls that is used to get them on the form
         /// </summary>
         private List<Control> _dataAcquisitionList = new List<Control>();
-
-        //TODO: RSDN | Done
+        
         /// <summary>
         /// list of label controls that is used to get them on the form
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
-
-        //TODO: RSDN | Done
+        
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
@@ -51,7 +46,6 @@ namespace SalaryPaymentGUI
             { 
                 "Оклад", 
                 () => {   
-                    //TODO: RSDN | Done
                     var fieldNames = new List<string> 
                     {
                         "Имя", "Фамилия", "Пол", 
@@ -110,7 +104,6 @@ namespace SalaryPaymentGUI
         private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
         {
             _instructions[comboBox1.Text].Invoke();
-            //TODO: | Убрал лишнее
             _dataAcquisitionList = _dictAcquisitionList;
 
             this.Controls.AddRange(_dataAcquisitionList.ToArray());
@@ -193,7 +186,7 @@ namespace SalaryPaymentGUI
         /// <param name="newEmployee"></param>
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN | Done
+            //TODO: RSDN 
             var AddedEmployee = new EventArgsEmployeeAdded(newEmployee);
             EmployeeAdded?.Invoke(this, AddedEmployee);
         }
@@ -202,7 +195,6 @@ namespace SalaryPaymentGUI
         /// </summary>
         /// <param name="fieldNames">Names of fields that should be created</param>
         /// <returns></returns>
-        //TODO: RSDN | Done
         private static List<List<Control>> BuildFields(List<string> fieldNames)
         {
             List<Control> labels = new List<Control>();
@@ -212,10 +204,8 @@ namespace SalaryPaymentGUI
             const int gap = 31;
             for (int i = 0; i < fieldNames.Count; i++)
             {
-                
                 Label newLabel = new Label();
                 newLabel.Text = fieldNames[i];
-                //TODO: const | Done
                 newLabel.Location = new Point(12, startPosition + i * gap);
                 newLabel.Size = new Size(200, 21);
                 labels.Add(newLabel);

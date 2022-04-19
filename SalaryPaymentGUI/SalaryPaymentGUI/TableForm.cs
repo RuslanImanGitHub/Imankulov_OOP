@@ -14,19 +14,20 @@ using System.Xml.Serialization;
 
 namespace SalaryPaymentGUI
 {
+    //TODO: XML
     public partial class TableForm : Form
     {
-        //TODO: public? | Done
         /// <summary>
         /// Datasource for datagridview
         /// </summary>
         private BindingList<EmployeeBase> _employees = new BindingList<EmployeeBase>();
-
-        //TODO: public? | Done
+        
+        //TODO: static?
         /// <summary>
         /// List of random employees that are transferd to datasource 
         /// </summary>
         private static BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
+
         /// <summary>
         /// TableForm constructor 
         /// </summary>
@@ -91,11 +92,12 @@ namespace SalaryPaymentGUI
             this.dataGridView1.Update();
         }
 
-        //TODO: RSDN | Done
+        //TODO: static?
         /// <summary>
         /// Dictinary that is used to get random employee of a specified type
         /// </summary>
-        private static Dictionary<string, Action> _randomEmployeeDictionary = new Dictionary<string, Action>()
+        private readonly Dictionary<string, Action> _randomEmployeeDictionary 
+            = new Dictionary<string, Action>()
         {
             { "Оклад",
                 () => { _employeesDict.Add(WageEmployee.GetRandomWageEmployee());
@@ -108,6 +110,7 @@ namespace SalaryPaymentGUI
                                 } },
             {"", () => {} }
         };
+
         /// <summary>
         /// Method that is used to get random employee
         /// </summary>
@@ -115,6 +118,7 @@ namespace SalaryPaymentGUI
         {
             _randomEmployeeDictionary[comboBox2.Text].Invoke();
         }
+
         /// <summary>
         /// Method that catches event from AddingEmployeeForm and adds employee to datasource
         /// </summary>
@@ -124,6 +128,7 @@ namespace SalaryPaymentGUI
         {
             _employees.Add(e.Employee);
         }
+
         /// <summary>
         /// ButtonClick that loads file
         /// </summary>
@@ -226,7 +231,8 @@ namespace SalaryPaymentGUI
             {
                 foreach (EmployeeBase employee in listDataSource)
                 {
-                    if (CheckItem(ToDouble(employee, selectedColumn), numericData,
+                    var doubleValue = Convert.ToDouble(GetValue(employee, selectedColumn));
+                    if (CheckItem( doubleValue, numericData,
                             this.ActionSortComboBox.SelectedIndex))
                     {
                         sortedEmployees.Add(employee);
@@ -243,15 +249,13 @@ namespace SalaryPaymentGUI
                 }
                 foreach (EmployeeBase employee in listDataSource)
                 {
-
-                    if (CheckItem(ToString(employee, selectedColumn), stringData,
-                            this.ActionSortComboBox.SelectedIndex))
+                    //TODO: duplication
+                    if (ToString(employee, selectedColumn) == stringData)
                     {
                         sortedEmployees.Add(employee);
                     }
                 }
                 this.dataGridView1.DataSource = sortedEmployees;
-                //TODO: duplication | Done
             }
         }
         /// <summary>
@@ -262,9 +266,9 @@ namespace SalaryPaymentGUI
         /// <returns></returns>
         private double ToDouble(EmployeeBase employee, string selectedColumn)
         {
-            //TODO: Передать как аргумент название проперти | Done
-            return Convert.ToDouble(employee.GetType().GetProperty(selectedColumn).GetValue(employee));
+            return Convert.ToDouble(GetValue(employee, selectedColumn));
         }
+
         /// <summary>
         /// Method that is used to convert value from employee object to string
         /// </summary>
@@ -273,8 +277,14 @@ namespace SalaryPaymentGUI
         /// <returns></returns>
         private string ToString(EmployeeBase employee, string selectedColumn)
         {
-            return Convert.ToString(employee.GetType().GetProperty(selectedColumn).GetValue(employee));
+            return Convert.ToString(GetValue(employee, selectedColumn));
         }
+
+        private static object GetValue(EmployeeBase employee, string selectedColumn)
+        {
+            return employee.GetType().GetProperty(selectedColumn).GetValue(employee);
+        }
+
         /// <summary>
         /// Method that performs sorting operations for doubles
         /// </summary>
@@ -298,23 +308,7 @@ namespace SalaryPaymentGUI
                     return false;
             }
         }
-        /// <summary>
-        /// Method that performs sorting operations for strings
-        /// </summary>
-        /// <param name="value1">Value that is being measured</param>
-        /// <param name="value2">Value that is set as goal</param>
-        /// <param name="checkingType">Operation type</param>
-        /// <returns></returns>
-        private bool CheckItem(string value1, string value2, int checkingType)
-        {
-            switch (checkingType)
-            {
-                case 0:
-                    return value1 == value2;
-                default:
-                    return value1 == value2;
-            }
-        }
+
         /// <summary>
         /// ButtonClick that resets filter
         /// </summary>
