@@ -74,8 +74,22 @@ namespace SalaryPaymentProject
         /// <param name="names">List with employee names</param>
         /// <param name="surnames">List with employee surnames</param>
         /// <returns></returns>
-        public static PerHourEmployee GetRandomPerHourEmployee(List<string> names, List<string> surnames)
+        public static PerHourEmployee GetRandomPerHourEmployee()
         {
+            List<string> names = new List<string>
+            {
+                "Amari", "Ash", "Avery", "Bay", "Blake",
+                "Cameron", "Casey", "Charlie", "Drew", "Emerson",
+                "Jesse", "Morgan", "Remy", "Sam", "Bobbie"
+            };
+
+            List<string> surnames = new List<string>
+            {
+                "Smith", "Johnson", "Williams", "Jones", "Brown",
+                "Miller", "Wilson", "Moore", "Taylor", "Thomas",
+                "Turner", "Mitchell", "Phillips", "Baker", "Adams"
+            };
+
             var rnd = new Random();
 
             var person = new PerHourEmployee(
