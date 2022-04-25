@@ -37,8 +37,7 @@ namespace SalaryPaymentGUI
         /// list of label controls that is used to get them on the form
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
-
-        //TODO: | Done
+        
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
@@ -49,7 +48,6 @@ namespace SalaryPaymentGUI
         /// </summary>
         public AddingEmployeeForm()
         {
-            //TODO: | Done 
             _instructions = new Dictionary<string, Action>()
             {
                 {
@@ -159,7 +157,6 @@ namespace SalaryPaymentGUI
                         break;
                 }
             }
-            //TODO: | расписать на отдельные ошибки | Done?
             catch (Exception ex)
             {
                 if (ex is FormatException || ex is ArgumentException || ex is ArgumentOutOfRangeException)
