@@ -85,7 +85,9 @@ namespace SalaryPaymentGUI
             {
                 addingEmployeeForm.EmployeeAdded -= UpdateDelegateWithNewEmployee;
             };
+            this.AddEmployeeButton.Enabled = false;
             addingEmployeeForm.Show();
+            addingEmployeeForm.FormClosed += (s, a) => this.AddEmployeeButton.Enabled = true;
         }
         /// <summary>
         /// ButtonClick that deletes an employee selected in datagridview from datasource
@@ -150,13 +152,11 @@ namespace SalaryPaymentGUI
                         XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
                         _employees = (BindingList<EmployeeBase>)serializer.Deserialize(streamReader);
                         this.dataGridView1.DataSource = _employees;
-                        this.StatusTextBox.Text = $"{openFileDialog.FileName}";
                     }
                 }
                 catch (Exception ex)
                 { 
                     Console.WriteLine(ex.Message);
-                    this.StatusTextBox.Text = ex.Message;
                 }
             }
         }
@@ -177,12 +177,10 @@ namespace SalaryPaymentGUI
                     XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
                     serializer.Serialize(fileStream, _employees);
                     fileStream.Close();
-                    this.StatusTextBox.Text = $"{saveFile.FileName}";
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    this.StatusTextBox.Text = ex.Message;
                 }
             }
         }

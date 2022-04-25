@@ -36,7 +36,6 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SaveFileButton = new System.Windows.Forms.Button();
             this.LoadFileButton = new System.Windows.Forms.Button();
-            this.StatusTextBox = new System.Windows.Forms.TextBox();
             this.ColumnSortComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DataSortTextBox = new System.Windows.Forms.TextBox();
@@ -132,13 +131,6 @@
             this.LoadFileButton.UseVisualStyleBackColor = true;
             this.LoadFileButton.Click += new System.EventHandler(this.LoadFileButton_Click);
             // 
-            // StatusTextBox
-            // 
-            this.StatusTextBox.Location = new System.Drawing.Point(961, 138);
-            this.StatusTextBox.Name = "StatusTextBox";
-            this.StatusTextBox.Size = new System.Drawing.Size(262, 20);
-            this.StatusTextBox.TabIndex = 12;
-            // 
             // ColumnSortComboBox
             // 
             this.ColumnSortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -225,7 +217,6 @@
             this.Controls.Add(this.DataSortTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ColumnSortComboBox);
-            this.Controls.Add(this.StatusTextBox);
             this.Controls.Add(this.LoadFileButton);
             this.Controls.Add(this.SaveFileButton);
             this.Controls.Add(this.comboBox2);
@@ -237,7 +228,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TableForm";
-            this.Text = "Form1";
+            this.Text = "Таблица сотрудников";
             this.panelDataGridView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -255,7 +246,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button SaveFileButton;
         private System.Windows.Forms.Button LoadFileButton;
-        private System.Windows.Forms.TextBox StatusTextBox;
         private System.Windows.Forms.ComboBox ColumnSortComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox DataSortTextBox;

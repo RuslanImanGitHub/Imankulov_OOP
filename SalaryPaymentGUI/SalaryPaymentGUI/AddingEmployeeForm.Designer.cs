@@ -42,7 +42,6 @@ namespace SalaryPaymentGUI
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.EmployeeSalaryTypeChoiceButton = new System.Windows.Forms.Button();
             this.CancelEmployeeAddButton = new System.Windows.Forms.Button();
             this.EmployeeCreationConfirmButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -59,6 +58,7 @@ namespace SalaryPaymentGUI
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -68,16 +68,6 @@ namespace SalaryPaymentGUI
             this.label1.Size = new System.Drawing.Size(319, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Выберите тип начисления зарплаты для будущего работника";
-            // 
-            // EmployeeSalaryTypeChoiceButton
-            // 
-            this.EmployeeSalaryTypeChoiceButton.Location = new System.Drawing.Point(155, 35);
-            this.EmployeeSalaryTypeChoiceButton.Name = "EmployeeSalaryTypeChoiceButton";
-            this.EmployeeSalaryTypeChoiceButton.Size = new System.Drawing.Size(75, 23);
-            this.EmployeeSalaryTypeChoiceButton.TabIndex = 2;
-            this.EmployeeSalaryTypeChoiceButton.Text = "Выбрать";
-            this.EmployeeSalaryTypeChoiceButton.UseVisualStyleBackColor = true;
-            this.EmployeeSalaryTypeChoiceButton.Click += new System.EventHandler(this.EmployeeSalaryTypeChoiceButton_Click);
             // 
             // CancelEmployeeAddButton
             // 
@@ -106,14 +96,13 @@ namespace SalaryPaymentGUI
             this.ClientSize = new System.Drawing.Size(412, 487);
             this.Controls.Add(this.EmployeeCreationConfirmButton);
             this.Controls.Add(this.CancelEmployeeAddButton);
-            this.Controls.Add(this.EmployeeSalaryTypeChoiceButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddingEmployeeForm";
-            this.Text = "Form2";
+            this.Text = "Добавление сотрудников";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,7 +112,6 @@ namespace SalaryPaymentGUI
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button EmployeeSalaryTypeChoiceButton;
         private System.Windows.Forms.Button CancelEmployeeAddButton;
         private System.Windows.Forms.Button EmployeeCreationConfirmButton;
     }
