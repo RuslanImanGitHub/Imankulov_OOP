@@ -41,7 +41,7 @@ namespace SalaryPaymentGUI
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
-        private Dictionary<string, Action> _instructions = new Dictionary<string, Action>()
+        private readonly Dictionary<string, Action> _instructions = new Dictionary<string, Action>()
         {
             { 
                 "Оклад", 
@@ -125,42 +125,51 @@ namespace SalaryPaymentGUI
         /// <param name="e"></param>
         private void EmployeeCreationConfirmButton_Click(object sender, EventArgs e)
         {
-            switch (_employeeType)
+            try
             {
+                switch (_employeeType)
+                {
 
-                case nameof(WageEmployee):
-                    var wageEmployee = new WageEmployee(
-                        _dataAcquisitionList[0].Text, 
-                        _dataAcquisitionList[1].Text,
-                        int.Parse(_dataAcquisitionList[3].Text),
-                        (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
-                        double.Parse(_dataAcquisitionList[4].Text),
-                        double.Parse(_dataAcquisitionList[5].Text));
-                    UpdateNewEmployee(wageEmployee);
-                    break;
-                case nameof(PerHourEmployee):
-                    var perHourEmployee = new PerHourEmployee(
-                        _dataAcquisitionList[0].Text,
-                        _dataAcquisitionList[1].Text,
-                        int.Parse(_dataAcquisitionList[3].Text),
-                        (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
-                        double.Parse(_dataAcquisitionList[4].Text),
-                        double.Parse(_dataAcquisitionList[5].Text),
-                        int.Parse(_dataAcquisitionList[6].Text));
-                    UpdateNewEmployee(perHourEmployee);
-                    break;
-                case nameof(PerPcsEmployee):
-                    var perPcsEmployee = new PerPcsEmployee(
-                        _dataAcquisitionList[0].Text,
-                        _dataAcquisitionList[1].Text,
-                        int.Parse(_dataAcquisitionList[3].Text),
-                        (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
-                        double.Parse(_dataAcquisitionList[4].Text),
-                        double.Parse(_dataAcquisitionList[5].Text),
-                        int.Parse(_dataAcquisitionList[6].Text));
-                    UpdateNewEmployee(perPcsEmployee);
-                    break;
+                    case nameof(WageEmployee):
+                        var wageEmployee = new WageEmployee(
+                            _dataAcquisitionList[0].Text,
+                            _dataAcquisitionList[1].Text,
+                            int.Parse(_dataAcquisitionList[3].Text),
+                            (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
+                            double.Parse(_dataAcquisitionList[4].Text),
+                            double.Parse(_dataAcquisitionList[5].Text));
+                        UpdateNewEmployee(wageEmployee);
+                        break;
+                    case nameof(PerHourEmployee):
+                        var perHourEmployee = new PerHourEmployee(
+                            _dataAcquisitionList[0].Text,
+                            _dataAcquisitionList[1].Text,
+                            int.Parse(_dataAcquisitionList[3].Text),
+                            (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
+                            double.Parse(_dataAcquisitionList[4].Text),
+                            double.Parse(_dataAcquisitionList[5].Text),
+                            int.Parse(_dataAcquisitionList[6].Text));
+                        UpdateNewEmployee(perHourEmployee);
+                        break;
+                    case nameof(PerPcsEmployee):
+                        var perPcsEmployee = new PerPcsEmployee(
+                            _dataAcquisitionList[0].Text,
+                            _dataAcquisitionList[1].Text,
+                            int.Parse(_dataAcquisitionList[3].Text),
+                            (Gender)Enum.Parse(typeof(Gender), _dataAcquisitionList[2].Text),
+                            double.Parse(_dataAcquisitionList[4].Text),
+                            double.Parse(_dataAcquisitionList[5].Text),
+                            int.Parse(_dataAcquisitionList[6].Text));
+                        UpdateNewEmployee(perPcsEmployee);
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Data Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             this.EmployeeSalaryTypeChoiceButton.Enabled = true;
             foreach (Control control in _dataAcquisitionList)
             {
@@ -186,9 +195,9 @@ namespace SalaryPaymentGUI
         /// <param name="newEmployee"></param>
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN 
-            var AddedEmployee = new EventArgsEmployeeAdded(newEmployee);
-            EmployeeAdded?.Invoke(this, AddedEmployee);
+            //TODO: RSDN | Done
+            var addedEmployee = new EventArgsEmployeeAdded(newEmployee);
+            EmployeeAdded?.Invoke(this, addedEmployee);
         }
         /// <summary>
         /// Method to create fields to accept information about new employee

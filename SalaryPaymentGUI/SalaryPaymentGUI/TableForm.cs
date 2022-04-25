@@ -14,7 +14,10 @@ using System.Xml.Serialization;
 
 namespace SalaryPaymentGUI
 {
-    //TODO: XML
+    //TODO: XML | Done
+    /// <summary>
+    /// Form where you can load/save and filter data 
+    /// </summary>
     public partial class TableForm : Form
     {
         /// <summary>
@@ -22,7 +25,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         private BindingList<EmployeeBase> _employees = new BindingList<EmployeeBase>();
         
-        //TODO: static?
+        //TODO: static? | Can't solve, can't see no other way
         /// <summary>
         /// List of random employees that are transferd to datasource 
         /// </summary>
@@ -92,7 +95,7 @@ namespace SalaryPaymentGUI
             this.dataGridView1.Update();
         }
 
-        //TODO: static?
+        //TODO: static? | Done, not static
         /// <summary>
         /// Dictinary that is used to get random employee of a specified type
         /// </summary>
@@ -116,7 +119,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         private void  GenerateRandomEmployee()
         {
-            _randomEmployeeDictionary[comboBox2.Text].Invoke();
+            this._randomEmployeeDictionary[comboBox2.Text].Invoke();
         }
 
         /// <summary>
@@ -147,7 +150,7 @@ namespace SalaryPaymentGUI
                         XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
                         _employees = (BindingList<EmployeeBase>)serializer.Deserialize(streamReader);
                         this.dataGridView1.DataSource = _employees;
-                        this.StatusTextBox.Text = $"Загружен файл {openFileDialog.FileName}";
+                        this.StatusTextBox.Text = $"{openFileDialog.FileName}";
                     }
                 }
                 catch (Exception ex)
@@ -174,7 +177,7 @@ namespace SalaryPaymentGUI
                     XmlSerializer serializer = new XmlSerializer(typeof(BindingList<EmployeeBase>));
                     serializer.Serialize(fileStream, _employees);
                     fileStream.Close();
-                    this.StatusTextBox.Text = $"Сохранен файл {saveFile.FileName}";
+                    this.StatusTextBox.Text = $"{saveFile.FileName}";
                 }
                 catch (Exception ex)
                 {
@@ -249,8 +252,9 @@ namespace SalaryPaymentGUI
                 }
                 foreach (EmployeeBase employee in listDataSource)
                 {
-                    //TODO: duplication
-                    if (ToString(employee, selectedColumn) == stringData)
+                    var stringValue = Convert.ToString(GetValue(employee, selectedColumn));
+                    //TODO: duplication | Probably Done
+                    if (stringValue == stringData)
                     {
                         sortedEmployees.Add(employee);
                     }
@@ -258,28 +262,13 @@ namespace SalaryPaymentGUI
                 this.dataGridView1.DataSource = sortedEmployees;
             }
         }
-        /// <summary>
-        /// Method that is used to convert value from employee object to double
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <param name="selectedColumn"></param>
-        /// <returns></returns>
-        private double ToDouble(EmployeeBase employee, string selectedColumn)
-        {
-            return Convert.ToDouble(GetValue(employee, selectedColumn));
-        }
 
         /// <summary>
-        /// Method that is used to convert value from employee object to string
+        /// Returns selected property of selected item
         /// </summary>
-        /// <param name="employee"></param>
-        /// <param name="selectedColumn"></param>
+        /// <param name="employee">Employee from employeeList</param>
+        /// <param name="selectedColumn">Property that needs to be returned</param>
         /// <returns></returns>
-        private string ToString(EmployeeBase employee, string selectedColumn)
-        {
-            return Convert.ToString(GetValue(employee, selectedColumn));
-        }
-
         private static object GetValue(EmployeeBase employee, string selectedColumn)
         {
             return employee.GetType().GetProperty(selectedColumn).GetValue(employee);

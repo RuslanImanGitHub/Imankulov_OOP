@@ -33,7 +33,6 @@
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.DeleteEmployeeButton = new System.Windows.Forms.Button();
             this.CreateRandomEmployeeButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SaveFileButton = new System.Windows.Forms.Button();
             this.LoadFileButton = new System.Windows.Forms.Button();
@@ -61,10 +60,13 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(934, 581);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(934, 431);
             this.dataGridView1.TabIndex = 0;
             // 
             // AddEmployeeButton
@@ -96,15 +98,6 @@
             this.CreateRandomEmployeeButton.Text = "Создать случайного сотрудника";
             this.CreateRandomEmployeeButton.UseVisualStyleBackColor = true;
             this.CreateRandomEmployeeButton.Click += new System.EventHandler(this.CreateRandomEmployeeButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(962, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Текущий тип сотрудников";
             // 
             // comboBox2
             // 
@@ -236,7 +229,6 @@
             this.Controls.Add(this.LoadFileButton);
             this.Controls.Add(this.SaveFileButton);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.CreateRandomEmployeeButton);
             this.Controls.Add(this.DeleteEmployeeButton);
             this.Controls.Add(this.AddEmployeeButton);
@@ -260,7 +252,6 @@
         private System.Windows.Forms.Button AddEmployeeButton;
         private System.Windows.Forms.Button DeleteEmployeeButton;
         private System.Windows.Forms.Button CreateRandomEmployeeButton;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button SaveFileButton;
         private System.Windows.Forms.Button LoadFileButton;
