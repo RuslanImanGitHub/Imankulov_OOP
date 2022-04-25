@@ -24,12 +24,14 @@ namespace SalaryPaymentGUI
         /// Datasource for datagridview
         /// </summary>
         private BindingList<EmployeeBase> _employees = new BindingList<EmployeeBase>();
-        
-        //TODO: static? | Can't solve, can't see no other way
+
+        //TODO: static? | Done Deleted unnecessary BindingList
+
         /// <summary>
-        /// List of random employees that are transferd to datasource 
+        /// Dictionary with string keys and actions
         /// </summary>
-        private static BindingList<EmployeeBase> _employeesDict = new BindingList<EmployeeBase>();
+        private readonly Dictionary<string, Action> _randomEmployeeDictionary
+            = new Dictionary<string, Action>();
 
         /// <summary>
         /// TableForm constructor 
@@ -51,7 +53,25 @@ namespace SalaryPaymentGUI
                 columnNames.Add(this.dataGridView1.Columns[i].Name);
             }
             this.ColumnSortComboBox.DataSource = columnNames;
+
+            Dictionary<string, Action> randomEmployeeDictionary
+            = new Dictionary<string, Action>()
+            {
+                { "Оклад",
+                    () => { _employees.Add(WageEmployee.GetRandomWageEmployee());
+                                    } },
+                { "Почасовая оплата",
+                    () => { _employees.Add(PerHourEmployee.GetRandomPerHourEmployee());
+                                    } },
+                { "Сдельная оплата",
+                    () => { _employees.Add(PerPcsEmployee.GetRandomPerPcsEmployee());
+                                    } },
+                {"", () => {} }
+
+            };
+            this._randomEmployeeDictionary = randomEmployeeDictionary;
         }
+
         /// <summary>
         /// ButtonClick that creates AddingEmployeeForm to add a new employee
         /// </summary>
@@ -88,31 +108,11 @@ namespace SalaryPaymentGUI
         /// <param name="e"></param>
         private void CreateRandomEmployeeButton_Click(object sender, EventArgs e)
         {
-            _employeesDict = _employees;
             GenerateRandomEmployee();
-            _employees = _employeesDict;
             this.dataGridView1.DataSource = _employees;
             this.dataGridView1.Update();
         }
 
-        //TODO: static? | Done, not static
-        /// <summary>
-        /// Dictinary that is used to get random employee of a specified type
-        /// </summary>
-        private readonly Dictionary<string, Action> _randomEmployeeDictionary 
-            = new Dictionary<string, Action>()
-        {
-            { "Оклад",
-                () => { _employeesDict.Add(WageEmployee.GetRandomWageEmployee());
-                                } },
-            { "Почасовая оплата",
-                () => { _employeesDict.Add(PerHourEmployee.GetRandomPerHourEmployee());
-                                } },
-            { "Сдельная оплата",
-                () => { _employeesDict.Add(PerPcsEmployee.GetRandomPerPcsEmployee());
-                                } },
-            {"", () => {} }
-        };
 
         /// <summary>
         /// Method that is used to get random employee

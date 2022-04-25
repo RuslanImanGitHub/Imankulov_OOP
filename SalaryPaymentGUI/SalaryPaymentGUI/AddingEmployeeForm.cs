@@ -23,11 +23,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         private static string _employeeType;
         
-        /// <summary>
-        /// List of controls that is used to get them from action in _instructions
-        /// </summary>
-        private static List<Control> _dictAcquisitionList = new List<Control>();
-        
+       
         /// <summary>
         /// list of interactable controls that is used to get them on the form
         /// </summary>
@@ -37,58 +33,62 @@ namespace SalaryPaymentGUI
         /// list of label controls that is used to get them on the form
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
-        
+
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
-        private readonly Dictionary<string, Action> _instructions = new Dictionary<string, Action>()
-        {
-            { 
-                "Оклад", 
-                () => {   
-                    var fieldNames = new List<string> 
-                    {
-                        "Имя", "Фамилия", "Пол", 
-                        "Возраст", "Стартовый баланс", "Ставка"
-                    };
-                    var controls = BuildFields(fieldNames);
-                    _dictAcquisitionList = controls[0];
-                    _labelList = controls[1];
-                    _employeeType = "WageEmployee";
-                 } },
-            { 
-                "Почасовая оплата",
-                () => {
-                    var fieldNames = new List<string> 
-                    {
-                        "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
-                        "Почасовая ставка", "Отработанные часы"
-                    };
-                    var controls = BuildFields(fieldNames);
-                    _dictAcquisitionList = controls[0];
-                    _labelList = controls[1];
-                    _employeeType = "PerHourEmployee";
-                 } },
-            { 
-                "Сдельная оплата",
-                () => {
-                    var fieldNames = new List<string> 
-                    {
-                        "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
-                        "Поштучная ставка", "Выработка"
-                    };
-                    var controls = BuildFields(fieldNames);
-                    _dictAcquisitionList = controls[0];
-                    _labelList = controls[1];
-                    _employeeType = "PerPcsEmployee";
-            } }
-        };
-
+        private readonly Dictionary<string, Action> _instructions = new Dictionary<string, Action>();
+        
         /// <summary>
         /// AddingEmployeeForm constructor
         /// </summary>
         public AddingEmployeeForm()
         {
+            Dictionary<string, Action> instructions = new Dictionary<string, Action>()
+            {
+                {
+                    "Оклад",
+                    () => {
+                        var fieldNames = new List<string>
+                        {
+                            "Имя", "Фамилия", "Пол",
+                            "Возраст", "Стартовый баланс", "Ставка"
+                        };
+                        var controls = BuildFields(fieldNames);
+                        _dataAcquisitionList = controls[0];
+                        _labelList = controls[1];
+                        _employeeType = "WageEmployee";
+                     } },
+                {
+                    "Почасовая оплата",
+                    () => {
+                        var fieldNames = new List<string>
+                        {
+                            "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
+                            "Почасовая ставка", "Отработанные часы"
+                        };
+                        var controls = BuildFields(fieldNames);
+                        _dataAcquisitionList = controls[0];
+                        _labelList = controls[1];
+                        _employeeType = "PerHourEmployee";
+                     } },
+                {
+                    "Сдельная оплата",
+                    () => {
+                        var fieldNames = new List<string>
+                        {
+                            "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
+                            "Поштучная ставка", "Выработка"
+                        };
+                        var controls = BuildFields(fieldNames);
+                        _dataAcquisitionList = controls[0];
+                        _labelList = controls[1];
+                        _employeeType = "PerPcsEmployee";
+                } }
+            };
+
+            this._instructions = instructions;
+
             InitializeComponent();
             var tmpEmployeeTypeKeys = _instructions.Keys.ToList();
             comboBox1.DataSource = tmpEmployeeTypeKeys;
@@ -104,7 +104,6 @@ namespace SalaryPaymentGUI
         private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
         {
             _instructions[comboBox1.Text].Invoke();
-            _dataAcquisitionList = _dictAcquisitionList;
 
             this.Controls.AddRange(_dataAcquisitionList.ToArray());
             this.Controls.AddRange(_labelList.ToArray());
@@ -225,6 +224,7 @@ namespace SalaryPaymentGUI
                     genderBox.DataSource = Enum.GetValues(typeof(Gender));
                     genderBox.Location = new Point(150, 126);
                     genderBox.Size = new Size(121, 21);
+                    genderBox.DropDownStyle = ComboBoxStyle.DropDownList;
                     boxes.Add(genderBox);
                 }
                 else
