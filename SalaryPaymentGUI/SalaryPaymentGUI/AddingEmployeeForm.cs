@@ -120,9 +120,9 @@ namespace SalaryPaymentGUI
         {
             try
             {
+                CheckNaNs();
                 switch (_employeeType)
                 {
-
                     case nameof(WageEmployee):
                         var wageEmployee = new WageEmployee(
                             _dataAcquisitionList[0].Text,
@@ -256,6 +256,16 @@ namespace SalaryPaymentGUI
             this.Controls.AddRange(_labelList.ToArray());
 
             this.EmployeeCreationConfirmButton.Enabled = true;
+        }
+        private void CheckNaNs()
+        {
+            foreach (Control textField in _dataAcquisitionList)
+            {
+                if (textField.Text.ToLower() == "nan")
+                {
+                    throw new ArgumentNullException("Data field sholdn't have NaN values");
+                }
+            }
         }
     }
 }

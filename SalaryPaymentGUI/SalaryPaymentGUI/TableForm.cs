@@ -156,8 +156,9 @@ namespace SalaryPaymentGUI
                     }
                 }
                 catch (Exception ex)
-                { 
-                    Console.WriteLine(ex.Message);
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString(),
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -181,7 +182,8 @@ namespace SalaryPaymentGUI
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    MessageBox.Show(ex.Message, ex.GetType().ToString(),
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
