@@ -27,7 +27,6 @@ namespace SalaryPaymentGUI
             {
                 this.Employee = setEmployee;
             }
-            //TODO: exception? | Done
             else
             {
                 throw new Exception("You must select non-null employee");

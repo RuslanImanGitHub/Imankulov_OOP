@@ -34,6 +34,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
 
+        //TODO:
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
@@ -44,6 +45,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         public AddingEmployeeForm()
         {
+            //TODO:
             Dictionary<string, Action> instructions = new Dictionary<string, Action>()
             {
                 {
@@ -57,6 +59,7 @@ namespace SalaryPaymentGUI
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
+                        //TODO:
                         _employeeType = "WageEmployee";
                      } },
                 {
@@ -70,6 +73,7 @@ namespace SalaryPaymentGUI
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
+                        //TODO:
                         _employeeType = "PerHourEmployee";
                      } },
                 {
@@ -83,6 +87,7 @@ namespace SalaryPaymentGUI
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
+                        //TODO:
                         _employeeType = "PerPcsEmployee";
                 } }
             };
@@ -163,6 +168,7 @@ namespace SalaryPaymentGUI
                         break;
                 }
             }
+            //TODO:
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Data Error",
@@ -194,7 +200,6 @@ namespace SalaryPaymentGUI
         /// <param name="newEmployee"></param>
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN | Done
             var addedEmployee = new EventArgsEmployeeAdded(newEmployee);
             EmployeeAdded?.Invoke(this, addedEmployee);
         }
