@@ -230,27 +230,34 @@ namespace SalaryPaymentGUI
             var listDataSource = (BindingList<EmployeeBase>)this.dataGridView1.DataSource;
             var sortedEmployees = new BindingList<EmployeeBase>();
             var selectedColumn = this.ColumnSortComboBox.Text;
-            if (Double.TryParse(this.DataSortTextBox.Text, out double numericData))
+
+            var stringData = this.DataSortTextBox.Text;
+            if (selectedColumn == "Gender")
             {
-                foreach (EmployeeBase employee in listDataSource)
-                {
-                    var doubleValue = Convert.ToDouble(GetValue(employee, selectedColumn));
-                    if (CheckItem( doubleValue, numericData,
-                            this.ActionSortComboBox.SelectedIndex))
-                    {
-                        sortedEmployees.Add(employee);
-                    }
-                }
-                this.dataGridView1.DataSource = sortedEmployees;
+                stringData = (string)this.ActionSortComboBox.SelectedItem;
             }
-            else
+            foreach (EmployeeBase employee in listDataSource)
             {
-                var stringData = this.DataSortTextBox.Text;
-                if (selectedColumn == "Gender")
+                if (Double.TryParse(this.DataSortTextBox.Text, out double numericData))
                 {
-                    stringData = (string)this.ActionSortComboBox.SelectedItem;
+                    try
+                    {
+                        var doubleValue = Convert.ToDouble(GetValue(employee, selectedColumn));
+                        if (CheckItem(doubleValue, numericData,
+                                this.ActionSortComboBox.SelectedIndex))
+                        {
+                            sortedEmployees.Add(employee);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Input Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    
                 }
-                foreach (EmployeeBase employee in listDataSource)
+                else
                 {
                     var stringValue = Convert.ToString(GetValue(employee, selectedColumn));
                     //TODO: duplication | Probably Done
@@ -259,8 +266,8 @@ namespace SalaryPaymentGUI
                         sortedEmployees.Add(employee);
                     }
                 }
-                this.dataGridView1.DataSource = sortedEmployees;
             }
+            this.dataGridView1.DataSource = sortedEmployees;
         }
 
         /// <summary>
