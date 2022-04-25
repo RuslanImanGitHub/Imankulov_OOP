@@ -22,11 +22,7 @@ namespace SalaryPaymentGUI
         /// Indicates what type employee is being created
         /// </summary>
         private static string _employeeType;
-
-        /// <summary>
-        /// Constant that is used to mark gender field
-        /// </summary>
-        private const string _gender = "Пол";
+        
        
         /// <summary>
         /// list of interactable controls that is used to get them on the form
@@ -38,59 +34,65 @@ namespace SalaryPaymentGUI
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
 
+        //TODO:
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
-        private readonly Dictionary<string, Action> _instructions;
+        private readonly Dictionary<string, Action> _instructions = new Dictionary<string, Action>();
         
         /// <summary>
         /// AddingEmployeeForm constructor
         /// </summary>
         public AddingEmployeeForm()
         {
-            //TODO: | Done 
-            _instructions = new Dictionary<string, Action>()
+            //TODO:
+            Dictionary<string, Action> instructions = new Dictionary<string, Action>()
             {
                 {
                     "Оклад",
                     () => {
                         var fieldNames = new List<string>
                         {
-                            "Имя", "Фамилия", _gender,
+                            "Имя", "Фамилия", "Пол",
                             "Возраст", "Стартовый баланс", "Ставка"
                         };
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
-                        _employeeType = nameof(WageEmployee);
+                        //TODO:
+                        _employeeType = "WageEmployee";
                      } },
                 {
                     "Почасовая оплата",
                     () => {
                         var fieldNames = new List<string>
                         {
-                            "Имя", "Фамилия", _gender, "Возраст", "Стартовый баланс",
+                            "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
                             "Почасовая ставка", "Отработанные часы"
                         };
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
-                        _employeeType = nameof(PerHourEmployee);
+                        //TODO:
+                        _employeeType = "PerHourEmployee";
                      } },
                 {
                     "Сдельная оплата",
                     () => {
                         var fieldNames = new List<string>
                         {
-                            "Имя", "Фамилия", _gender, "Возраст", "Стартовый баланс",
+                            "Имя", "Фамилия", "Пол", "Возраст", "Стартовый баланс",
                             "Поштучная ставка", "Выработка"
                         };
                         var controls = BuildFields(fieldNames);
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
-                        _employeeType = nameof(PerPcsEmployee);
+                        //TODO:
+                        _employeeType = "PerPcsEmployee";
                 } }
             };
+
+            this._instructions = instructions;
 
             InitializeComponent();
             var tmpEmployeeTypeKeys = _instructions.Keys.ToList();
@@ -99,7 +101,27 @@ namespace SalaryPaymentGUI
             this.EmployeeCreationConfirmButton.Enabled = false;
         }
 
+        /// <summary>
+        /// ButtonClick that creates fields to accept information about employees
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EmployeeSalaryTypeChoiceButton_Click(object sender, EventArgs e)
+        {
+            _instructions[comboBox1.Text].Invoke();
 
+            this.Controls.AddRange(_dataAcquisitionList.ToArray());
+            this.Controls.AddRange(_labelList.ToArray());
+            foreach (Control control in _dataAcquisitionList)
+            {
+                if (control is TextBox)
+                {
+                    control.Text = "";
+                }
+            }
+            this.EmployeeSalaryTypeChoiceButton.Enabled = false;
+            this.EmployeeCreationConfirmButton.Enabled = true;
+        }
         /// <summary>
         /// ButtonClick that reads info from fields about employees
         /// </summary>
@@ -146,11 +168,21 @@ namespace SalaryPaymentGUI
                         break;
                 }
             }
-            //TODO: | расписать на отдельные ошибки
+            //TODO:
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Data Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            this.EmployeeSalaryTypeChoiceButton.Enabled = true;
+            foreach (Control control in _dataAcquisitionList)
+            {
+                this.Controls.Remove(control);
+            }
+            foreach (Control control in _labelList)
+            {
+                this.Controls.Remove(control);
             }
         }
         /// <summary>
@@ -161,7 +193,6 @@ namespace SalaryPaymentGUI
         private void CancelEmployeeAddButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            
         }
         /// <summary>
         /// Event that triggers UpdateDelegateWithNewEmployee event in TableForm
@@ -169,7 +200,6 @@ namespace SalaryPaymentGUI
         /// <param name="newEmployee"></param>
         public void UpdateNewEmployee(EmployeeBase newEmployee)
         {
-            //TODO: RSDN | Done
             var addedEmployee = new EventArgsEmployeeAdded(newEmployee);
             EmployeeAdded?.Invoke(this, addedEmployee);
         }
@@ -193,7 +223,7 @@ namespace SalaryPaymentGUI
                 newLabel.Size = new Size(200, 21);
                 labels.Add(newLabel);
                 
-                if (fieldNames[i] == _gender)
+                if (fieldNames[i] == "Пол")
                 {
                     ComboBox genderBox = new ComboBox();
                     genderBox.DataSource = Enum.GetValues(typeof(Gender));
@@ -213,27 +243,6 @@ namespace SalaryPaymentGUI
             controls.Add(boxes);
             controls.Add(labels);
             return controls;
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (_dataAcquisitionList.Count != 0)
-            {
-                foreach (Control control in _dataAcquisitionList)
-                {
-                    this.Controls.Remove(control);
-                }
-                foreach (Control control in _labelList)
-                {
-                    this.Controls.Remove(control);
-                }
-            }
-            _instructions[comboBox1.Text].Invoke();
-
-            this.Controls.AddRange(_dataAcquisitionList.ToArray());
-            this.Controls.AddRange(_labelList.ToArray());
-
-            this.EmployeeCreationConfirmButton.Enabled = true;
         }
     }
 }

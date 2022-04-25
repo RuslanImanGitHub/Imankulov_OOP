@@ -14,7 +14,6 @@ using System.Xml.Serialization;
 
 namespace SalaryPaymentGUI
 {
-    //TODO: XML | Done
     /// <summary>
     /// Form where you can load/save and filter data 
     /// </summary>
@@ -25,13 +24,10 @@ namespace SalaryPaymentGUI
         /// </summary>
         private BindingList<EmployeeBase> _employees = new BindingList<EmployeeBase>();
 
-        //TODO: static? | Done Deleted unnecessary BindingList
-
         /// <summary>
         /// Dictionary with string keys and actions
         /// </summary>
-        private readonly Dictionary<string, Action> _randomEmployeeDictionary
-            = new Dictionary<string, Action>();
+        private readonly Dictionary<string, Action> _randomEmployeeDictionary;
 
         /// <summary>
         /// TableForm constructor 
@@ -53,23 +49,21 @@ namespace SalaryPaymentGUI
                 columnNames.Add(this.dataGridView1.Columns[i].Name);
             }
             this.ColumnSortComboBox.DataSource = columnNames;
-
-            Dictionary<string, Action> randomEmployeeDictionary
-            = new Dictionary<string, Action>()
+            
+            this._randomEmployeeDictionary = new Dictionary<string, Action>()
             {
                 { "Оклад",
                     () => { _employees.Add(WageEmployee.GetRandomWageEmployee());
-                                    } },
+                    } },
                 { "Почасовая оплата",
                     () => { _employees.Add(PerHourEmployee.GetRandomPerHourEmployee());
-                                    } },
+                    } },
                 { "Сдельная оплата",
                     () => { _employees.Add(PerPcsEmployee.GetRandomPerPcsEmployee());
-                                    } },
+                    } },
                 {"", () => {} }
 
             };
-            this._randomEmployeeDictionary = randomEmployeeDictionary;
         }
 
         /// <summary>
@@ -259,7 +253,6 @@ namespace SalaryPaymentGUI
                 else
                 {
                     var stringValue = Convert.ToString(GetValue(employee, selectedColumn));
-                    //TODO: duplication | Probably Done
                     if (stringValue == stringData)
                     {
                         sortedEmployees.Add(employee);
