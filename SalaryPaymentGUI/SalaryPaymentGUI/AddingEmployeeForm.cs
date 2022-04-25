@@ -95,7 +95,7 @@ namespace SalaryPaymentGUI
 
             InitializeComponent();
             var tmpEmployeeTypeKeys = _instructions.Keys.ToList();
-            comboBox1.DataSource = tmpEmployeeTypeKeys;
+            EmployeeTypeSelector.DataSource = tmpEmployeeTypeKeys;
 
             if (_dataAcquisitionList.Count != 0)
             {
@@ -234,7 +234,12 @@ namespace SalaryPaymentGUI
             return controls;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Selects the type of employee created
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EmployeeTypeSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_dataAcquisitionList.Count != 0)
             {
@@ -248,7 +253,7 @@ namespace SalaryPaymentGUI
                 }
             }
 
-            _instructions[comboBox1.Text].Invoke();
+            _instructions[EmployeeTypeSelector.Text].Invoke();
 
             this.Controls.AddRange(_dataAcquisitionList.ToArray());
             this.Controls.AddRange(_labelList.ToArray());

@@ -40,25 +40,25 @@ namespace SalaryPaymentGUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.EmployeeTypeSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CancelEmployeeAddButton = new System.Windows.Forms.Button();
             this.EmployeeCreationConfirmButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // EmployeeTypeSelector
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.EmployeeTypeSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.EmployeeTypeSelector.FormattingEnabled = true;
+            this.EmployeeTypeSelector.Items.AddRange(new object[] {
             "Ставка",
             "Почасовая оплата",
             "Сдельная оплата"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.EmployeeTypeSelector.Location = new System.Drawing.Point(12, 35);
+            this.EmployeeTypeSelector.Name = "EmployeeTypeSelector";
+            this.EmployeeTypeSelector.Size = new System.Drawing.Size(121, 21);
+            this.EmployeeTypeSelector.TabIndex = 0;
+            this.EmployeeTypeSelector.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -71,7 +71,7 @@ namespace SalaryPaymentGUI
             // 
             // CancelEmployeeAddButton
             // 
-            this.CancelEmployeeAddButton.Location = new System.Drawing.Point(334, 35);
+            this.CancelEmployeeAddButton.Location = new System.Drawing.Point(260, 331);
             this.CancelEmployeeAddButton.Name = "CancelEmployeeAddButton";
             this.CancelEmployeeAddButton.Size = new System.Drawing.Size(75, 23);
             this.CancelEmployeeAddButton.TabIndex = 4;
@@ -81,7 +81,7 @@ namespace SalaryPaymentGUI
             // 
             // EmployeeCreationConfirmButton
             // 
-            this.EmployeeCreationConfirmButton.Location = new System.Drawing.Point(253, 35);
+            this.EmployeeCreationConfirmButton.Location = new System.Drawing.Point(179, 331);
             this.EmployeeCreationConfirmButton.Name = "EmployeeCreationConfirmButton";
             this.EmployeeCreationConfirmButton.Size = new System.Drawing.Size(75, 23);
             this.EmployeeCreationConfirmButton.TabIndex = 5;
@@ -93,11 +93,11 @@ namespace SalaryPaymentGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 305);
+            this.ClientSize = new System.Drawing.Size(348, 366);
             this.Controls.Add(this.EmployeeCreationConfirmButton);
             this.Controls.Add(this.CancelEmployeeAddButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.EmployeeTypeSelector);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -110,7 +110,7 @@ namespace SalaryPaymentGUI
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox EmployeeTypeSelector;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button CancelEmployeeAddButton;
         private System.Windows.Forms.Button EmployeeCreationConfirmButton;

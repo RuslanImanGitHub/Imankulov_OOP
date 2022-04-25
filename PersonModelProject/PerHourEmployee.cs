@@ -30,7 +30,7 @@ namespace SalaryPaymentProject
 
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException($"Hourly paymnet should not be negative");
                 }
@@ -51,7 +51,7 @@ namespace SalaryPaymentProject
             set
             {
                 {
-                    if (value <= 0)
+                    if (value < 0)
                     {
                         throw new ArgumentOutOfRangeException($"Hours worked value should not be negative");
                     }

@@ -25,7 +25,7 @@ namespace SalaryPaymentProject
 
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException($"Wage should not be negative");
                 }
