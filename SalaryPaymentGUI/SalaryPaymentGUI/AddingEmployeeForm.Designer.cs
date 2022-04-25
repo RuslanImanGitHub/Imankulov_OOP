@@ -58,7 +58,7 @@ namespace SalaryPaymentGUI
             this.EmployeeTypeSelector.Name = "EmployeeTypeSelector";
             this.EmployeeTypeSelector.Size = new System.Drawing.Size(121, 21);
             this.EmployeeTypeSelector.TabIndex = 0;
-            this.EmployeeTypeSelector.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.EmployeeTypeSelector.SelectedIndexChanged += new System.EventHandler(this.EmployeeTypeSelector_SelectedIndexChanged);
             // 
             // label1
             // 
