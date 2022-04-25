@@ -257,6 +257,10 @@ namespace SalaryPaymentGUI
 
             this.EmployeeCreationConfirmButton.Enabled = true;
         }
+        /// <summary>
+        /// Checks control fields for NaN values
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
         private void CheckNaNs()
         {
             foreach (Control textField in _dataAcquisitionList)
