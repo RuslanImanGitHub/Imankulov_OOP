@@ -235,6 +235,7 @@ namespace SalaryPaymentGUI
             if (selectedColumn == "Gender")
             {
                 stringData = (string)this.ActionSortComboBox.SelectedItem;
+                this.DataSortTextBox.Text = "Пол";
             }
             foreach (EmployeeBase employee in listDataSource)
             {
