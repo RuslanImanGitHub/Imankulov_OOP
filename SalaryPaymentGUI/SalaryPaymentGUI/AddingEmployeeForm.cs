@@ -38,7 +38,7 @@ namespace SalaryPaymentGUI
         /// </summary>
         private static List<Control> _labelList = new List<Control>();
 
-        //TODO:
+        //TODO: | Done
         /// <summary>
         /// Dictinary that is used to create controls according to employee type that is being created
         /// </summary>
@@ -90,12 +90,24 @@ namespace SalaryPaymentGUI
                         _dataAcquisitionList = controls[0];
                         _labelList = controls[1];
                         _employeeType = nameof(PerPcsEmployee);
-                } }
+                } },
             };
 
             InitializeComponent();
             var tmpEmployeeTypeKeys = _instructions.Keys.ToList();
             comboBox1.DataSource = tmpEmployeeTypeKeys;
+
+            if (_dataAcquisitionList.Count != 0)
+            {
+                foreach (Control control in _dataAcquisitionList)
+                {
+                    this.Controls.Remove(control);
+                }
+                foreach (Control control in _labelList)
+                {
+                    this.Controls.Remove(control);
+                }
+            }
 
             this.EmployeeCreationConfirmButton.Enabled = false;
         }
@@ -147,11 +159,18 @@ namespace SalaryPaymentGUI
                         break;
                 }
             }
-            //TODO: | расписать на отдельные ошибки
+            //TODO: | расписать на отдельные ошибки | Done?
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Data Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex is FormatException || ex is ArgumentException || ex is ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString(),
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
         /// <summary>
@@ -228,6 +247,7 @@ namespace SalaryPaymentGUI
                     this.Controls.Remove(control);
                 }
             }
+
             _instructions[comboBox1.Text].Invoke();
 
             this.Controls.AddRange(_dataAcquisitionList.ToArray());

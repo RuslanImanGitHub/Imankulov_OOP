@@ -26,7 +26,17 @@ namespace SalaryPaymentProject
         {
             get => _paymentPerOnePcs;
 
-            set => _paymentPerOnePcs = value;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException($"Payment per one pcs should not be negative");
+                }
+                else
+                {
+                    _paymentPerOnePcs = value;
+                }
+            }
         }
 
         /// <summary>
@@ -36,7 +46,17 @@ namespace SalaryPaymentProject
         {
             get => _pcsAmount;
 
-            set => _pcsAmount = value;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException($"Pcs made amount should not be negative");
+                }
+                else
+                {
+                    _pcsAmount = value;
+                }
+            }
         }
 
         /// <summary>

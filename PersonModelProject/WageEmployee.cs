@@ -23,7 +23,17 @@ namespace SalaryPaymentProject
         {
             get => _wage;
 
-            set => _wage = value;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException($"Wage should not be negative");
+                }
+                else
+                {
+                    _wage = value;
+                }
+            }
         }
 
         /// <summary>

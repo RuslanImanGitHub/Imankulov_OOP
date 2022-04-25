@@ -52,13 +52,13 @@ namespace SalaryPaymentGUI
             
             this._randomEmployeeDictionary = new Dictionary<string, Action>()
             {
-                { "Оклад",
+                { nameof(WageEmployee),
                     () => { _employees.Add(WageEmployee.GetRandomWageEmployee());
                     } },
-                { "Почасовая оплата",
+                { nameof(PerHourEmployee),
                     () => { _employees.Add(PerHourEmployee.GetRandomPerHourEmployee());
                     } },
-                { "Сдельная оплата",
+                { nameof(PerPcsEmployee),
                     () => { _employees.Add(PerPcsEmployee.GetRandomPerPcsEmployee());
                     } },
                 {"", () => {} }
@@ -115,7 +115,14 @@ namespace SalaryPaymentGUI
         /// </summary>
         private void  GenerateRandomEmployee()
         {
-            this._randomEmployeeDictionary[comboBox2.Text].Invoke();
+            Random random = new Random();
+            List<string> employeeTypes = new List<string>()
+            {
+                nameof(WageEmployee),
+                nameof(PerHourEmployee),
+                nameof(PerPcsEmployee)
+            };
+            this._randomEmployeeDictionary[employeeTypes[random.Next(0,2)]].Invoke();
         }
 
         /// <summary>

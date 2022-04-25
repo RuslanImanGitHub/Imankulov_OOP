@@ -33,7 +33,6 @@
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.DeleteEmployeeButton = new System.Windows.Forms.Button();
             this.CreateRandomEmployeeButton = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SaveFileButton = new System.Windows.Forms.Button();
             this.LoadFileButton = new System.Windows.Forms.Button();
             this.ColumnSortComboBox = new System.Windows.Forms.ComboBox();
@@ -44,8 +43,14 @@
             this.ActionSortComboBox = new System.Windows.Forms.ComboBox();
             this.SortButton = new System.Windows.Forms.Button();
             this.CancelFilterButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panelDataGridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelDataGridView
@@ -54,7 +59,7 @@
             this.panelDataGridView.Controls.Add(this.dataGridView1);
             this.panelDataGridView.Location = new System.Drawing.Point(12, 12);
             this.panelDataGridView.Name = "panelDataGridView";
-            this.panelDataGridView.Size = new System.Drawing.Size(944, 591);
+            this.panelDataGridView.Size = new System.Drawing.Size(895, 446);
             this.panelDataGridView.TabIndex = 0;
             // 
             // dataGridView1
@@ -65,12 +70,12 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(934, 431);
+            this.dataGridView1.Size = new System.Drawing.Size(885, 431);
             this.dataGridView1.TabIndex = 0;
             // 
             // AddEmployeeButton
             // 
-            this.AddEmployeeButton.Location = new System.Drawing.Point(962, 49);
+            this.AddEmployeeButton.Location = new System.Drawing.Point(12, 19);
             this.AddEmployeeButton.Name = "AddEmployeeButton";
             this.AddEmployeeButton.Size = new System.Drawing.Size(129, 23);
             this.AddEmployeeButton.TabIndex = 1;
@@ -80,7 +85,7 @@
             // 
             // DeleteEmployeeButton
             // 
-            this.DeleteEmployeeButton.Location = new System.Drawing.Point(962, 78);
+            this.DeleteEmployeeButton.Location = new System.Drawing.Point(172, 19);
             this.DeleteEmployeeButton.Name = "DeleteEmployeeButton";
             this.DeleteEmployeeButton.Size = new System.Drawing.Size(129, 23);
             this.DeleteEmployeeButton.TabIndex = 2;
@@ -90,7 +95,7 @@
             // 
             // CreateRandomEmployeeButton
             // 
-            this.CreateRandomEmployeeButton.Location = new System.Drawing.Point(1092, 549);
+            this.CreateRandomEmployeeButton.Location = new System.Drawing.Point(1106, 348);
             this.CreateRandomEmployeeButton.Name = "CreateRandomEmployeeButton";
             this.CreateRandomEmployeeButton.Size = new System.Drawing.Size(129, 49);
             this.CreateRandomEmployeeButton.TabIndex = 6;
@@ -98,22 +103,9 @@
             this.CreateRandomEmployeeButton.UseVisualStyleBackColor = true;
             this.CreateRandomEmployeeButton.Click += new System.EventHandler(this.CreateRandomEmployeeButton_Click);
             // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Оклад",
-            "Почасовая оплата",
-            "Сдельная оплата"});
-            this.comboBox2.Location = new System.Drawing.Point(957, 549);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(129, 21);
-            this.comboBox2.TabIndex = 9;
-            // 
             // SaveFileButton
             // 
-            this.SaveFileButton.Location = new System.Drawing.Point(961, 164);
+            this.SaveFileButton.Location = new System.Drawing.Point(172, 19);
             this.SaveFileButton.Name = "SaveFileButton";
             this.SaveFileButton.Size = new System.Drawing.Size(128, 23);
             this.SaveFileButton.TabIndex = 10;
@@ -123,7 +115,7 @@
             // 
             // LoadFileButton
             // 
-            this.LoadFileButton.Location = new System.Drawing.Point(1095, 164);
+            this.LoadFileButton.Location = new System.Drawing.Point(11, 19);
             this.LoadFileButton.Name = "LoadFileButton";
             this.LoadFileButton.Size = new System.Drawing.Size(128, 23);
             this.LoadFileButton.TabIndex = 11;
@@ -135,7 +127,7 @@
             // 
             this.ColumnSortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ColumnSortComboBox.FormattingEnabled = true;
-            this.ColumnSortComboBox.Location = new System.Drawing.Point(961, 241);
+            this.ColumnSortComboBox.Location = new System.Drawing.Point(11, 51);
             this.ColumnSortComboBox.Name = "ColumnSortComboBox";
             this.ColumnSortComboBox.Size = new System.Drawing.Size(129, 21);
             this.ColumnSortComboBox.TabIndex = 13;
@@ -144,7 +136,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(958, 225);
+            this.label2.Location = new System.Drawing.Point(8, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 13);
             this.label2.TabIndex = 14;
@@ -152,7 +144,7 @@
             // 
             // DataSortTextBox
             // 
-            this.DataSortTextBox.Location = new System.Drawing.Point(961, 328);
+            this.DataSortTextBox.Location = new System.Drawing.Point(11, 138);
             this.DataSortTextBox.Name = "DataSortTextBox";
             this.DataSortTextBox.Size = new System.Drawing.Size(130, 20);
             this.DataSortTextBox.TabIndex = 15;
@@ -160,7 +152,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(959, 311);
+            this.label3.Location = new System.Drawing.Point(9, 121);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 13);
             this.label3.TabIndex = 16;
@@ -169,7 +161,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(959, 271);
+            this.label4.Location = new System.Drawing.Point(9, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 13);
             this.label4.TabIndex = 18;
@@ -179,14 +171,14 @@
             // 
             this.ActionSortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ActionSortComboBox.FormattingEnabled = true;
-            this.ActionSortComboBox.Location = new System.Drawing.Point(961, 287);
+            this.ActionSortComboBox.Location = new System.Drawing.Point(11, 97);
             this.ActionSortComboBox.Name = "ActionSortComboBox";
             this.ActionSortComboBox.Size = new System.Drawing.Size(129, 21);
             this.ActionSortComboBox.TabIndex = 17;
             // 
             // SortButton
             // 
-            this.SortButton.Location = new System.Drawing.Point(961, 354);
+            this.SortButton.Location = new System.Drawing.Point(172, 106);
             this.SortButton.Name = "SortButton";
             this.SortButton.Size = new System.Drawing.Size(130, 23);
             this.SortButton.TabIndex = 19;
@@ -196,7 +188,7 @@
             // 
             // CancelFilterButton
             // 
-            this.CancelFilterButton.Location = new System.Drawing.Point(1105, 354);
+            this.CancelFilterButton.Location = new System.Drawing.Point(172, 135);
             this.CancelFilterButton.Name = "CancelFilterButton";
             this.CancelFilterButton.Size = new System.Drawing.Size(130, 23);
             this.CancelFilterButton.TabIndex = 20;
@@ -204,25 +196,54 @@
             this.CancelFilterButton.UseVisualStyleBackColor = true;
             this.CancelFilterButton.Click += new System.EventHandler(this.CancelFilterButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.SortButton);
+            this.groupBox1.Controls.Add(this.CancelFilterButton);
+            this.groupBox1.Controls.Add(this.ColumnSortComboBox);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.DataSortTextBox);
+            this.groupBox1.Controls.Add(this.ActionSortComboBox);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(923, 154);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(312, 168);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Фильтрация";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.LoadFileButton);
+            this.groupBox2.Controls.Add(this.SaveFileButton);
+            this.groupBox2.Location = new System.Drawing.Point(923, 79);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(312, 55);
+            this.groupBox2.TabIndex = 22;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Загрузка/Сохранение";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.AddEmployeeButton);
+            this.groupBox3.Controls.Add(this.DeleteEmployeeButton);
+            this.groupBox3.Location = new System.Drawing.Point(923, 17);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(312, 56);
+            this.groupBox3.TabIndex = 23;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Добавление/Удаление";
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1247, 615);
-            this.Controls.Add(this.CancelFilterButton);
-            this.Controls.Add(this.SortButton);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.ActionSortComboBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.DataSortTextBox);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.ColumnSortComboBox);
-            this.Controls.Add(this.LoadFileButton);
-            this.Controls.Add(this.SaveFileButton);
-            this.Controls.Add(this.comboBox2);
+            this.ClientSize = new System.Drawing.Size(1247, 462);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CreateRandomEmployeeButton);
-            this.Controls.Add(this.DeleteEmployeeButton);
-            this.Controls.Add(this.AddEmployeeButton);
             this.Controls.Add(this.panelDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -231,8 +252,11 @@
             this.Text = "Таблица сотрудников";
             this.panelDataGridView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -243,7 +267,6 @@
         private System.Windows.Forms.Button AddEmployeeButton;
         private System.Windows.Forms.Button DeleteEmployeeButton;
         private System.Windows.Forms.Button CreateRandomEmployeeButton;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button SaveFileButton;
         private System.Windows.Forms.Button LoadFileButton;
         private System.Windows.Forms.ComboBox ColumnSortComboBox;
@@ -254,6 +277,9 @@
         private System.Windows.Forms.ComboBox ActionSortComboBox;
         private System.Windows.Forms.Button SortButton;
         private System.Windows.Forms.Button CancelFilterButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

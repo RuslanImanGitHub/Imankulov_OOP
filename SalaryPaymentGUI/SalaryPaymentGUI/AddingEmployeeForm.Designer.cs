@@ -71,7 +71,7 @@ namespace SalaryPaymentGUI
             // 
             // CancelEmployeeAddButton
             // 
-            this.CancelEmployeeAddButton.Location = new System.Drawing.Point(325, 452);
+            this.CancelEmployeeAddButton.Location = new System.Drawing.Point(334, 35);
             this.CancelEmployeeAddButton.Name = "CancelEmployeeAddButton";
             this.CancelEmployeeAddButton.Size = new System.Drawing.Size(75, 23);
             this.CancelEmployeeAddButton.TabIndex = 4;
@@ -81,7 +81,7 @@ namespace SalaryPaymentGUI
             // 
             // EmployeeCreationConfirmButton
             // 
-            this.EmployeeCreationConfirmButton.Location = new System.Drawing.Point(244, 452);
+            this.EmployeeCreationConfirmButton.Location = new System.Drawing.Point(253, 35);
             this.EmployeeCreationConfirmButton.Name = "EmployeeCreationConfirmButton";
             this.EmployeeCreationConfirmButton.Size = new System.Drawing.Size(75, 23);
             this.EmployeeCreationConfirmButton.TabIndex = 5;
@@ -93,7 +93,7 @@ namespace SalaryPaymentGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 487);
+            this.ClientSize = new System.Drawing.Size(422, 305);
             this.Controls.Add(this.EmployeeCreationConfirmButton);
             this.Controls.Add(this.CancelEmployeeAddButton);
             this.Controls.Add(this.label1);

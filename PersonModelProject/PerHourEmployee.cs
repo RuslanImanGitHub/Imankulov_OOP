@@ -28,7 +28,17 @@ namespace SalaryPaymentProject
         {
             get => _hourlyPayment;
 
-            set => _hourlyPayment = value;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException($"Hourly paymnet should not be negative");
+                }
+                else
+                {
+                    _hourlyPayment = value;
+                }
+            } 
         }
 
         /// <summary>
@@ -38,7 +48,19 @@ namespace SalaryPaymentProject
         {
             get => _hoursWorked;
 
-            set => _hoursWorked = value;
+            set
+            {
+                {
+                    if (value <= 0)
+                    {
+                        throw new ArgumentOutOfRangeException($"Hours worked value should not be negative");
+                    }
+                    else
+                    {
+                        _hoursWorked = value;
+                    }
+                }
+            }
         }
 
         /// <summary>

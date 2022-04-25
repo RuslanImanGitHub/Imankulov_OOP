@@ -102,7 +102,7 @@ namespace SalaryPaymentProject
             {
                 if (value < _minAge || value > _maxAge)
                 {
-                    throw new Exception($"Age must be in range from {_minAge} to {_maxAge}");
+                    throw new ArgumentOutOfRangeException($"Age must be in range from {_minAge} to {_maxAge}");
                 }
                 else
                 {
@@ -185,12 +185,12 @@ namespace SalaryPaymentProject
                 {
                     if (_locale != regexValue.Item2)
                     {
-                        throw new Exception("Not in the same localization");
+                        throw new ArgumentException("Not in the same localization");
                     }
                 }
                 return;
             }
-            throw new Exception($"Use only latin or cyrilic to write {input}");
+            throw new ArgumentException($"Use only latin or cyrilic to write {input}");
         }
 
         /// <summary>
