@@ -195,6 +195,8 @@ namespace SalaryPaymentGUI
         private void ColumnSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var currentSelection = ColumnSortComboBox.SelectedItem;
+            this.DataSortTextBox.Show();
+            this.label3.Show();
             if (currentSelection != null)
             {
                 foreach (DataGridViewColumn column in this.dataGridView1.Columns)
@@ -216,6 +218,8 @@ namespace SalaryPaymentGUI
                         else if (currnetType == typeof(Gender))
                         {
                             this.ActionSortComboBox.DataSource = Enum.GetNames(typeof(Gender));
+                            this.DataSortTextBox.Hide();
+                            this.label3.Hide();
                         }
                     }
                 }
@@ -236,7 +240,6 @@ namespace SalaryPaymentGUI
             if (selectedColumn == "Gender")
             {
                 stringData = (string)this.ActionSortComboBox.SelectedItem;
-                this.DataSortTextBox.Text = "Пол";
             }
             foreach (EmployeeBase employee in listDataSource)
             {
@@ -267,8 +270,9 @@ namespace SalaryPaymentGUI
                         sortedEmployees.Add(employee);
                     }
                 }
+                this.dataGridView1.DataSource = sortedEmployees;
             }
-            this.dataGridView1.DataSource = sortedEmployees;
+            //this.dataGridView1.DataSource = sortedEmployees;
         }
 
         /// <summary>
