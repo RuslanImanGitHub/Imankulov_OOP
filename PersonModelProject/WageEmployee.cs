@@ -29,6 +29,10 @@ namespace SalaryPaymentProject
                 {
                     throw new ArgumentOutOfRangeException($"Wage should not be negative");
                 }
+                else if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Value must not be NaN");
+                }
                 else
                 {
                     _wage = value;

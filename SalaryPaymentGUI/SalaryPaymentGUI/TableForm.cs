@@ -38,7 +38,6 @@ namespace SalaryPaymentGUI
 
             #if !DEBUG
             this.CreateRandomEmployeeButton.Visible = false;
-            this.comboBox2.Visible = false;
             #endif
             this.dataGridView1.DataSource = _employees;
             this.dataGridView1.AllowUserToAddRows = false;
@@ -157,8 +156,18 @@ namespace SalaryPaymentGUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString(),
-                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (ex is FormatException ||
+                        ex is InvalidOperationException ||
+                        ex is ArgumentException ||
+                        ex is ArgumentOutOfRangeException)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString(),
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
         }

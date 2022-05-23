@@ -120,7 +120,7 @@ namespace SalaryPaymentGUI
         {
             try
             {
-                CheckNaNs();
+                //CheckNaNs();
                 switch (_employeeType)
                 {
                     case nameof(WageEmployee):
@@ -159,7 +159,9 @@ namespace SalaryPaymentGUI
             }
             catch (Exception ex)
             {
-                if (ex is FormatException || ex is ArgumentException || ex is ArgumentOutOfRangeException)
+                if (ex is FormatException ||
+                    ex is ArgumentException ||
+                    ex is ArgumentOutOfRangeException)
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString(),
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -257,6 +259,7 @@ namespace SalaryPaymentGUI
 
             this.EmployeeCreationConfirmButton.Enabled = true;
         }
+        /*
         /// <summary>
         /// Checks control fields for NaN values
         /// </summary>
@@ -270,6 +273,6 @@ namespace SalaryPaymentGUI
                     throw new ArgumentNullException("Data field sholdn't have NaN values");
                 }
             }
-        }
+        }*/
     }
 }

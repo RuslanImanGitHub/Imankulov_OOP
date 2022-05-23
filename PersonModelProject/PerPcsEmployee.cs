@@ -32,6 +32,10 @@ namespace SalaryPaymentProject
                 {
                     throw new ArgumentOutOfRangeException($"Payment per one pcs should not be negative");
                 }
+                else if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Value must not be NaN");
+                }
                 else
                 {
                     _paymentPerOnePcs = value;
@@ -51,6 +55,10 @@ namespace SalaryPaymentProject
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException($"Pcs made amount should not be negative");
+                }
+                else if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Value must not be NaN");
                 }
                 else
                 {

@@ -34,6 +34,10 @@ namespace SalaryPaymentProject
                 {
                     throw new ArgumentOutOfRangeException($"Hourly paymnet should not be negative");
                 }
+                else if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Value must not be NaN");
+                }
                 else
                 {
                     _hourlyPayment = value;
@@ -54,6 +58,10 @@ namespace SalaryPaymentProject
                     if (value < 0)
                     {
                         throw new ArgumentOutOfRangeException($"Hours worked value should not be negative");
+                    }
+                    else if (double.IsNaN(value))
+                    {
+                        throw new ArgumentException("Value must not be NaN");
                     }
                     else
                     {

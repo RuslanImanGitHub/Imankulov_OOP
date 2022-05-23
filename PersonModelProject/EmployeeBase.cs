@@ -33,7 +33,17 @@ namespace SalaryPaymentProject
         {
             get => _account;
 
-            set => _account = value;
+            set
+            {
+                if (double.IsNaN(value))
+                {
+                   throw new ArgumentException("Value must not be NaN");
+                }
+                else
+                {
+                    _account = value;
+                };
+            }
         }
 
         /// <summary>
@@ -103,6 +113,10 @@ namespace SalaryPaymentProject
                 if (value < _minAge || value > _maxAge)
                 {
                     throw new ArgumentOutOfRangeException($"Age must be in range from {_minAge} to {_maxAge}");
+                }
+                else if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Value must not be NaN");
                 }
                 else
                 {
